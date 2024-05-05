@@ -1,4 +1,17 @@
 package server.Operations.Reservation;
 
-public class reservationService {
+import server.serv.MediathequeService;
+
+import java.net.Socket;
+
+public class reservationService extends MediathequeService {
+
+    public reservationService(Socket socket) {
+        super(socket);
+    }
+
+    @Override
+    public void lancement() {
+        // TODO
+    }
 }

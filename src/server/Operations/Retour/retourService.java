@@ -1,4 +1,17 @@
 package server.Operations.Retour;
 
-public class retourService {
+import server.serv.MediathequeService;
+
+import java.net.Socket;
+
+public class retourService extends MediathequeService {
+
+        public retourService(Socket socket) {
+            super(socket);
+        }
+
+        @Override
+        public void lancement() {
+            // TODO
+        }
 }

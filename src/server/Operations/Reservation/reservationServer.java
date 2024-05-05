@@ -1,5 +1,11 @@
 package server.Operations.Reservation;
 
-public class reservationServer {
+import server.serv.MediathequeServer;
+
+public class reservationServer extends MediathequeServer {
     private final static int RESERVATION_PORT = 3000;
+
+    public reservationServer() {
+        super(RESERVATION_PORT, reservationServer.class);
+    }
 }
