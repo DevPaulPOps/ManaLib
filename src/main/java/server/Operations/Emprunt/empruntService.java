@@ -10,7 +10,6 @@ public class empruntService extends MediathequeService {
         super(socket);
     }
 
-
     // TODO
     @Override
     public void lancement() {

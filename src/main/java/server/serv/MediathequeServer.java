@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public abstract class MediathequeServer implements Runnable{
+public abstract class MediathequeServer implements Runnable {
     private final int PORT;
     private final ServerSocket serverSocket;
     private MediathequeService service;

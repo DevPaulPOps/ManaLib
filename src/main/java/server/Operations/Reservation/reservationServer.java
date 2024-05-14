@@ -6,6 +6,6 @@ public class reservationServer extends MediathequeServer {
     private final static int RESERVATION_PORT = 3000;
 
     public reservationServer() {
-        super(RESERVATION_PORT, reservationServer.class);
+        super(RESERVATION_PORT, this);
     }
 }

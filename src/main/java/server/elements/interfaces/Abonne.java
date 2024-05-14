@@ -1,8 +1,8 @@
-package server.elements.interfaces;
-
-import java.util.Date;
-
-public interface Abonne extends dataStorage {
-    int getNumberOfSubscribers();
-    Date getDateOfBirth();
-}
+//package Abonne.interfaces;
+//
+//import java.util.Date;
+//
+//public interface Abonne {
+//    int getNumberOfSubscribers();
+//    Date getDateOfBirth();
+//}

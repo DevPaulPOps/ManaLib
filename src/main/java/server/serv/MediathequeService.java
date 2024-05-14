@@ -4,7 +4,7 @@ import server.serv.bttp.BttpProtocole;
 
 import java.io.IOException;
 import java.net.Socket;
-public abstract class MediathequeService implements Runnable{
+public abstract class MediathequeService implements Runnable {
     private final Socket socket;
     private final BttpProtocole bttp;
 

@@ -31,3 +31,6 @@ bin/
 ProjetArchiLog.iml
 
 *.iml
+target/
+pom.xml
+.idea/
