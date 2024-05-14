@@ -1,6 +1,6 @@
 package Mediatheque;
 
-import Abonne.Abonne;
+import server.elements.Abonne;
 import server.elements.Documents.Document;
 import server.Exception.ReservationException;
 import org.junit.jupiter.api.BeforeEach;
