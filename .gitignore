@@ -30,4 +30,7 @@ bin/
 .idea
 ProjetArchiLog.iml
 
+target
 *.iml
+pom.xml
+.idea/
