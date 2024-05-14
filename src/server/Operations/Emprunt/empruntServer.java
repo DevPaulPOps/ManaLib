@@ -1,7 +1,6 @@
 package server.Operations.Emprunt;
 
 import server.serv.MediathequeServer;
-import server.serv.MediathequeService;
 
 import java.io.IOException;
 
