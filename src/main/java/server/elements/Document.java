@@ -8,12 +8,31 @@ import server.elements.interfaces.Documents;
 
 public class Document implements Documents {
 
+    private int numero;
+    private String titre;
+    private String state;
+    private Integer idReserveur;
+
+    public Document(int numero, String titre, String state, Integer idReserveur) {
+        this.numero = numero;
+        this.titre = titre;
+        this.state = state;
+        this.idReserveur = idReserveur;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public Integer getIdReserveur() {
+        return idReserveur;
+    }
     /**
      * @return
      */
     @Override
     public int numero() {
-        return 0;
+        return numero;
     }
 
     /**
@@ -49,5 +68,13 @@ public class Document implements Documents {
             throw new RetourException();
         }
         retournerLeDocument();
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public Integer getId() {
+        return 0;
     }
 }

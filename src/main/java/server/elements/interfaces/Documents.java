@@ -4,7 +4,7 @@ import server.Exception.EmpruntException;
 import server.Exception.ReservationException;
 import server.Exception.RetourException;
 
-public interface Documents {
+public interface Documents extends DataStorage{
     int numero();
 
     /**

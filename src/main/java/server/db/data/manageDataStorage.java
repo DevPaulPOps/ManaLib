@@ -1,12 +1,13 @@
 package server.db.data;
 
+import server.elements.interfaces.DataStorage;
 import server.elements.interfaces.dataStorage;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class manageDataStorage {
-    public static HashMap<String, dataStorage> dataStorage = new HashMap<>();
+public class ManageDataStorage {
+    public static HashMap<String, DataStorage> dataStorage = new HashMap<>();
 
     /**
      * TODO : add dataStorage with an factory
@@ -15,23 +16,23 @@ public class manageDataStorage {
         //TODO : add dataStorage with an factory
     }
 
-    public static void addDataStorage(dataStorage dataStorage) {
-        manageDataStorage.dataStorage.put(dataStorage.getId(), dataStorage);
+    public static void addDataStorage(DataStorage dataStorage) {
+        ManageDataStorage.dataStorage.put(dataStorage.getId(), dataStorage);
     }
 
-    public static dataStorage getDataStorageById(String id) {
-        return manageDataStorage.dataStorage.get(id);
+    public static DataStorage getDataStorageById(String id) {
+        return ManageDataStorage.dataStorage.get(id);
     }
 
-    public static List<dataStorage> getAllDataStorage() {
-        return (List<dataStorage>) manageDataStorage.dataStorage.values();
+    public static List<DataStorage> getAllDataStorage() {
+        return (List<DataStorage>) ManageDataStorage.dataStorage.values();
     }
 
     public static void removeDataStorage(String id) {
-        manageDataStorage.dataStorage.remove(id);
+        ManageDataStorage.dataStorage.remove(id);
     }
 
-    public static void updateDataStorage(dataStorage dataStorage) {
-        manageDataStorage.dataStorage.put(dataStorage.getId(), dataStorage);
+    public static void updateDataStorage(DataStorage dataStorage) {
+        ManageDataStorage.dataStorage.put(dataStorage.getId(), dataStorage);
     }
 }

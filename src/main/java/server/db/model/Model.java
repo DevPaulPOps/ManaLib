@@ -7,5 +7,5 @@ import java.sql.SQLException;
 public interface Model {
     void save(Documents documents) throws SQLException;
 
-    void get(Documents documents) throws SQLException;
+    void get() throws SQLException;
 }

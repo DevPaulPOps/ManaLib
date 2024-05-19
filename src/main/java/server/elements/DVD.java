@@ -62,4 +62,12 @@ public class DVD implements DVDs {
     public void retour() throws RetourException {
         document.retour();
     }
+
+    /**
+     * @return
+     */
+    @Override
+    public String getId() {
+        return 0;
+    }
 }

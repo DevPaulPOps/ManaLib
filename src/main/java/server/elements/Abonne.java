@@ -34,4 +34,12 @@ public class Abonne implements Abonnes {
     public String getNom() {
         return this.nom;
     }
+
+    /**
+     * @return
+     */
+    @Override
+    public String getId() {
+        return 0;
+    }
 }
