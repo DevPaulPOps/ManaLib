@@ -1,7 +1,7 @@
 package server.elements.Documents.StateDocument;
 
-import server.elements.Documents.Document;
 import server.Exception.ReservationException;
+import server.elements.Documents.Document;
 import server.elements.interfaces.StateDocument;
 
 public class Reserve implements StateDocument {
@@ -28,12 +28,12 @@ public class Reserve implements StateDocument {
     }
 
     @Override
-    public void emprunter(Document document ) {
+    public void emprunter(Document document) {
         document.changeState(new Emprunte());
     }
 
     @Override
-    public void reserver(Document document ) {
+    public void reserver(Document document) {
         throw new ReservationException();
     }
 }

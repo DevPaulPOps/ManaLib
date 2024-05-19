@@ -7,15 +7,15 @@ import java.net.Socket;
 public abstract class MediathequeServer implements Runnable {
     private final int PORT;
     private final ServerSocket serverSocket;
-    private MediathequeService service;
-
     /**
      * TypeClassDuService est une classe qui hérite de MediathequeService
      * Ceci : <? extends MediathequeService> permet de dire que TypeClassDuService est une classe qui hérite de MediathequeService
      * On appel ceci un "Type Wildcard"
+     *
      * @see <a href="https://docs.oracle.com/javase/tutorial/java/generics/wildcards.html">Type Wildcard</a>
      */
     private final Class<? extends MediathequeService> TypeClassDuService;
+    private MediathequeService service;
 
     public MediathequeServer(int port, Class<? extends MediathequeService> typeClassDuService) throws IOException {
         this.PORT = port;
@@ -23,17 +23,17 @@ public abstract class MediathequeServer implements Runnable {
         this.TypeClassDuService = typeClassDuService;
     }
 
-    public int getPort(){
+    public int getPort() {
         return PORT;
     }
 
-    public ServerSocket getServerSocket(){
+    public ServerSocket getServerSocket() {
         return serverSocket;
     }
 
     @java.lang.Override
     public void run() {
-        while(true){
+        while (true) {
             try {
                 this.service = TypeClassDuService.getConstructor(Socket.class).newInstance(serverSocket.accept());
                 service.start();
@@ -43,7 +43,7 @@ public abstract class MediathequeServer implements Runnable {
         }
     }
 
-    public void close(){
+    public void close() {
         this.service.getBttpProtocole().close();
     }
 }

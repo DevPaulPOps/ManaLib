@@ -9,4 +9,5 @@ public class reservationServer extends MediathequeServer {
 
     public reservationServer() throws IOException {
         super(RESERVATION_PORT, reservationService.class);
+    }
 }

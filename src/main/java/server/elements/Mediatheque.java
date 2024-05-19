@@ -1,6 +1,7 @@
 package server.elements;
 
 import server.elements.Documents.Document;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,9 +12,9 @@ import java.util.HashMap;
 //quelqu’un d’autre). Pour simplifier, on suppose que ces numéros sont connus de l’abonné qui
 //réserve/emprunte/rend un document et peuvent donc être simplement saisis au clavier.
 public class Mediatheque {
-    private ArrayList<Abonne> listesAbonnes;
-    private ArrayList<Document> listesDocuments;
-    private HashMap<Document, Abonne> listeReservEmprunt;
+    private final ArrayList<Abonne> listesAbonnes;
+    private final ArrayList<Document> listesDocuments;
+    private final HashMap<Document, Abonne> listeReservEmprunt;
 
     public Mediatheque() {
         listesAbonnes = new ArrayList<>();
@@ -30,7 +31,7 @@ public class Mediatheque {
     //Un abonne peut emprunte si pas reserve
     //Un abonne peut emprunte si reserve
     public void setReservEmprunt(Document document, Abonne abonne) {
-        if (estPasDansMediatheque(document,abonne))
+        if (estPasDansMediatheque(document, abonne))
             return;
 
         if (dejaReserve(document)) {

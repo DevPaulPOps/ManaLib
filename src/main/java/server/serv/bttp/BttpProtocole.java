@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class BttpProtocole {
-    private Socket socket;
+    private final Socket socket;
     private PrintWriter out;
     private BufferedReader in;
 
@@ -15,6 +15,7 @@ public class BttpProtocole {
         this.socket = socket;
         communicate();
     }
+
     public void communicate() {
         try {
             out = new PrintWriter(socket.getOutputStream(), true);

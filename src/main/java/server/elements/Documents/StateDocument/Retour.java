@@ -1,7 +1,7 @@
 package server.elements.Documents.StateDocument;
 
-import server.elements.Documents.Document;
 import server.Exception.RetourException;
+import server.elements.Documents.Document;
 import server.elements.interfaces.StateDocument;
 
 public class Retour implements StateDocument {

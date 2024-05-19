@@ -1,8 +1,11 @@
 package server.elements.interfaces;
 
 public interface BaseDocumentState {
-    public boolean estRetourne();
-    public boolean estEmprunte();
-    public boolean estReserve();
-    public void changeState(StateDocument stateDocument);
+    boolean estRetourne();
+
+    boolean estEmprunte();
+
+    boolean estReserve();
+
+    void changeState(StateDocument stateDocument);
 }

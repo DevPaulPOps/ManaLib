@@ -6,12 +6,12 @@ import java.net.Socket;
 
 public class retourService extends MediathequeService {
 
-        public retourService(Socket socket) {
-            super(socket);
-        }
+    public retourService(Socket socket) {
+        super(socket);
+    }
 
-        @Override
-        public void lancement() {
-            // TODO
-        }
+    @Override
+    public void lancement() {
+        // TODO
+    }
 }

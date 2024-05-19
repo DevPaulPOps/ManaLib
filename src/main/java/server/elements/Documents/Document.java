@@ -1,18 +1,18 @@
 package server.elements.Documents;
 
-import server.elements.Abonne;
-import server.elements.Documents.StateDocument.Retour;
 import server.Exception.EmpruntException;
 import server.Exception.ReservationException;
 import server.Exception.RetourException;
+import server.elements.Abonne;
+import server.elements.Documents.StateDocument.Retour;
 import server.elements.interfaces.BaseDocumentState;
 import server.elements.interfaces.Documents;
 import server.elements.interfaces.StateDocument;
 
 public class Document implements Documents, BaseDocumentState {
-    private StateDocument stateDocument;
     private final int numero;
     private final String titre;
+    private StateDocument stateDocument;
     private int abonneId;
 
     public Document(int numero, String titre) {

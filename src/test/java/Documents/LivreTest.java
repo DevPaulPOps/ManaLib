@@ -12,14 +12,14 @@ class LivreTest {
 
     @org.junit.jupiter.api.Test
     void changeState() {
-        Livre l = new Livre(1,"paulLeBg");
+        Livre l = new Livre(1, "paulLeBg");
         assertTrue(l.estRetourne());
     }
 
     @org.junit.jupiter.api.Test
     void getState() {
         Livre l = new Livre(1, "paulLeBg");
-        Abonne ab = new Abonne(1,"paul","27/01/5555");
+        Abonne ab = new Abonne(1, "paul", "27/01/5555");
         l.reservation(ab);
         assertTrue(l.estReserve());
         assertFalse(l.estRetourne());
@@ -34,7 +34,7 @@ class LivreTest {
     @org.junit.jupiter.api.Test
     void throwException() {
         Livre l = new Livre(1, "paulLeBg");
-        Abonne ab = new Abonne(1,"paul","27/01/5555");
+        Abonne ab = new Abonne(1, "paul", "27/01/5555");
 
         assertThrows(RetourException.class, () -> l.retour());
 
@@ -52,8 +52,8 @@ class LivreTest {
     @org.junit.jupiter.api.Test
     void plusieursAbonne() {
         Livre l = new Livre(1, "paulLeBg");
-        Abonne ab = new Abonne(1,"paul","27/01/5555");
-        Abonne abb = new Abonne(2,"owen","27/01/5555");
+        Abonne ab = new Abonne(1, "paul", "27/01/5555");
+        Abonne abb = new Abonne(2, "owen", "27/01/5555");
 
         l.emprunt(ab);
         assertThrows(EmpruntException.class, () -> l.emprunt(abb));

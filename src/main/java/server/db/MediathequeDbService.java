@@ -18,6 +18,7 @@ public abstract class MediathequeDbService {
     public static void setJdbcUrl(String jdbcUrl) {
         MediathequeDbService.jdbcUrl = jdbcUrl;
     }
+
     public static Connection getConnection() throws SQLException {
         if (MediathequeDbService.connection == null) {
 
@@ -26,6 +27,7 @@ public abstract class MediathequeDbService {
         }
         return connection;
     }
+
     public static void closeConnection() throws SQLException {
         MediathequeDbService.getConnection().close();
     }
@@ -41,7 +43,6 @@ public abstract class MediathequeDbService {
     public static ResultSet executeQuery(String query) throws SQLException {
         return MediathequeDbService.getConnection().createStatement().executeQuery(query);
     }
-
 
 
 }

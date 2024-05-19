@@ -8,7 +8,9 @@ import server.elements.Abonne;
 public interface Documents {
     int numero();
 
-    public void reservation(Abonne ab) throws ReservationException;
-    public void emprunt(Abonne ab) throws EmpruntException;
-    public void retour() throws RetourException;
+    void reservation(Abonne ab) throws ReservationException;
+
+    void emprunt(Abonne ab) throws EmpruntException;
+
+    void retour() throws RetourException;
 }

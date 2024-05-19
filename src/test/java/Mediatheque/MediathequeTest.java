@@ -1,10 +1,10 @@
 package Mediatheque;
 
-import server.elements.Abonne;
-import server.elements.Documents.Document;
-import server.Exception.ReservationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import server.Exception.ReservationException;
+import server.elements.Abonne;
+import server.elements.Documents.Document;
 import server.elements.Mediatheque;
 
 import java.util.ArrayList;
