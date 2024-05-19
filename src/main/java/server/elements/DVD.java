@@ -10,6 +10,15 @@ import server.elements.interfaces.Documents;
 import server.utils.Utils;
 
 public class DVD implements DVDs {
+
+    private boolean isForAdults;
+    private Documents document;
+
+    public DVD(Documents document, boolean isForAdults) {
+        super(document);
+        this.isForAdults = isForAdults;
+    }
+
     /**
      * @return
      */

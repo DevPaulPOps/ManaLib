@@ -1,5 +1,13 @@
 package server.db.model;
 
+import server.db.MediathequeDbService;
+import server.db.data.ManageDataStorage;
+import server.elements.DVD;
+import server.elements.interfaces.Documents;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class DVDModel implements Model {
     /**
      * @param documents

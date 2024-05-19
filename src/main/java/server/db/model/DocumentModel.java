@@ -1,5 +1,13 @@
 package server.db.model;
 
+import server.db.MediathequeDbService;
+import server.db.data.ManageDataStorage;
+import server.elements.Document;
+import server.elements.interfaces.Documents;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class DocumentModel implements Model{
     /**
      * @param documents
@@ -15,6 +23,8 @@ public class DocumentModel implements Model{
         }
     }
 
+
+
     /**
      * @throws SQLException
      */
@@ -26,7 +36,7 @@ public class DocumentModel implements Model{
             int id = allData.getInt("id");
             String titre = allData.getString("titre");
             String state = allData.getString("state");
-            String idReserveur = allData.getString("id_reserveur");
+            int idReserveur = allData.getInt("id_reserveur");
 
             Document document = new Document(id, titre, state, idReserveur);
 
