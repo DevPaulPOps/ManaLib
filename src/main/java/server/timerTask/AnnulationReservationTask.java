@@ -1,7 +1,8 @@
 package server.timerTask;
 
-import java.util.TimerTask;
 import server.Operations.Reservation.Reservation;
+
+import java.util.TimerTask;
 
 public class AnnulationReservationTask extends TimerTask {
     private final Reservation reservation;
@@ -10,13 +11,13 @@ public class AnnulationReservationTask extends TimerTask {
         this.reservation = reservation;
     }
 
-    @Override
-    public void run() {
-        reservation.cancelReservation();
-    }
-
     public static long getDelay() {
         // 1h30
         return 90 * 60 * 1000;
+    }
+
+    @Override
+    public void run() {
+        reservation.cancelReservation();
     }
 }

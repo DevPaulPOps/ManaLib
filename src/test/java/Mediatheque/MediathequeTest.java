@@ -1,15 +1,16 @@
-/** package Mediatheque;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import server.Exception.ReservationException;
-import server.elements.Abonne;
-import server.elements.Documents.Document;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-*/
+/**
+ * package Mediatheque;
+ * <p>
+ * import org.junit.jupiter.api.BeforeEach;
+ * import org.junit.jupiter.api.Test;
+ * import server.Exception.ReservationException;
+ * import server.elements.Abonne;
+ * import server.elements.Documents.Document;
+ * <p>
+ * import java.util.ArrayList;
+ * <p>
+ * import static org.junit.jupiter.api.Assertions.*;
+ */
 //class MediathequeTest {
 //    ArrayList<Abonne> lstAbonne;
 //    ArrayList<Document> lstDocument;

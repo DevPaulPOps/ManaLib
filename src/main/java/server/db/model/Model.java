@@ -5,7 +5,7 @@ import server.elements.interfaces.Documents;
 import java.sql.SQLException;
 
 public interface Model {
-    public void save(Documents documents) throws SQLException;
+    void save(Documents documents) throws SQLException;
 
-    public void get(Documents documents) throws SQLException;
+    void get(Documents documents) throws SQLException;
 }

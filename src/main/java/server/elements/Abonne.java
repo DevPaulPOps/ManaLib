@@ -8,6 +8,7 @@ public class Abonne implements Abonnes {
     private final int numeroAbonne;
     private final String nom;
     private final Date dateNaissance;
+
     public Abonne(int numeroAbonne, String nom, Date dateNaissance) {
         this.numeroAbonne = numeroAbonne;
         this.nom = nom;

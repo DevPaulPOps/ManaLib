@@ -4,10 +4,10 @@ import server.Exception.EmpruntException;
 import server.Exception.NotAdultException;
 import server.Exception.ReservationException;
 import server.Exception.RetourException;
-import server.Utils;
 import server.elements.interfaces.Abonnes;
 import server.elements.interfaces.DVDs;
 import server.elements.interfaces.Documents;
+import server.utils.Utils;
 
 public class DVD implements DVDs {
     /**

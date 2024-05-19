@@ -8,17 +8,17 @@ public interface Documents {
     int numero();
 
     /**
-     *  @pre ni réservé ni emprunté
+     * @pre ni réservé ni emprunté
      */
     void reservation(Abonnes ab) throws ReservationException;
 
     /**
-     *     @pre libre ou réservé par l’abonné qui vient emprunter
+     * @pre libre ou réservé par l’abonné qui vient emprunter
      */
     void emprunt(Abonnes ab) throws EmpruntException;
 
     /**
-     *     @brief retour d’un document ou annulation d‘une réservation
+     * @brief retour d’un document ou annulation d‘une réservation
      */
-    void retour()throws RetourException;
+    void retour() throws RetourException;
 }
