@@ -1,25 +1,36 @@
 package server.elements;
 
-public class Abonne {
-    private final int numero;
-    private final String nom;
-    private final String dateNaissance;
+import server.elements.interfaces.Abonnes;
 
-    public Abonne(int numero, String nom, String dateNaissance) {
-        this.numero = numero;
+import java.util.Date;
+
+public class Abonne implements Abonnes {
+    private final int numeroAbonne;
+    private final String nom;
+    private final Date dateNaissance;
+    public Abonne(int numeroAbonne, String nom, Date dateNaissance) {
+        this.numeroAbonne = numeroAbonne;
         this.nom = nom;
         this.dateNaissance = dateNaissance;
     }
 
-    public int getNumero() {
-        return this.numero;
+    /**
+     * @return
+     */
+    @Override
+    public int getNumberOfSubscribers() {
+        return this.numeroAbonne;
     }
 
-    public String getDateNaissance() {
-        return dateNaissance;
+    /**
+     * @return
+     */
+    @Override
+    public Date getDateOfBirth() {
+        return this.dateNaissance;
     }
 
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 }

@@ -14,7 +14,7 @@ public class Utils {
         }
     }
 
-    public boolean isAdult(Date dateOfThePerson) {
+    public static boolean isAdult(Date dateOfThePerson) {
         return dateOfThePerson.getYear() < ADULT_AGE;
     }
 }

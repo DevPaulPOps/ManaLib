@@ -3,14 +3,22 @@ package server.elements.interfaces;
 import server.Exception.EmpruntException;
 import server.Exception.ReservationException;
 import server.Exception.RetourException;
-import server.elements.Abonne;
 
 public interface Documents {
     int numero();
 
-    void reservation(Abonne ab) throws ReservationException;
+    /**
+     *  @pre ni réservé ni emprunté
+     */
+    void reservation(Abonnes ab) throws ReservationException;
 
-    void emprunt(Abonne ab) throws EmpruntException;
+    /**
+     *     @pre libre ou réservé par l’abonné qui vient emprunter
+     */
+    void emprunt(Abonnes ab) throws EmpruntException;
 
-    void retour() throws RetourException;
+    /**
+     *     @brief retour d’un document ou annulation d‘une réservation
+     */
+    void retour()throws RetourException;
 }

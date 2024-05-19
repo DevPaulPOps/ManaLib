@@ -1,4 +1,4 @@
-package server.elements;
+/* package server.elements;
 
 import server.elements.Documents.Document;
 
@@ -69,4 +69,4 @@ public class Mediatheque {
         assert (document != null);
         return listesDocuments.contains(document);
     }
-}
+}*/
