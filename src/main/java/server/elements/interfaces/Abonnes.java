@@ -2,9 +2,10 @@ package server.elements.interfaces;
 
 import java.util.Date;
 
-public interface Abonnes extends DataStorage{
+public interface Abonnes extends DataStorage {
 
-    int getNumberOfSubscribers();
+    int getIdAbonne();
+    Date getDateDeNaissance();
+    String getNom();
 
-    Date getDateOfBirth();
 }

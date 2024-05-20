@@ -26,7 +26,7 @@ public class DataFactory {
             for (Class<? extends Model> d : data) {
                 try {
                     Model modelInstance = d.newInstance();
-                    modelInstance.save();
+//                    modelInstance.save();
                 } catch (InstantiationException | IllegalAccessException e) {
                     e.printStackTrace();
                 }

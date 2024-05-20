@@ -1,38 +1,41 @@
-package server.elements;
+package server.elements.Documents;
 
 import server.Exception.EmpruntException;
 import server.Exception.ReservationException;
 import server.Exception.RetourException;
+import server.Operations.Reservation.Reservation;
 import server.elements.interfaces.Abonnes;
 import server.elements.interfaces.Documents;
 
 public class Document implements Documents {
 
-    private int numero;
+    private int idDocument;
     private String titre;
     private String state;
-    private Integer idReserveur;
+    private Integer abonneId;
 
-    public Document(int numero, String titre, String state, Integer idReserveur) {
-        this.numero = numero;
+    public Document(int idDocument, String titre, String state, Integer abonneId) {
+        this.idDocument = idDocument;
         this.titre = titre;
         this.state = state;
-        this.idReserveur = idReserveur;
+        this.abonneId = abonneId;
     }
 
     public String getState() {
         return state;
     }
 
-    public Integer getIdReserveur() {
-        return idReserveur;
+    public Integer getAbonneId() {
+        return abonneId;
     }
-    /**
-     * @return
-     */
+
+    public String getTitre() {
+        return titre;
+    }
+
     @Override
     public int numero() {
-        return numero;
+        return this.idDocument;
     }
 
     /**
@@ -41,10 +44,10 @@ public class Document implements Documents {
      */
     @Override
     public void reservation(Abonnes ab) throws ReservationException {
-        if (isReserved || isBorrowed) {
+        if (Reservation.estReserve() || Reservation.estEmprunte()) {
             throw new ReservationException();
         }
-        reserverLeDocument(ab);
+        Reservation.reserverLeDocument(ab);
     }
 
     /**
@@ -53,10 +56,10 @@ public class Document implements Documents {
      */
     @Override
     public void emprunt(Abonnes ab) throws EmpruntException {
-        if (!isReserved && !isBorrowed) {
+        if (!Reservation.estReserve() && !Reservation.estEmprunte()) {
             throw new EmpruntException();
         }
-        emprunterLeDocument(ab);
+        Reservation.emprunterLeDocument(ab);
     }
 
     /**
@@ -64,17 +67,17 @@ public class Document implements Documents {
      */
     @Override
     public void retour() throws RetourException {
-        if (!isBorrowed) {
+        if (!Reservation.estEmprunte()) {
             throw new RetourException();
         }
-        retournerLeDocument();
+        Reservation.retournerLeDocument();
     }
 
     /**
      * @return
      */
     @Override
-    public Integer getId() {
+    public Integer getIdStorage() {
         return 0;
     }
 }

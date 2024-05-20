@@ -21,9 +21,7 @@ public abstract class MediathequeDbService {
 
     public static Connection getConnection() throws SQLException {
         if (MediathequeDbService.connection == null) {
-
             MediathequeDbService.connection = java.sql.DriverManager.getConnection(jdbcUrl);
-
         }
         return connection;
     }
@@ -43,6 +41,4 @@ public abstract class MediathequeDbService {
     public static ResultSet executeQuery(String query) throws SQLException {
         return MediathequeDbService.getConnection().createStatement().executeQuery(query);
     }
-
-
 }

@@ -5,12 +5,14 @@ import server.elements.interfaces.Abonnes;
 import java.util.Date;
 
 public class Abonne implements Abonnes {
-    private final int numeroAbonne;
+
+    private int idAbonne;
     private final String nom;
     private final Date dateNaissance;
+    private Integer idStorage;
 
-    public Abonne(int numeroAbonne, String nom, Date dateNaissance) {
-        this.numeroAbonne = numeroAbonne;
+    public Abonne(int idAbonne, String nom, Date dateNaissance) {
+        this.idAbonne = idAbonne;
         this.nom = nom;
         this.dateNaissance = dateNaissance;
     }
@@ -19,15 +21,15 @@ public class Abonne implements Abonnes {
      * @return
      */
     @Override
-    public int getNumberOfSubscribers() {
-        return this.numeroAbonne;
+    public int getIdAbonne() {
+        return this.idAbonne;
     }
 
     /**
      * @return
      */
     @Override
-    public Date getDateOfBirth() {
+    public Date getDateDeNaissance() {
         return this.dateNaissance;
     }
 
@@ -39,7 +41,7 @@ public class Abonne implements Abonnes {
      * @return
      */
     @Override
-    public String getId() {
-        return 0;
+    public Integer getIdStorage() {
+        return this.idStorage;
     }
 }

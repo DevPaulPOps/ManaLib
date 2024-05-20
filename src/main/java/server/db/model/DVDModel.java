@@ -2,7 +2,8 @@ package server.db.model;
 
 import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
-import server.elements.DVD;
+import server.elements.Documents.DVD;
+import server.elements.Documents.Document;
 import server.elements.interfaces.Documents;
 
 import java.sql.ResultSet;
@@ -13,12 +14,12 @@ public class DVDModel implements Model {
      * @param documents
      */
     @Override
-    public void save(Documents documents) throws SQLException {
-        if (documents.getId() == null) {
-            String query = "INSERT INTO dvd (titre, state, id_reserveur) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getIdReserveur() + "')";
+    public void save(Document documents) throws SQLException {
+        if (documents.getIdStorage() == null) {
+            String query = "INSERT INTO dvd (titre, state, id_reserveur) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "')";
             MediathequeDbService.executeUpdate(query);
         } else {
-            String query = "UPDATE dvd SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', id_reserveur = '" + documents.getIdReserveur() + "' WHERE id = " + documents.getId();
+            String query = "UPDATE dvd SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', id_reserveur = '" + documents.getAbonneId() + "' WHERE id = " + documents.getIdStorage();
             MediathequeDbService.executeUpdate(query);
         }
     }
@@ -34,9 +35,9 @@ public class DVDModel implements Model {
             int id = allData.getInt("id");
             String titre = allData.getString("titre");
             String state = allData.getString("state");
-            String idReserveur = allData.getString("id_reserveur");
+            int idReserveur = allData.getInt("id_reserveur");
 
-            DVD dvd = new DVD(id, titre, state, idReserveur);
+            DVD dvd = new DVD(id, titre, false ,state, idReserveur);
 
             ManageDataStorage.addDataStorage(dvd);
         }
