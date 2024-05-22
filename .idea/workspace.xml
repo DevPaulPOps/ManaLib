@@ -4,17 +4,87 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="764791d1-e306-4441-8ee1-a002707fc251" name="Changes" comment="" />
+    <list default="true" id="764791d1-e306-4441-8ee1-a002707fc251" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/clientServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/manageClientServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Exception/EmpruntException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Exception/NotAdultException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Exception/ReservationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Exception/RetourException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Operations/Emprunt/empruntServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Operations/Emprunt/empruntService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Operations/Reservation/Reservation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Operations/Reservation/reservationServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Operations/Reservation/reservationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Operations/Retour/retourServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Operations/Retour/retourService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/MedhiathequeConnectionDb.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/MediathequeDbService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/data/DataFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/data/ManageDataStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/data/TableFactory/TableAbonne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/data/TableFactory/TableBaseFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/data/TableFactory/TableDocument.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/data/TableFactory/TableFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/model/AbonneModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/model/DVDModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/model/DocumentModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/db/model/Model.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/elements/Abonne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/elements/Documents/DVD.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/elements/Documents/Document.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/elements/Documents/Livre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/elements/Mediatheque.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/elements/interfaces/Abonnes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/elements/interfaces/DataStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/elements/interfaces/Documents.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/serv/MediathequeServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/serv/MediathequeServerFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/serv/MediathequeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/serv/bttp/BttpProtocole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/timerTask/AnnulationReservationTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/utils/Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Documents/DVDTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Documents/LivreTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Mediatheque/MediathequeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OverrideImplement.generate.javadoc": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -31,7 +101,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716363421627</updated>
-      <workItem from="1716363423732" duration="92000" />
+      <workItem from="1716363423732" duration="6794000" />
     </task>
     <servers />
   </component>
