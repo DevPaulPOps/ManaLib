@@ -10,15 +10,9 @@ import server.utils.Utils;
 import java.sql.SQLException;
 
 public class DVD extends Document {
-    private final boolean contenuAdulte;
 
     public DVD(int numero, String titre, boolean contenuAdulte, String state, Integer abonneId) {
-        super(numero, titre, state, abonneId);
-        this.contenuAdulte = contenuAdulte;
-    }
-
-    public boolean estContenuAdulte() {
-        return contenuAdulte;
+        super(numero, titre, state, abonneId, contenuAdulte);
     }
 
     @Override
