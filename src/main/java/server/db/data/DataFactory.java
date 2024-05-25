@@ -7,6 +7,7 @@ import server.elements.interfaces.Documents;
 import java.util.List;
 
 public class DataFactory {
+
     public static void createDataInAppToDb(List<Class<? extends Model>> data) {
         try {
             for (Class<? extends Model> d : data) {

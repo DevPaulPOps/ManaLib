@@ -5,7 +5,6 @@ import java.util.List;
 
 public class MediathequeServerFactory {
 
-
     public static void createMediathequeServer(List<Class<? extends MediathequeServer>> serverClasses) {
         for (Class<? extends MediathequeServer> serverClass : serverClasses) {
             try {

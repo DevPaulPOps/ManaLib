@@ -10,9 +10,11 @@ import server.utils.Utils;
 import java.sql.SQLException;
 
 public class DVD extends Document {
+    private boolean contenuAdulte;
 
     public DVD(int numero, String titre, String state, Integer abonneId, boolean contenuAdulte) {
-        super(numero, titre, state, abonneId, contenuAdulte);
+        super(numero, titre, state, abonneId);
+        this.contenuAdulte = contenuAdulte;
     }
 
     @Override
@@ -21,6 +23,10 @@ public class DVD extends Document {
             throw new NotAdultException();
         }
         super.reservation(ab);
+    }
+
+    public boolean isContenuAdulte() {
+        return contenuAdulte;
     }
 
     @Override

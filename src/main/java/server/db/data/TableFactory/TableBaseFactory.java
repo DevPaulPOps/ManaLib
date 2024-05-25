@@ -16,17 +16,21 @@ public abstract class TableBaseFactory implements TableFactory {
     public static void createAllTables() throws SQLException {
         TableBaseFactory t = new TableAbonne();
         TableBaseFactory t2 = new TableDocument();
+        TableBaseFactory t3 = new TableDvd();
 
         t.createTable();
         t2.createTable();
+        t3.createTable();
     }
 
     public static void dropAllTables() throws SQLException {
-        TableBaseFactory t = new TableDocument();
-        TableBaseFactory t2 = new TableAbonne();
+        TableBaseFactory t = new TableDvd();
+        TableBaseFactory t2 = new TableDocument();
+        TableBaseFactory t3 = new TableAbonne();
 
         t.removeTable();
         t2.removeTable();
+        t3.removeTable();
     }
 
     @Override

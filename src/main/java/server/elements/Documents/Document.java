@@ -16,22 +16,16 @@ public class Document implements Documents {
     private String titre;
     private String state;
     private Integer abonneId;
-    private boolean contenuAdulte;
 
-    public Document(int idDocument, String titre, String state, Integer abonneId, boolean contenuAdulte) {
+    public Document(int idDocument, String titre, String state, Integer abonneId) {
         this.idDocument = idDocument;
         this.titre = titre;
         this.state = state;
         this.abonneId = abonneId;
-        this.contenuAdulte = contenuAdulte;
     }
 
     public String getState() {
         return state;
-    }
-
-    public boolean isContenuAdulte() {
-        return contenuAdulte;
     }
 
     public Integer getAbonneId() {

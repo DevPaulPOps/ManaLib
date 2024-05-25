@@ -2,6 +2,7 @@ package server.serv;
 
 import server.serv.bttp.BttpProtocole;
 
+import java.io.IOException;
 import java.net.Socket;
 
 public abstract class MediathequeService implements Runnable {
@@ -21,15 +22,19 @@ public abstract class MediathequeService implements Runnable {
         return socket;
     }
 
-    @java.lang.Override
+    @Override
     public void run() {
         this.bttp.communicate();
-        lancement();
+        try {
+            lancement();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void start() {
         new Thread(this).start();
     }
 
-    abstract public void lancement();
+    abstract public void lancement() throws IOException;
 }

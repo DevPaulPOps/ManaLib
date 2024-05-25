@@ -11,7 +11,6 @@ public class TableDocument extends TableBaseFactory {
                 + "titre VARCHAR(255) NOT NULL, "
                 + "state VARCHAR(255) NOT NULL, "
                 + "abonneId INT NOT NULL, "
-                + "contenuAdulte BOOLEAN NOT NULL, "
                 + "FOREIGN KEY (abonneId) REFERENCES Abonne(numero) ON DELETE CASCADE)";
         this.executeQueryCreate(createTableSQL, "Document", this.createOperation);
     }

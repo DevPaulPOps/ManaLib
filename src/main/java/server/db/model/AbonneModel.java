@@ -10,15 +10,16 @@ import server.elements.interfaces.Documents;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class AbonneModel<A> implements Model{
-    /**
-     * @param documents
-     * @throws SQLException
-     */
-    public void save(Document documents) throws SQLException {
-
-    }
+public class AbonneModel<A> implements Model {
+//    /**
+//     * @param documents
+//     * @throws SQLException
+//     */
+//    public void save(Document documents) throws SQLException {
+//
+//    }
 
     /**
      * @param dataStorage
@@ -33,11 +34,11 @@ public class AbonneModel<A> implements Model{
      * @throws SQLException
      */
     @Override
-    public void get() throws SQLException {
+    public ArrayList<Abonne> get() throws SQLException {
         String query = "SELECT * FROM abonne";
         ResultSet allData = MediathequeDbService.executeQuery(query);
         while (allData.next()) {
-            int id = allData.getInt("id");
+            int id = allData.getInt("numero");
             String nom = allData.getString("nom");
             Date dateNaissance = allData.getDate("dateNaissance");
 
@@ -45,5 +46,6 @@ public class AbonneModel<A> implements Model{
 
             ManageDataStorage.addDataStorage(abonne);
         }
+        return new ArrayList<>();
     }
 }

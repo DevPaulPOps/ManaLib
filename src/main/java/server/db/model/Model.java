@@ -4,7 +4,9 @@ import server.elements.Documents.Document;
 import server.elements.interfaces.DataStorage;
 import server.elements.interfaces.Documents;
 
+import javax.print.Doc;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface Model {
     /*
@@ -14,5 +16,5 @@ public interface Model {
      */
     void save(DataStorage dataStorage) throws SQLException;
 
-    void get() throws SQLException;
+    ArrayList get() throws SQLException;
 }
