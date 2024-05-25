@@ -3,11 +3,13 @@ package server;
 import server.Operations.Emprunt.empruntServer;
 import server.Operations.Reservation.reservationServer;
 import server.Operations.Retour.retourServer;
+import server.db.MediathequeDbService;
 import server.db.data.DataFactory;
 import server.db.model.AbonneModel;
 import server.db.model.DVDModel;
 import server.db.model.DocumentModel;
 import server.db.model.Model;
+import server.environment.Environment;
 import server.serv.MediathequeServer;
 import server.serv.MediathequeServerFactory;
 
@@ -15,7 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
+        MediathequeDbService.setJdbcClassDriver(Environment.DRIVER);
+        MediathequeDbService.setJdbcUrl(Environment.URL);
+
         List<Class<? extends MediathequeServer>> serverClasses = new ArrayList<>();
         serverClasses.add(empruntServer.class);
         serverClasses.add(reservationServer.class);

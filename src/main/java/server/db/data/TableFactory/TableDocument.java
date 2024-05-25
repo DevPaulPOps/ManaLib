@@ -9,6 +9,7 @@ public class TableDocument extends TableBaseFactory {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Document ("
                 + "numero INT AUTO_INCREMENT PRIMARY KEY, "
                 + "titre VARCHAR(255) NOT NULL, "
+                + "state VARCHAR(255) NOT NULL, "
                 + "abonneId INT NOT NULL, "
                 + "contenuAdulte BOOLEAN NOT NULL, "
                 + "FOREIGN KEY (abonneId) REFERENCES Abonne(numero) ON DELETE CASCADE)";

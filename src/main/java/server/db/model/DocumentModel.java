@@ -13,15 +13,19 @@ public class DocumentModel<D> implements Model{
      * @param documents
      * // TODO IL faut l'adapter pour les abonnées.
      */
-    @Override
     public void save(Document documents) throws SQLException {
         if (documents.getIdStorage() == null) {
-            String query = "INSERT INTO document (titre, state, id_reserveur) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "')";
+            String query = "INSERT INTO Document (titre, state, abonneId) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "')";
             MediathequeDbService.executeUpdate(query);
         } else {
-            String query = "UPDATE document SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', id_reserveur = '" + documents.getAbonneId() + "' WHERE id = " + documents.getIdStorage();
+            String query = "UPDATE Document SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', abonneId = '" + documents.getAbonneId() + "' WHERE id = " + documents.getIdStorage();
             MediathequeDbService.executeUpdate(query);
         }
+    }
+
+    @Override
+    public void save(DataStorage dataStorage) throws SQLException {
+
     }
 
     /**
@@ -29,15 +33,15 @@ public class DocumentModel<D> implements Model{
      */
     @Override
     public void get() throws SQLException{
-        String query = "SELECT * FROM document";
+        String query = "SELECT * FROM Document";
         ResultSet allData = MediathequeDbService.executeQuery(query);
         while (allData.next()) {
             int id = allData.getInt("id");
             String titre = allData.getString("titre");
             String state = allData.getString("state");
-            int idReserveur = allData.getInt("id_reserveur");
+            int abonneId = allData.getInt("abonneId");
 
-            Document document = new Document(id, titre, state, idReserveur);
+            Document document = new Document(id, titre, state, abonneId, true);
 
             ManageDataStorage.addDataStorage(document);
         }
