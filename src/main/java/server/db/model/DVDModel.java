@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DVDModel<D extends Document> implements Model {
+
     /**
      * @param documents
      */
