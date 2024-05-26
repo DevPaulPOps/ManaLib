@@ -2,7 +2,6 @@ package server.db.data;
 
 import server.db.model.Model;
 import server.elements.interfaces.DataStorage;
-import server.elements.interfaces.Documents;
 
 import java.util.List;
 
@@ -24,20 +23,20 @@ public class DataFactory {
     }
 
     /*
-    * Il faut passer par les éléments pour pouvoir les ajouter et non pas les models...
-    * Donc Save un Document
+     * Il faut passer par les éléments pour pouvoir les ajouter et non pas les models...
+     * Donc Save un Document
      */
     public static void createDataInDbToApp() {
         try {
             for (DataStorage d : ManageDataStorage.getAllDataStorage()) {
                 try {
                     d.saveFromDB();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-        }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-}}
+    }
+}

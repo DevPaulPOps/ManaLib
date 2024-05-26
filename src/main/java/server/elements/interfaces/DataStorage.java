@@ -7,6 +7,7 @@ public interface DataStorage {
 
     /**
      * Methode pour sauvegarder les données present dans la base de données vers l'application
+     *
      * @throws SQLException
      */
     void saveFromDB() throws SQLException;

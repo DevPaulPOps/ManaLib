@@ -22,10 +22,17 @@ public class main {
         String serviceDemande = args[0];
 
         switch (serviceDemande) {
-            case "reservation": new Reservation().launch(Constants.HOST); break;
-            case "emprunt": new Emprunt().launch(Constants.HOST); break;
-            case "retour": new Retour().launch(Constants.HOST); break;
-            default: System.err.println("Merci de lancer le programme avec un service reconnu : " + getServices());
+            case "reservation":
+                new Reservation().launch(Constants.HOST);
+                break;
+            case "emprunt":
+                new Emprunt().launch(Constants.HOST);
+                break;
+            case "retour":
+                new Retour().launch(Constants.HOST);
+                break;
+            default:
+                System.err.println("Merci de lancer le programme avec un service reconnu : " + getServices());
         }
     }
 
@@ -42,7 +49,7 @@ public class main {
     }
 
     private static String getServices() {
-        return  "   - reservation \n" +
+        return "   - reservation \n" +
                 "   - emprunt \n" +
                 "   - retour \n";
     }

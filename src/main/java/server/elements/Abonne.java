@@ -8,9 +8,9 @@ import java.util.Date;
 
 public class Abonne implements Abonnes {
 
-    private int idAbonne;
     private final String nom;
     private final Date dateNaissance;
+    private final int idAbonne;
     private Integer idStorage;
 
     public Abonne(int idAbonne, String nom, Date dateNaissance) {

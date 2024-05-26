@@ -17,8 +17,7 @@ public class Reservation {
             insertDataTmp();
             MediathequeServer server = new reservationServer();
             server.run();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.err.println(e.getLocalizedMessage());
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -30,11 +29,11 @@ public class Reservation {
         DocumentModel doc = new DocumentModel();
         AbonneModel abonneModel = new AbonneModel();
 
-        Abonne abonne = new Abonne(1,"Paul", new Date(27 / 2004));
+        Abonne abonne = new Abonne(1, "Paul", new Date(27 / 2004));
 
         abonneModel.save(abonne);
 
-        Document docu = new Document(1,"YO","disponible", 1);
+        Document docu = new Document(1, "YO", "disponible", 1);
         doc.save(docu);
     }
 }

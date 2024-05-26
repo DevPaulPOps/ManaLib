@@ -5,13 +5,8 @@ import server.db.MediathequeDbService;
 import java.sql.SQLException;
 
 public abstract class TableBaseFactory implements TableFactory {
-     protected final String createOperation = "crée";
-     protected final String removeOperation = "supprimé";
-
-    public void executeQueryCreate(String createTableSQL, String tableName, String operation) throws SQLException {
-        MediathequeDbService.executeUpdate(createTableSQL);
-        System.out.println("Table " + tableName +  " " + operation + " avec succès !");
-    }
+    protected final String createOperation = "crée";
+    protected final String removeOperation = "supprimé";
 
     public static void createAllTables() throws SQLException {
         TableBaseFactory t = new TableAbonne();
@@ -33,7 +28,13 @@ public abstract class TableBaseFactory implements TableFactory {
         t3.removeTable();
     }
 
+    public void executeQueryCreate(String createTableSQL, String tableName, String operation) throws SQLException {
+        MediathequeDbService.executeUpdate(createTableSQL);
+        System.out.println("Table " + tableName + " " + operation + " avec succès !");
+    }
+
     @Override
     public abstract void createTable() throws SQLException;
+
     public abstract void removeTable() throws SQLException;
 }

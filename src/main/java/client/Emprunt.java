@@ -10,8 +10,7 @@ public class Emprunt {
         try {
             MediathequeServer server = new empruntServer();
             server.run();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.err.println(e.getLocalizedMessage());
         }
     }

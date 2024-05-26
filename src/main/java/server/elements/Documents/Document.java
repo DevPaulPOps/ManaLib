@@ -12,10 +12,10 @@ import java.sql.SQLException;
 
 public class Document implements Documents {
 
-    private int idDocument;
-    private String titre;
-    private String state;
-    private Integer abonneId;
+    private final int idDocument;
+    private final String titre;
+    private final String state;
+    private final Integer abonneId;
 
     public Document(int idDocument, String titre, String state, Integer abonneId) {
         this.idDocument = idDocument;
@@ -86,8 +86,7 @@ public class Document implements Documents {
     }
 
     /**
-     * @throws SQLException
-     * Methode pour sauvegarder les données present dans la base de données vers l'application
+     * @throws SQLException Methode pour sauvegarder les données present dans la base de données vers l'application
      */
     @Override
     public void saveFromDB() throws SQLException {

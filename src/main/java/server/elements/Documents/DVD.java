@@ -3,14 +3,13 @@ package server.elements.Documents;
 import server.Exception.NotAdultException;
 import server.Exception.ReservationException;
 import server.db.model.DVDModel;
-import server.db.model.DocumentModel;
 import server.elements.interfaces.Abonnes;
 import server.utils.Utils;
 
 import java.sql.SQLException;
 
 public class DVD extends Document {
-    private boolean contenuAdulte;
+    private final boolean contenuAdulte;
 
     public DVD(int numero, String titre, String state, Integer abonneId, boolean contenuAdulte) {
         super(numero, titre, state, abonneId);

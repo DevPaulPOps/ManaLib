@@ -18,6 +18,6 @@ public class AnnulationReservationTask extends TimerTask {
 
     @Override
     public void run() {
-        reservation.cancelReservation();
+        Reservation.cancelReservation();
     }
 }

@@ -4,5 +4,6 @@ import java.sql.SQLException;
 
 public interface TableFactory {
     void createTable() throws SQLException;
+
     void removeTable() throws SQLException;
 }

@@ -1,6 +1,5 @@
 package server.Operations.Reservation;
 
-import server.elements.Abonne;
 import server.elements.interfaces.Abonnes;
 import server.timerTask.AnnulationReservationTask;
 
@@ -11,11 +10,7 @@ public class Reservation {
     private static Abonnes abonne;
 
     public Reservation() {
-        this.timer = new Timer();
-    }
-
-    public void startReservationDelay() {
-        timer.schedule(new AnnulationReservationTask(this), AnnulationReservationTask.getDelay());
+        timer = new Timer();
     }
 
     public static void reserverLeDocument(Abonnes ab) {
@@ -42,5 +37,9 @@ public class Reservation {
 
     public static void cancelReservation() {
         timer.cancel();
+    }
+
+    public void startReservationDelay() {
+        timer.schedule(new AnnulationReservationTask(this), AnnulationReservationTask.getDelay());
     }
 }
