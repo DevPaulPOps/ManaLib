@@ -41,4 +41,10 @@ public class DocumentModel<D extends Document> implements Model<D> {
             ManageDataStorage.addDataStorage(document);
         }
     }
+
+    @Override
+    public void delete(D dataStorage) throws SQLException {
+        String query = "DELETE FROM document WHERE numero = " + dataStorage.getIdStorage();
+        MediathequeDbService.executeUpdate(query);
+    }
 }

@@ -43,4 +43,10 @@ public class DVDModel<D extends DVD> implements Model<D> {
             ManageDataStorage.addDataStorage(dvd);
         }
     }
+
+    @Override
+    public void delete(D dataStorage) throws SQLException {
+        String query = "DELETE FROM dvd WHERE numero = " + dataStorage.getIdStorage();
+        MediathequeDbService.executeUpdate(query);
+    }
 }

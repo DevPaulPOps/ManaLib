@@ -3,7 +3,6 @@ package server.db.model;
 import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
 import server.elements.Abonne;
-import server.elements.interfaces.DataStorage;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -43,4 +42,11 @@ public class AbonneModel<A extends Abonne> implements Model<A> {
             ManageDataStorage.addDataStorage(abonne);
         }
     }
+
+    @Override
+    public void delete(A dataStorage) throws SQLException {
+        String query = "DELETE FROM abonne WHERE numero = " + dataStorage.getIdStorage();
+        MediathequeDbService.executeUpdate(query);
+    }
+
 }
