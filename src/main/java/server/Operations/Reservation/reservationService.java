@@ -1,6 +1,7 @@
 package server.Operations.Reservation;
 
-import server.db.model.DocumentModel;
+import server.db.data.ManageDataStorage;
+import server.elements.Documents.Document;
 import server.serv.MediathequeService;
 
 import java.io.BufferedReader;
@@ -9,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class reservationService extends MediathequeService {
 
@@ -22,8 +24,8 @@ public class reservationService extends MediathequeService {
         try {
             showCatalogue();
             BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));
-            BufferedReader sin = new BufferedReader (new InputStreamReader(getSocket().getInputStream ( )));
-            PrintWriter sout = new PrintWriter (getSocket().getOutputStream ( ), true);
+            BufferedReader sin = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
+            PrintWriter sout = new PrintWriter(getSocket().getOutputStream(), true);
 
             String line;
             line = sin.readLine();
@@ -36,8 +38,7 @@ public class reservationService extends MediathequeService {
             sout.println(clavier.readLine());
 
             System.out.print(sin.readLine());
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.err.println(e.getLocalizedMessage());
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -47,16 +48,14 @@ public class reservationService extends MediathequeService {
             if (getSocket() != null) {
                 getSocket().close();
             }
+        } catch (IOException ignored) {
         }
-        catch (IOException ignored) { }
     }
 
     public void showCatalogue() throws SQLException {
-        DocumentModel documentModel = new DocumentModel();
+        ArrayList<Document> catalogue = ManageDataStorage.getOnlyDocumentDataStorage();
 
         System.out.println("Voici les documents disponibles : \n");
-        for (int i = 0; i < documentModel.get().size(); i++) {
-            System.out.println( documentModel.get().get(i));
-        }
+        catalogue.forEach(document -> System.out.println(document));
     }
 }

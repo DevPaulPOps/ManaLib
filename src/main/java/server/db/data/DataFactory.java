@@ -13,7 +13,7 @@ public class DataFactory {
             for (Class<? extends Model> d : data) {
                 try {
                     Model modelInstance = d.newInstance();
-                    modelInstance.get();
+                    modelInstance.getInit();
                 } catch (InstantiationException | IllegalAccessException e) {
                     e.printStackTrace();
                 }

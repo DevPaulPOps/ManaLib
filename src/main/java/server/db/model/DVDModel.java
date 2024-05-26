@@ -3,19 +3,17 @@ package server.db.model;
 import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
 import server.elements.Documents.DVD;
-import server.elements.Documents.Document;
-import server.elements.interfaces.DataStorage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class DVDModel<D extends Document> implements Model {
+public class DVDModel<D extends DVD> implements Model<D> {
 
     /**
      * @param documents
      */
-    public void save(DVD documents) throws SQLException {
+    @Override
+    public void save(D documents) throws SQLException {
         if (documents.getIdStorage() == null) {
             String query = "INSERT INTO dvd (titre, state, abonneId, contenuAdulte) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "', '" + documents.isContenuAdulte() + "')";
             MediathequeDbService.executeUpdate(query);
@@ -25,16 +23,12 @@ public class DVDModel<D extends Document> implements Model {
         }
     }
 
-    @Override
-    public void save(DataStorage dataStorage) throws SQLException {
-
-    }
 
     /**
      * @throws SQLException
      */
     @Override
-    public ArrayList<Document> get() throws SQLException {
+    public void getInit() throws SQLException {
         String query = "SELECT * FROM dvd";
         ResultSet allData = MediathequeDbService.executeQuery(query);
         while (allData.next()) {
@@ -48,6 +42,5 @@ public class DVDModel<D extends Document> implements Model {
 
             ManageDataStorage.addDataStorage(dvd);
         }
-        return new ArrayList<>();
     }
 }

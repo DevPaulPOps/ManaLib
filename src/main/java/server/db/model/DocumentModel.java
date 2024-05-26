@@ -3,18 +3,17 @@ package server.db.model;
 import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
 import server.elements.Documents.Document;
-import server.elements.interfaces.DataStorage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class DocumentModel<D> implements Model {
+public class DocumentModel<D extends Document> implements Model<D> {
+
     /**
-     * @param documents
-     * // TODO IL faut l'adapter pour les abonnées.
+     * @param documents // TODO IL faut l'adapter pour les abonnées.
      */
-    public void save(Document documents) throws SQLException {
+    @Override
+    public void save(D documents) throws SQLException {
         if (documents.getIdStorage() == null) {
             String query = "INSERT INTO document (titre, state, abonneId) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "')";
             MediathequeDbService.executeUpdate(query);
@@ -24,17 +23,12 @@ public class DocumentModel<D> implements Model {
         }
     }
 
-    @Override
-    public void save(DataStorage dataStorage) throws SQLException {
-
-    }
 
     /**
      * @throws SQLException
      */
     @Override
-    public ArrayList<Document> get() throws SQLException{
-        ArrayList<Document> lstDocument = new ArrayList<>();
+    public void getInit() throws SQLException {
         String query = "SELECT * FROM document";
         ResultSet allData = MediathequeDbService.executeQuery(query);
         while (allData.next()) {
@@ -44,9 +38,7 @@ public class DocumentModel<D> implements Model {
             int abonneId = allData.getInt("abonneId");
 
             Document document = new Document(numero, titre, state, abonneId);
-            lstDocument.add(document);
             ManageDataStorage.addDataStorage(document);
         }
-        return lstDocument;
     }
 }
