@@ -1,5 +1,7 @@
 package server.Operations.Reservation;
 
+import server.Exception.EmpruntException;
+import server.Exception.ReservationException;
 import server.elements.interfaces.Abonnes;
 import server.timerTask.AnnulationReservationTask;
 
@@ -13,9 +15,17 @@ public class Reservation {
         timer = new Timer();
     }
 
-    public static void reserverLeDocument(Abonnes ab) {
-        //startReservation ????
-        abonne = ab;
+    public void reserverLeDocument(Abonnes ab) {
+        if (estReserve()) {
+            throw new ReservationException();
+        }
+        else if (estEmprunte()) {
+            throw new EmpruntException();
+        }
+        else {
+            abonne = ab;
+            startReservationDelay();
+        }
     }
 
     public static boolean estReserve() {
@@ -27,8 +37,12 @@ public class Reservation {
     }
 
     public static void emprunterLeDocument(Abonnes ab) {
-        //startReservation ????
-        abonne = ab;
+        if (!estReserve() || ab.getIdAbonne() == abonne.getIdAbonne()) {
+            abonne = ab;
+            timer.cancel();
+        } else {
+            throw new EmpruntException();
+        }
     }
 
     public static void retournerLeDocument() {
@@ -37,6 +51,7 @@ public class Reservation {
 
     public static void cancelReservation() {
         timer.cancel();
+        abonne = null;
     }
 
     public void startReservationDelay() {

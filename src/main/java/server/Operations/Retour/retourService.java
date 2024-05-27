@@ -17,27 +17,40 @@ public class retourService extends MediathequeService {
 
     @Override
     public void lancement() {
-        //. Lors du retour, le numéro de
-        //DVD suffit
         try {
-
-            BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));
-            BufferedReader sin = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
-            PrintWriter sout = new PrintWriter(getSocket().getOutputStream(), true);
-
-            String line;
-            line = sin.readLine();
-            System.out.println(line);
-            System.out.print(sin.readLine());
-
-            String repAbonne = clavier.readLine();
-            sout.println(repAbonne);
+            BufferedReader in = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
+            PrintWriter out = new PrintWriter(getSocket().getOutputStream(), true);
+            out.println("Vous êtes sur le service de retour.\n" + "Le document appartient-il a quelqu'un ? (oui / non) : ");
 
 
-            System.out.print(sin.readLine());
-            sout.println(clavier.readLine());
+            String docTrouve = in.readLine();
+            while (true) {
+                if (docTrouve.equals("oui")){
 
-            System.out.print(sin.readLine());
+                    out.println("Numero du document : ");
+                    String numeroDocument = in.readLine();
+                    int numeroDoc = Integer.parseInt(numeroDocument);
+
+                    //Faire la recherche pour voir si le document correspond et qu'il etait bien emprunte
+
+                    break;
+                } else if (docTrouve.equals("non")) {
+
+                    out.println("Numero du document : ");
+                    String numeroDocument = in.readLine();
+                    int numeroDoc = Integer.parseInt(numeroDocument);
+
+                    //Stocker le numero de document / voir si appartient a quelqun
+                    break;
+                }
+                else {
+                    out.println("Vous devez répondre par oui ou non.");
+                    docTrouve = in.readLine();
+                }
+            }
+
+            out.println("Le document a bien été remis avec succès.");
+
         } catch (IOException e) {
             System.err.println(e.getLocalizedMessage());
         }

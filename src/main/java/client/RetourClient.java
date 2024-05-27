@@ -1,11 +1,8 @@
 package client;
 
-
 import server.serv.MediathequeServer;
 
-import java.io.IOException;
-
-public class Emprunt {
+public class RetourClient {
     public void launch(MediathequeServer server) {
 //        try {
 //            server.run();

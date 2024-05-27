@@ -27,13 +27,13 @@ public class main {
 
         switch (serviceDemande) {
             case "reservation":
-                new Reservation().launch(new reservationServer());
+                new ReservationClient().launch(new reservationServer());
                 break;
             case "emprunt":
-                new Emprunt().launch(new empruntServer());
+                new EmpruntClient().launch(new empruntServer());
                 break;
             case "retour":
-                new Retour().launch(new retourServer());
+                new RetourClient().launch(new retourServer());
                 break;
             default:
                 System.err.println("Merci de lancer le programme avec un service reconnu : " + getServices());

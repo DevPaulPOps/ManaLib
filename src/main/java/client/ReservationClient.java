@@ -1,6 +1,5 @@
 package client;
 
-import server.Operations.Reservation.reservationServer;
 import server.db.model.AbonneModel;
 import server.db.model.DocumentModel;
 import server.elements.Abonne;
@@ -14,7 +13,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Date;
 
-public class Reservation {
+public class ReservationClient {
     public void launch(MediathequeServer server) {
         try {
             //Clavier utilisateur
