@@ -20,22 +20,15 @@ public class reservationService extends MediathequeService {
 
     @Override
     public void lancement() throws IOException {
-        System.out.println("Lancement du service.\n");
         try {
-            showCatalogue();
-            BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));
             BufferedReader sin = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
             PrintWriter sout = new PrintWriter(getSocket().getOutputStream(), true);
+            sout.println("Vous êtes sur le service de reservation.\n"+ "Voici le catalogue : \n" + showCatalogue());
 
-            String line;
-            line = sin.readLine();
-            System.out.println(line);
+            sout.println("Votre numero de client : ");
+            String number = sin.readLine();
 
-            System.out.print(sin.readLine());
-            String nbSub = clavier.readLine();
-            sout.println(nbSub);
-            System.out.print(sin.readLine());
-            sout.println(clavier.readLine());
+//            BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));
 
             System.out.print(sin.readLine());
         } catch (IOException e) {
@@ -43,7 +36,6 @@ public class reservationService extends MediathequeService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         try {
             if (getSocket() != null) {
                 getSocket().close();
@@ -52,10 +44,13 @@ public class reservationService extends MediathequeService {
         }
     }
 
-    public void showCatalogue() throws SQLException {
+    public String showCatalogue() throws SQLException {
         ArrayList<Document> catalogue = ManageDataStorage.getOnlyDocumentDataStorage();
 
-        System.out.println("Voici les documents disponibles : \n");
-        catalogue.forEach(document -> System.out.println(document));
+        StringBuilder sb = new StringBuilder();
+
+        catalogue.forEach(document -> sb.append(document + "\n"));
+
+        return sb.toString();
     }
 }

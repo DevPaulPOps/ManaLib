@@ -1,16 +1,20 @@
 package client;
 //TODO implement this class
 
-import Constant.Constants;
+import config.Config;
+import server.Operations.Emprunt.empruntServer;
+import server.Operations.Reservation.reservationServer;
+import server.Operations.Retour.retourServer;
 import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
 import server.environment.Environment;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class main {
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
 
         setConfig();
 
@@ -23,13 +27,13 @@ public class main {
 
         switch (serviceDemande) {
             case "reservation":
-                new Reservation().launch(Constants.HOST);
+                new Reservation().launch(new reservationServer());
                 break;
             case "emprunt":
-                new Emprunt().launch(Constants.HOST);
+                new Emprunt().launch(new empruntServer());
                 break;
             case "retour":
-                new Retour().launch(Constants.HOST);
+                new Retour().launch(new retourServer());
                 break;
             default:
                 System.err.println("Merci de lancer le programme avec un service reconnu : " + getServices());

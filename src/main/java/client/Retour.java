@@ -6,12 +6,11 @@ import server.serv.MediathequeServer;
 import java.io.IOException;
 
 public class Retour {
-    public void launch(String host) {
-        try {
-            MediathequeServer server = new retourServer();
-            server.run();
-        } catch (IOException e) {
-            System.err.println(e.getLocalizedMessage());
-        }
+    public void launch(MediathequeServer server) {
+//        try {
+//            server.run();
+//        } catch (IOException e) {
+//            System.err.println(e.getLocalizedMessage());
+//        }
     }
 }

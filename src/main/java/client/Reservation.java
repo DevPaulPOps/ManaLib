@@ -7,20 +7,46 @@ import server.elements.Abonne;
 import server.elements.Documents.Document;
 import server.serv.MediathequeServer;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Date;
 
 public class Reservation {
-    public void launch(String host) {
+    public void launch(MediathequeServer server) {
         try {
-            insertDataTmp();
-            MediathequeServer server = new reservationServer();
+            //Clavier utilisateur
+            BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));
             server.run();
+
+            BufferedReader sin = new BufferedReader (new InputStreamReader(server.getServerSocket().accept().getInputStream()));
+            PrintWriter sout = new PrintWriter(server.getServerSocket().accept().getOutputStream ( ), true);
+
+            //Premiere ligne envoye par le serveur
+            String line;
+            line = sin.readLine();
+            System.out.println(line);
+            System.out.println(sin.readLine());
+
+            //Demande au user
+            String numAbonne = clavier.readLine();
+
+            //Envoie au serveur
+            sout.println(numAbonne);
+
+            System.out.println(sin.readLine());
+
+            //Deuxieme demande au user
+            sout.println(clavier.readLine());
+
+            //Resultat
+            System.out.println(sin.readLine());
+
+
         } catch (IOException e) {
             System.err.println(e.getLocalizedMessage());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 

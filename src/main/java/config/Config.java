@@ -21,7 +21,7 @@ public class Config {
     private void loadConfig() {
         JSONParser parser = new JSONParser();
         try {
-            JSONObject config = (JSONObject) parser.parse(new FileReader("config.json"));
+            JSONObject config = (JSONObject) parser.parse(new FileReader("src/main/java/config/config.json"));
             ports.put("PORT", ((Long) config.get("PORT")).intValue());
             ports.put("PORT_RESERVATION", ((Long) config.get("PORT_RESERVATION")).intValue());
             ports.put("PORT_EMPRUNT", ((Long) config.get("PORT_EMPRUNT")).intValue());
@@ -33,6 +33,10 @@ public class Config {
     }
 
     public static int getPort(String portName) {
+        if (ports.isEmpty()) {
+            Config f = new Config();
+        }
+
         return ports.getOrDefault(portName, -1);
     }
 
