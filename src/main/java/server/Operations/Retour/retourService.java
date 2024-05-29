@@ -22,7 +22,6 @@ public class retourService extends MediathequeService {
             PrintWriter out = new PrintWriter(getSocket().getOutputStream(), true);
             out.println("Vous êtes sur le service de retour.\n" + "Le document appartient-il a quelqu'un ? (oui / non) : ");
 
-
             String docTrouve = in.readLine();
             while (true) {
                 if (docTrouve.equals("oui")){

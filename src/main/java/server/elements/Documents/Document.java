@@ -3,7 +3,9 @@ package server.elements.Documents;
 import server.Exception.EmpruntException;
 import server.Exception.ReservationException;
 import server.Exception.RetourException;
+import server.Operations.Emprunt.Emprunt;
 import server.Operations.Reservation.Reservation;
+import server.Operations.Retour.Retour;
 import server.db.model.DocumentModel;
 import server.elements.interfaces.Abonnes;
 import server.elements.interfaces.Documents;
@@ -48,10 +50,10 @@ public class Document implements Documents {
      */
     @Override
     public void reservation(Abonnes ab) throws ReservationException {
-        if (Reservation.estReserve() || Reservation.estEmprunte()) {
+        if (Reservation.estReserve() || Emprunt.estEmprunte()) {
             throw new ReservationException();
         }
-        Reservation.reserverLeDocument(ab);
+        Reservation.reserver(ab);
     }
 
     /**
@@ -60,10 +62,10 @@ public class Document implements Documents {
      */
     @Override
     public void emprunt(Abonnes ab) throws EmpruntException {
-        if (!Reservation.estReserve() && !Reservation.estEmprunte()) {
+        if (!Reservation.estReservePar(ab) && !Emprunt.estEmprunte()) {
             throw new EmpruntException();
         }
-        Reservation.emprunterLeDocument(ab);
+        Reservation.reserver(ab);
     }
 
     /**
@@ -71,10 +73,10 @@ public class Document implements Documents {
      */
     @Override
     public void retour() throws RetourException {
-        if (!Reservation.estEmprunte()) {
+        if (!Emprunt.estEmprunte()) {
             throw new RetourException();
         }
-        Reservation.retournerLeDocument();
+        Retour.retourner();
     }
 
     /**

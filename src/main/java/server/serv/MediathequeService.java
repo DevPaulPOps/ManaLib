@@ -24,7 +24,7 @@ public abstract class MediathequeService implements Runnable {
 
     @Override
     public void run() {
-        this.bttp.communicate();
+        this.bttp.initInOut();
         try {
             lancement();
         } catch (IOException e) {

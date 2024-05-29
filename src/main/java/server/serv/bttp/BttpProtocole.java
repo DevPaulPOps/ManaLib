@@ -13,16 +13,29 @@ public class BttpProtocole {
 
     public BttpProtocole(Socket socket) {
         this.socket = socket;
-        communicate();
+        initInOut();
     }
 
-    public void communicate() {
+    public void initInOut() {
         try {
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
             System.out.println("Error: " + e);
         }
+    }
+
+    public String communicate(String response) throws IOException {
+        out.println(response);
+        return in.readLine();
+    }
+
+    public String getResponseServer() throws IOException {
+        return in.readLine();
+    }
+
+    public void sendResponseToServer(String response) throws IOException {
+        out.println(response);
     }
 
     public void close() {
@@ -34,5 +47,4 @@ public class BttpProtocole {
             System.out.println("Error: " + e);
         }
     }
-
 }

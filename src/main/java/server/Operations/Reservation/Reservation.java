@@ -2,6 +2,7 @@ package server.Operations.Reservation;
 
 import server.Exception.EmpruntException;
 import server.Exception.ReservationException;
+import server.Operations.Emprunt.Emprunt;
 import server.elements.interfaces.Abonnes;
 import server.timerTask.AnnulationReservationTask;
 
@@ -13,17 +14,24 @@ public class Reservation {
 
     public Reservation() {
         timer = new Timer();
+        abonne = null;
     }
 
-    public void reserverLeDocument(Abonnes ab) {
+    public static void reserver(Abonnes abonneI) {
+
+        if (estReservePar(abonneI)) {
+            setAbonne(abonneI);
+            return;
+        }
+
         if (estReserve()) {
             throw new ReservationException();
         }
-        else if (estEmprunte()) {
+        else if (Emprunt.estEmprunte()) {
             throw new EmpruntException();
         }
         else {
-            abonne = ab;
+            setAbonne(abonneI);
             startReservationDelay();
         }
     }
@@ -32,21 +40,12 @@ public class Reservation {
         return timer != null;
     }
 
-    public static boolean estEmprunte() {
-        return abonne != null;
+    private static void setAbonne(Abonnes abonneI) {
+        abonne = abonneI;
     }
 
-    public static void emprunterLeDocument(Abonnes ab) {
-        if (!estReserve() || ab.getIdAbonne() == abonne.getIdAbonne()) {
-            abonne = ab;
-            timer.cancel();
-        } else {
-            throw new EmpruntException();
-        }
-    }
-
-    public static void retournerLeDocument() {
-        cancelReservation();
+    public static boolean estReservePar(Abonnes abonnesI) {
+        return abonnesI.getIdAbonne() == abonnesI.getIdAbonne();
     }
 
     public static void cancelReservation() {
@@ -54,7 +53,7 @@ public class Reservation {
         abonne = null;
     }
 
-    public void startReservationDelay() {
+    public static void startReservationDelay() {
         timer.schedule(new AnnulationReservationTask(this), AnnulationReservationTask.getDelay());
     }
 }

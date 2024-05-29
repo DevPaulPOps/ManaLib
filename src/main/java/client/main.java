@@ -1,60 +1,32 @@
 package client;
-//TODO implement this class
-
-import config.Config;
-import server.Operations.Emprunt.empruntServer;
-import server.Operations.Reservation.reservationServer;
-import server.Operations.Retour.retourServer;
-import server.db.MediathequeDbService;
-import server.db.data.ManageDataStorage;
-import server.environment.Environment;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class main {
+    public static void main(String[] args) throws IOException {
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
-
-        setConfig();
+        SelectionPortServer.messageBienvenue();
 
         if (args.length != 1) {
-            System.err.println("Services disponible : " + getServices());
+            System.err.println("Services disponible : " + SelectionPortServer.getServices());
             return;
         }
 
-        String serviceDemande = args[0];
+        ClientServer client;
+        try {
+            client = new ClientServer(SelectionPortServer.getPort(args[0]));
+            System.out.println(client.getBttpProtocole().getResponseServer());
 
-        switch (serviceDemande) {
-            case "reservation":
-                new ReservationClient().launch(new reservationServer());
-                break;
-            case "emprunt":
-                new EmpruntClient().launch(new empruntServer());
-                break;
-            case "retour":
-                new RetourClient().launch(new retourServer());
-                break;
-            default:
-                System.err.println("Merci de lancer le programme avec un service reconnu : " + getServices());
+            //A voir vu que ducoup on recuperer pas les reponses du serveur
+            while (true) {
+                client.getBttpProtocole().initInOut();
+                client.getBttpProtocole().sendResponseToServer(client.getInput().readLine());
+//                if ("exit")
+//                    break;
+            }
+//            client.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-    }
-
-    private static void messageBienvenue() {
-        System.out.println("Bonjour et Bienvenue !!\n");
-        System.out.println("Voici les services disponible : \n" + getServices());
-        System.out.println("Choissez un service : ");
-    }
-
-    private static void setConfig() throws ClassNotFoundException, SQLException {
-        MediathequeDbService.setJdbcClassDriver(Environment.DRIVER);
-        MediathequeDbService.setJdbcUrl(Environment.URL);
-        ManageDataStorage.initDataStorage();
-    }
-
-    private static String getServices() {
-        return "   - reservation \n" +
-                "   - emprunt \n" +
-                "   - retour \n";
     }
 }

@@ -12,6 +12,15 @@ import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static java.lang.Integer.parseInt;
+
+
+/*
+    le service de réservation lui
+    envoie le catalogue et lui demande son numéro d’abonné et le numéro de document qu’il souhaite
+    réserver.
+*/
+
 public class reservationService extends MediathequeService {
 
     public reservationService(Socket socket) {
@@ -23,12 +32,19 @@ public class reservationService extends MediathequeService {
         try {
             BufferedReader sin = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
             PrintWriter sout = new PrintWriter(getSocket().getOutputStream(), true);
-            sout.println("Vous êtes sur le service de reservation.\n"+ "Voici le catalogue : \n" + showCatalogue());
+            sout.println("Bienvenue sur le service de reservation, voici le catalogue : " + showCatalogue() + "\n");
 
-            sout.println("Votre numero de client : ");
-            String number = sin.readLine();
+            sout.print("Votre numero de client : ");
+            String stringAboId = sin.readLine();
+            int numberAboId = Integer.parseInt(stringAboId);
 
-//            BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));
+            sout.print("Le numero du document : ");
+            String stringDocId = sin.readLine();
+            int numberDocId = parseInt(stringDocId);
+
+            // Voir si l'abonne existe ?
+            // Voir si le document existe ?
+            // TODO
 
             System.out.print(sin.readLine());
         } catch (IOException e) {

@@ -11,6 +11,10 @@ public class AnnulationReservationTask extends TimerTask {
         this.reservation = reservation;
     }
 
+//    public static void setReservation(Reservation reserv) {
+//        new AnnulationReservationTask(reserv);
+//    }
+
     // 1h30
     public static long getDelay() {
         return 90 * 60 * 1000;
