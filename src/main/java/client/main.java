@@ -16,12 +16,14 @@ import java.util.Date;
 public class main {
     public static void main(String[] args) throws IOException {
 
-        SelectionPortServer.messageBienvenue();
+//        if (args.length != 1) {
+//            System.err.println("Services disponible : " + SelectionPortServer.getServices());
+//            return;
+//        }
 
-        if (args.length != 1) {
-            System.err.println("Services disponible : " + SelectionPortServer.getServices());
-            return;
-        }
+        //Voir avec le prof pour savoir on passe en parametre et si pas de param on fait quoi
+
+        SelectionPortServer.messageBienvenueWithtoutServices();
 
         ClientServer client;
         try {
@@ -29,19 +31,21 @@ public class main {
             System.out.println(client.getBttpProtocole().getResponseServer());
 
             //A voir vu que ducoup on recuperer pas les reponses du serveur
-            while (true) {
-                client.getBttpProtocole().initInOut();
-                client.getBttpProtocole().getResponseServer();
-                client.getBttpProtocole().getResponseServer();
+//            while (true) {
+////                client.getBttpProtocole().initInOut();
+//                System.out.println(client.getBttpProtocole().getResponseServer());
+//
+//                String line = client.getClavierInput().readLine();
+//
+//                if (line.toLowerCase() == "exit") {
+//                    break;
+//                }
+//
+//                System.out.println(client.getBttpProtocole().communicate(line));
+//            }
 
-                String line = client.getClavierInput().readLine();
-
-                if (line.toLowerCase() == "exit") {
-                    break;
-                }
-
-                System.out.println(client.getBttpProtocole().communicate(line));
-            }
+            System.out.println(client.getBttpProtocole().getResponseServer());
+            System.out.println(client.getBttpProtocole().getResponseServer());
             client.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

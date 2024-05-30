@@ -12,6 +12,10 @@ public class SelectionPortServer {
         System.out.println("Choisissez un service : ");
     }
 
+    public static void messageBienvenueWithtoutServices() {
+        System.out.println("Bonjour,\n");
+    }
+
     public static int getPort(String serviceDemande) {
         while (true) {
             int port = getPortChoosed(serviceDemande);
@@ -39,7 +43,7 @@ public class SelectionPortServer {
     }
 
     public static String getServices() {
-        return "    - reservation \n" +
+        return  "   - reservation \n" +
                 "   - emprunt \n" +
                 "   - retour \n";
     }
