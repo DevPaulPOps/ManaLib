@@ -25,7 +25,7 @@ public class ClientServer {
          this.bttpProtocole = new BttpProtocole(new Socket(host, port));
     }
 
-    public BufferedReader getInput() {
+    public BufferedReader getClavierInput() {
         return new BufferedReader(new InputStreamReader(System.in));
     }
 

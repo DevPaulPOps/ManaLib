@@ -46,7 +46,8 @@ public class reservationService extends MediathequeService {
             // Voir si le document existe ?
             // TODO
 
-            System.out.print(sin.readLine());
+            sout.print("exit => pour quitter le service.");
+
         } catch (IOException e) {
             System.err.println(e.getLocalizedMessage());
         } catch (SQLException e) {

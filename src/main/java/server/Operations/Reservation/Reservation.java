@@ -54,6 +54,6 @@ public class Reservation {
     }
 
     public static void startReservationDelay() {
-        timer.schedule(new AnnulationReservationTask(this), AnnulationReservationTask.getDelay());
+//        timer.schedule(new AnnulationReservationTask(this), AnnulationReservationTask.getDelay());
     }
 }

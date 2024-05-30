@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class DocumentModel<D extends Document> implements Model<D> {
 
     /**
-     * @param documents // TODO IL faut l'adapter pour les abonnées.
+     * @param documents
      */
     @Override
     public void save(D documents) throws SQLException {
@@ -18,7 +18,7 @@ public class DocumentModel<D extends Document> implements Model<D> {
             String query = "INSERT INTO document (titre, state, abonneId) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "')";
             MediathequeDbService.executeUpdate(query);
         } else {
-            String query = "UPDATE document SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', abonneId = '" + documents.getAbonneId() + "' WHERE id = " + documents.getIdStorage();
+            String query = "UPDATE document SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', abonneId = '" + documents.getAbonneId() + "' WHERE numero = " + documents.getIdStorage();
             MediathequeDbService.executeUpdate(query);
         }
     }

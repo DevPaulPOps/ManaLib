@@ -18,6 +18,7 @@ public class Document implements Documents {
     private final String titre;
     private final String state;
     private final Integer abonneId;
+    private Integer idStorage;
 
     public Document(int idDocument, String titre, String state, Integer abonneId) {
         this.idDocument = idDocument;
@@ -84,7 +85,7 @@ public class Document implements Documents {
      */
     @Override
     public Integer getIdStorage() {
-        return idDocument;
+        return idStorage;
     }
 
     /**
