@@ -37,7 +37,6 @@ public class main {
         dataClasses.add(DVDModel.class);
         try {
             MediathequeDbService.setJdbcUrlClassDriver(Environment.URL, Environment.DRIVER);
-            tmpInsertData();
             DataFactory.createDataInAppToDb(dataClasses);
             MediathequeServerFactory.createMediathequeServer(serverClasses);
         } catch (Exception e) {
