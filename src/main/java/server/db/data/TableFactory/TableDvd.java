@@ -7,12 +7,10 @@ public class TableDvd extends TableBaseFactory {
     //Faire heritage
     @Override
     public void createTable() throws SQLException {
-        String createTableSQL = "CREATE TABLE IF NOT EXISTS DVD ("
-                + "numero INT AUTO_INCREMENT PRIMARY KEY, "
-                + "titre VARCHAR(255) NOT NULL, "
-                + "state VARCHAR(255) NOT NULL, "
-                + "abonneId INT NOT NULL, "
-                + "contenuAdulte BOOLEAN NOT NULL) ";
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS dvd ("
+                + "numero INT PRIMARY KEY, "
+                + "contenuAdulte BOOLEAN NOT NULL, "
+                + "FOREIGN KEY (numero) REFERENCES Document (numero) ON DELETE CASCADE)";
         this.executeQueryCreate(createTableSQL, "DVD", this.createOperation);
     }
 

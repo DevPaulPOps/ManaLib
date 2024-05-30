@@ -3,11 +3,14 @@ package server.db.model;
 import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
 import server.elements.Documents.DVD;
+import server.elements.Documents.Document;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DVDModel<D extends DVD> implements Model<D> {
+    DocumentModel<Document> documentModel = new DocumentModel();
+    int tmpContenuAdulteForDb;
 
     /**
      * @param documents
@@ -16,24 +19,35 @@ public class DVDModel<D extends DVD> implements Model<D> {
     public void save(D documents) throws SQLException {
 
         //PhpMyAdmin n'accepte pas true ou false, que 1 ou 0
-        int tmpContenuAdulteForDb = documents.isContenuAdulte() ? 1 : 0;
+        tmpContenuAdulteForDb = documents.isContenuAdulte() ? 1 : 0;
+
+        //Pour l'heritage
+        int clefGenereBd = documentModel.saveAndGetKey(documents);
 
         if (documents.getEntityId() == null) {
-            String query = "INSERT INTO dvd (titre, state, abonneId, contenuAdulte) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "', '" + tmpContenuAdulteForDb + "')";
+            String query = "INSERT INTO dvd (numero, contenuAdulte) VALUES ('" + clefGenereBd + "', '" + tmpContenuAdulteForDb + "')";
             MediathequeDbService.executeUpdate(query);
         } else {
-            String query = "UPDATE dvd SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', abonneId = '" + documents.getAbonneId() + "' WHERE numero = " + documents.getEntityId();
-            MediathequeDbService.executeUpdate(query);
+            update(documents);
         }
     }
 
+    @Override
+    public void update(D documents) throws SQLException {
+        documentModel.update(documents);
+        String query = "UPDATE dvd SET contenuAdulte = " + tmpContenuAdulteForDb + " WHERE numero = " + documents.getEntityId();
+        MediathequeDbService.executeUpdate(query);
+    }
 
     /**
      * @throws SQLException
      */
     @Override
     public void getInit() throws SQLException {
-        String query = "SELECT * FROM dvd";
+        String query = "SELECT d.numero, doc.titre, doc.state, doc.abonneId, d.contenuAdulte " +
+                "FROM dvd d " +
+                "JOIN document doc ON d.numero = doc.numero";
+
         ResultSet allData = MediathequeDbService.executeQuery(query);
         while (allData.next()) {
             int numero = allData.getInt("numero");
@@ -43,14 +57,12 @@ public class DVDModel<D extends DVD> implements Model<D> {
             boolean contenuAdulte = allData.getBoolean("contenuAdulte");
 
             DVD dvd = new DVD(numero, titre, state, abonneId, contenuAdulte);
-
             ManageDataStorage.addDataStorage(dvd);
         }
     }
 
     @Override
     public void delete(D dataStorage) throws SQLException {
-        String query = "DELETE FROM dvd WHERE numero = " + dataStorage.getEntityId();
-        MediathequeDbService.executeUpdate(query);
+        documentModel.delete(dataStorage);
     }
 }

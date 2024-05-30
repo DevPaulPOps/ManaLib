@@ -37,6 +37,7 @@ public class main {
         dataClasses.add(DVDModel.class);
         try {
             MediathequeDbService.setJdbcUrlClassDriver(Environment.URL, Environment.DRIVER);
+//            tmpInsertData();
             DataFactory.createDataInAppToDb(dataClasses);
             MediathequeServerFactory.createMediathequeServer(serverClasses);
         } catch (Exception e) {
@@ -46,23 +47,15 @@ public class main {
         System.out.println(reservationService.showCatalogue2());
     }
 
-    public static void tmpInsertData() throws SQLException, ClassNotFoundException {
-        ManageDataStorage.initDataStorage();
-
-//        try {
-//            Abonne abonne = new Abonne("Paula", new java.sql.Date(new java.util.Date().getTime()));
-//            AbonneModel abonneModel = new AbonneModel();
-//            abonneModel.save(abonne);
-//        } catch (Exception e) {
-//
-//        }
+//    public static void tmpInsertData() throws SQLException, ClassNotFoundException {
+//        ManageDataStorage.initDataStorage();
 //
 //        Document doc = new Document("Mein Kampf","libre", 1);
 //        DocumentModel documentModel = new DocumentModel();
 //        documentModel.save(doc);
-
-        DVD dvd = new DVD(1,"Jhonnyes", "busy", 1, true);
-        DVDModel dvdModel = new DVDModel();
-        dvdModel.save(dvd);
-    }
+//
+//        DVD dvd = new DVD("Jhonnyes", "busy", 1, true);
+//        DVDModel dvdModel = new DVDModel();
+//        dvdModel.save(dvd);
+//    }
 }

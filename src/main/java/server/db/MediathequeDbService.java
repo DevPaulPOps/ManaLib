@@ -1,9 +1,6 @@
 package server.db;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public abstract class MediathequeDbService {
     private static String jdbcClassDriver;
@@ -37,6 +34,23 @@ public abstract class MediathequeDbService {
 
     public static PreparedStatement prepareStatement(String query) throws SQLException {
         return MediathequeDbService.getConnection().prepareStatement(query);
+    }
+
+    public static PreparedStatement prepareStatementWithKey(String query) throws SQLException {
+        return MediathequeDbService.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+    }
+
+    public static int executeUpdateKey(String query) throws SQLException {
+        PreparedStatement pst = MediathequeDbService.prepareStatementWithKey(query);
+        pst.executeUpdate();
+
+        try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                return generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("Creating document failed, no ID obtained.");
+            }
+        }
     }
 
     public static void executeUpdate(String query) throws SQLException {

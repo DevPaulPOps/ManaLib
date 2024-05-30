@@ -32,7 +32,7 @@ public class reservationService extends MediathequeService {
         try {
             BufferedReader sin = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
             PrintWriter sout = new PrintWriter(getSocket().getOutputStream(), true);
-            sout.println("Bienvenue sur le service de reservation, voici le catalogue : " + showCatalogue() + "\n");
+            sout.println("Bienvenue sur le service de reservation, voici le catalogue : \n\n" + showCatalogue() + "\n");
 
             sout.print("Votre numero de client : ");
             String stringAboId = sin.readLine();
@@ -66,7 +66,9 @@ public class reservationService extends MediathequeService {
 
         StringBuilder sb = new StringBuilder();
 
-        catalogue.forEach(document -> sb.append(document + "\n"));
+        for (var document : catalogue) {
+            sb.append(document.toString() + "\n");
+        }
 
         return sb.toString();
     }
@@ -76,7 +78,9 @@ public class reservationService extends MediathequeService {
 
         StringBuilder sb = new StringBuilder();
 
-        catalogue.forEach(document -> sb.append(document + "\n"));
+        for (var document : catalogue) {
+            sb.append(document.toString() + "\n");
+        }
 
         return sb.toString();
     }

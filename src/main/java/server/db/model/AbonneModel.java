@@ -20,9 +20,14 @@ public class AbonneModel<A extends Abonne> implements Model<A> {
             String query = "INSERT INTO abonne (nom, dateNaissance) VALUES ('" + dataStorage.getNom() + "', '" + dataStorage.getDateDeNaissance() + "')";
             MediathequeDbService.executeUpdate(query);
         } else {
-            String query = "UPDATE abonne SET nom = '" + dataStorage.getNom() + "', dateNaissance = '" + dataStorage.getDateDeNaissance() + "' WHERE numero = " + dataStorage.getEntityId();
-            MediathequeDbService.executeUpdate(query);
+            update(dataStorage);
         }
+    }
+
+    @Override
+    public void update(A dataStorage) throws SQLException {
+        String query = "UPDATE abonne SET nom = '" + dataStorage.getNom() + "', dateNaissance = '" + dataStorage.getDateDeNaissance() + "' WHERE numero = " + dataStorage.getEntityId();
+        MediathequeDbService.executeUpdate(query);
     }
 
     /**

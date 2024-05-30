@@ -18,9 +18,21 @@ public class DocumentModel<D extends Document> implements Model<D> {
             String query = "INSERT INTO document (titre, state, abonneId) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "')";
             MediathequeDbService.executeUpdate(query);
         } else {
-            String query = "UPDATE document SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', abonneId = '" + documents.getAbonneId() + "' WHERE numero = " + documents.getEntityId();
-            MediathequeDbService.executeUpdate(query);
+            update(documents);
         }
+    }
+
+    public void update(D documents) throws SQLException {
+        String query = "UPDATE document SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', abonneId = '" + documents.getAbonneId() + "' WHERE numero = " + documents.getEntityId();
+        MediathequeDbService.executeUpdate(query);
+    }
+
+    public int saveAndGetKey(D documents) throws SQLException {
+        if (documents.getEntityId() == null) {
+            String query = "INSERT INTO document (titre, state, abonneId) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "')";
+            return MediathequeDbService.executeUpdateKey(query);
+        }
+        return documents.getEntityId();
     }
 
     /**

@@ -12,6 +12,8 @@ public interface Model<D extends DataStorage> {
      */
     void save(D dataStorage) throws SQLException;
 
+    void update(D dataStorage) throws SQLException;
+
     void getInit() throws SQLException;
 
     void delete(D dataStorage) throws SQLException;
