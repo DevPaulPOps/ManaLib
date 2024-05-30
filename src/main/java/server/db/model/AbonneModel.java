@@ -16,11 +16,11 @@ public class AbonneModel<A extends Abonne> implements Model<A> {
      */
     @Override
     public void save(A dataStorage) throws SQLException {
-        if (dataStorage.getIdStorage() == null) {
+        if (dataStorage.getEntityId() == null) {
             String query = "INSERT INTO abonne (nom, dateNaissance) VALUES ('" + dataStorage.getNom() + "', '" + dataStorage.getDateDeNaissance() + "')";
             MediathequeDbService.executeUpdate(query);
         } else {
-            String query = "UPDATE abonne SET nom = '" + dataStorage.getNom() + "', dateNaissance = '" + dataStorage.getDateDeNaissance() + "' WHERE numero = " + dataStorage.getIdStorage();
+            String query = "UPDATE abonne SET nom = '" + dataStorage.getNom() + "', dateNaissance = '" + dataStorage.getDateDeNaissance() + "' WHERE numero = " + dataStorage.getEntityId();
             MediathequeDbService.executeUpdate(query);
         }
     }
@@ -45,8 +45,7 @@ public class AbonneModel<A extends Abonne> implements Model<A> {
 
     @Override
     public void delete(A dataStorage) throws SQLException {
-        String query = "DELETE FROM abonne WHERE numero = " + dataStorage.getIdStorage();
+        String query = "DELETE FROM abonne WHERE numero = " + dataStorage.getEntityId();
         MediathequeDbService.executeUpdate(query);
     }
-
 }

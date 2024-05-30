@@ -26,6 +26,11 @@ public abstract class MediathequeDbService {
         return connection;
     }
 
+    public static void setJdbcUrlClassDriver(String jdbcUrl, String jdbcClassDriver) throws ClassNotFoundException {
+        setJdbcUrl(jdbcUrl);
+        setJdbcClassDriver(jdbcClassDriver);
+    }
+
     public static void closeConnection() throws SQLException {
         MediathequeDbService.getConnection().close();
     }

@@ -25,7 +25,6 @@ public class main {
 
         ClientServer client;
         try {
-            tmpInsertData();
             client = new ClientServer(SelectionPortServer.getPort(args[0]));
             System.out.println(client.getBttpProtocole().getResponseServer());
 
@@ -46,34 +45,6 @@ public class main {
             client.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
-    }
-
-    public static void tmpInsertData() throws SQLException, ClassNotFoundException {
-        MediathequeDbService.setJdbcClassDriver(Environment.DRIVER);
-        MediathequeDbService.setJdbcUrl(Environment.URL);
-        ManageDataStorage.initDataStorage();
-
-//        String pattern = "MM/dd/yyyy";
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-//        Date date = new Date("03-12-2024");
-
-        try {
-            Abonne abonne = new Abonne(4,"Paul", new Date());
-            AbonneModel abonneModel = new AbonneModel();
-            abonneModel.save(abonne);
-        } catch (Exception e) {
-
-        }
-
-
-
-//        Document doc = new Document(1,"TEST","libre", 1);
-//        DocumentModel documentModel = new DocumentModel();
-//        documentModel.save(doc);
     }
 }

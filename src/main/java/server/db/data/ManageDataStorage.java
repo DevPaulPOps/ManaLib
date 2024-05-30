@@ -18,7 +18,7 @@ public class ManageDataStorage {
     }
 
     public static void addDataStorage(DataStorage dataStorage) {
-        ManageDataStorage.dataStorage.put(dataStorage.getIdStorage().toString(), dataStorage);
+        ManageDataStorage.dataStorage.put(dataStorage.getEntityId().toString(), dataStorage);
     }
 
     public static DataStorage getDataStorageById(String id) {
@@ -44,6 +44,6 @@ public class ManageDataStorage {
     }
 
     public static void updateDataStorage(DataStorage dataStorage) {
-        ManageDataStorage.dataStorage.put(dataStorage.getIdStorage().toString(), dataStorage);
+        ManageDataStorage.dataStorage.put(dataStorage.getEntityId().toString(), dataStorage);
     }
 }

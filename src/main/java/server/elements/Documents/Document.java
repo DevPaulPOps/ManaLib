@@ -14,17 +14,23 @@ import java.sql.SQLException;
 
 public class Document implements Documents {
 
-    private final int idDocument;
+    //L'id du document est creer automatiquement dans la base de donnee.
+    private Integer idDocument;
     private final String titre;
     private final String state;
     private final Integer abonneId;
-    private Integer idStorage;
 
-    public Document(int idDocument, String titre, String state, Integer abonneId) {
-        this.idDocument = idDocument;
+    //Cosntructeur pour creer un document
+    public Document(String titre, String state, Integer abonneId) {
         this.titre = titre;
         this.state = state;
         this.abonneId = abonneId;
+    }
+
+    //Constructeur pour mettre a jour un document existant avec l'id
+    public Document(int idDocument, String titre, String state, Integer abonneId) {
+        this(titre,state,abonneId);
+        this.idDocument = idDocument;
     }
 
     public String getState() {
@@ -40,6 +46,7 @@ public class Document implements Documents {
     }
 
 
+    //Duplication entre celle si et getIdStroage
     @Override
     public int numero() {
         return this.idDocument;
@@ -82,10 +89,10 @@ public class Document implements Documents {
 
     /**
      * @return
-     */
     @Override
-    public Integer getIdStorage() {
-        return idStorage;
+    */
+    public Integer getEntityId() {
+        return idDocument;
     }
 
     /**
@@ -95,5 +102,13 @@ public class Document implements Documents {
     public void saveFromDB() throws SQLException {
         DocumentModel<Document> docModelToSave = new DocumentModel<>();
         docModelToSave.save(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Document : " + idDocument +
+                ", titre ='" + titre + '\'' +
+                ", state ='" + state + '\'' +
+                ", abonneId = '" + abonneId + '\'';
     }
 }

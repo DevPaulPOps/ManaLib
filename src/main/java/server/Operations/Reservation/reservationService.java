@@ -70,4 +70,14 @@ public class reservationService extends MediathequeService {
 
         return sb.toString();
     }
+
+    public static String showCatalogue2() throws SQLException {
+        ArrayList<Document> catalogue = ManageDataStorage.getOnlyDocumentDataStorage();
+
+        StringBuilder sb = new StringBuilder();
+
+        catalogue.forEach(document -> sb.append(document + "\n"));
+
+        return sb.toString();
+    }
 }

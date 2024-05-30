@@ -14,11 +14,15 @@ public class DVDModel<D extends DVD> implements Model<D> {
      */
     @Override
     public void save(D documents) throws SQLException {
-        if (documents.getIdStorage() == null) {
-            String query = "INSERT INTO dvd (titre, state, abonneId, contenuAdulte) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "', '" + documents.isContenuAdulte() + "')";
+
+        //PhpMyAdmin n'accepte pas true ou false, que 1 ou 0
+        int tmpContenuAdulteForDb = documents.isContenuAdulte() ? 1 : 0;
+
+        if (documents.getEntityId() == null) {
+            String query = "INSERT INTO dvd (titre, state, abonneId, contenuAdulte) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "', '" + tmpContenuAdulteForDb + "')";
             MediathequeDbService.executeUpdate(query);
         } else {
-            String query = "UPDATE dvd SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', abonneId = '" + documents.getAbonneId() + "' WHERE id = " + documents.getIdStorage();
+            String query = "UPDATE dvd SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', abonneId = '" + documents.getAbonneId() + "' WHERE numero = " + documents.getEntityId();
             MediathequeDbService.executeUpdate(query);
         }
     }
@@ -46,7 +50,7 @@ public class DVDModel<D extends DVD> implements Model<D> {
 
     @Override
     public void delete(D dataStorage) throws SQLException {
-        String query = "DELETE FROM dvd WHERE numero = " + dataStorage.getIdStorage();
+        String query = "DELETE FROM dvd WHERE numero = " + dataStorage.getEntityId();
         MediathequeDbService.executeUpdate(query);
     }
 }

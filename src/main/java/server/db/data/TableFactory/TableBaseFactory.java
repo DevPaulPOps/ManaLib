@@ -30,7 +30,7 @@ public abstract class TableBaseFactory implements TableFactory {
 
     public void executeQueryCreate(String createTableSQL, String tableName, String operation) throws SQLException {
         MediathequeDbService.executeUpdate(createTableSQL);
-        System.out.println("Table " + tableName + " " + operation + " avec succès !");
+//        System.out.println("Table " + tableName + " " + operation + " avec succès !");
     }
 
     @Override

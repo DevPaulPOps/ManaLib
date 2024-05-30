@@ -14,15 +14,14 @@ public class DocumentModel<D extends Document> implements Model<D> {
      */
     @Override
     public void save(D documents) throws SQLException {
-        if (documents.getIdStorage() == null) {
+        if (documents.getEntityId() == null) {
             String query = "INSERT INTO document (titre, state, abonneId) VALUES ('" + documents.getTitre() + "', '" + documents.getState() + "', '" + documents.getAbonneId() + "')";
             MediathequeDbService.executeUpdate(query);
         } else {
-            String query = "UPDATE document SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', abonneId = '" + documents.getAbonneId() + "' WHERE numero = " + documents.getIdStorage();
+            String query = "UPDATE document SET titre = '" + documents.getTitre() + "', state = '" + documents.getState() + "', abonneId = '" + documents.getAbonneId() + "' WHERE numero = " + documents.getEntityId();
             MediathequeDbService.executeUpdate(query);
         }
     }
-
 
     /**
      * @throws SQLException
@@ -44,7 +43,7 @@ public class DocumentModel<D extends Document> implements Model<D> {
 
     @Override
     public void delete(D dataStorage) throws SQLException {
-        String query = "DELETE FROM document WHERE numero = " + dataStorage.getIdStorage();
+        String query = "DELETE FROM document WHERE numero = " + dataStorage.getEntityId();
         MediathequeDbService.executeUpdate(query);
     }
 }

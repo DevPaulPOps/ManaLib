@@ -8,15 +8,21 @@ import java.util.Date;
 
 public class Abonne implements Abonnes {
 
+    //Crée automatiquement depuis la base de donnee
+    private Integer idAbonne;
     private final String nom;
     private final Date dateNaissance;
-    private final int idAbonne;
-    private Integer idStorage;
 
-    public Abonne(int idAbonne, String nom, Date dateNaissance) {
-        this.idAbonne = idAbonne;
+    //constructeur pour creer un abonne
+    public Abonne(String nom, Date dateNaissance) {
         this.nom = nom;
         this.dateNaissance = dateNaissance;
+    }
+
+    //constructeur pour mettrea jour un abonne existant avec l'id
+    public Abonne(int idAbonne, String nom, Date dateNaissance) {
+        this(nom, dateNaissance);
+        this.idAbonne = idAbonne;
     }
 
     /**
@@ -25,6 +31,12 @@ public class Abonne implements Abonnes {
     @Override
     public int getIdAbonne() {
         return this.idAbonne;
+    }
+
+
+    @Override
+    public Integer getEntityId() {
+        return idAbonne;
     }
 
     /**
@@ -40,14 +52,6 @@ public class Abonne implements Abonnes {
     }
 
     /**
-     * @return
-     */
-    @Override
-    public Integer getIdStorage() {
-        return this.idStorage;
-    }
-
-    /**
      * Methode pour sauvegarder les données present dans la base de données vers l'application
      *
      * @throws SQLException
@@ -56,5 +60,10 @@ public class Abonne implements Abonnes {
     public void saveFromDB() throws SQLException {
         AbonneModel<Abonne> abonneModelToSave = new AbonneModel<>();
         abonneModelToSave.save(this);
+    }
+
+    @Override
+    public String toString() {
+        return idAbonne + "  " + nom + "  " + dateNaissance;
     }
 }
