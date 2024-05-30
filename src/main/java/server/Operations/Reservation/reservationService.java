@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -21,10 +22,16 @@ import static java.lang.Integer.parseInt;
     réserver.
 */
 
-public class reservationService extends MediathequeService {
 
-    public reservationService(Socket socket) {
+// TODO
+//Essayer de regler le probleme : quand on saute une ligne, on doit redemander partie client de faire un readline.
+//Ducoup l'affichage moche.
+public class reservationService extends MediathequeService {
+    String catalogue;
+
+    public reservationService(Socket socket) throws SQLException {
         super(socket);
+        catalogue = showCatalogue();
     }
 
     @Override
@@ -32,7 +39,12 @@ public class reservationService extends MediathequeService {
         try {
             BufferedReader sin = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
             PrintWriter sout = new PrintWriter(getSocket().getOutputStream(), true);
-            sout.println("Bienvenue sur le service de reservation, voici le catalogue : \n\n" + showCatalogue() + "\n");
+            sout.println("Bienvenue sur le service de reservation, voici le catalogue : " + catalogue);
+
+//            for (String line : catalogue) {
+//                sout.println(line); // Envoie chaque ligne au client
+//            }
+//            sout.flush();
 
             sout.print("Votre numero de client : ");
             String stringAboId = sin.readLine();
@@ -50,8 +62,6 @@ public class reservationService extends MediathequeService {
 
         } catch (IOException e) {
             System.err.println(e.getLocalizedMessage());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
         try {
             if (getSocket() != null) {
@@ -67,19 +77,7 @@ public class reservationService extends MediathequeService {
         StringBuilder sb = new StringBuilder();
 
         for (var document : catalogue) {
-            sb.append(document.toString() + "\n");
-        }
-
-        return sb.toString();
-    }
-
-    public static String showCatalogue2() throws SQLException {
-        ArrayList<Document> catalogue = ManageDataStorage.getOnlyDocumentDataStorage();
-
-        StringBuilder sb = new StringBuilder();
-
-        for (var document : catalogue) {
-            sb.append(document.toString() + "\n");
+            sb.append(document.toString()).append(System.getProperty("line.separator")); // Ajoute le caractère de nouvelle ligne
         }
 
         return sb.toString();

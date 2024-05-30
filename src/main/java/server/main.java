@@ -43,8 +43,6 @@ public class main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println(reservationService.showCatalogue2());
     }
 
 //    public static void tmpInsertData() throws SQLException, ClassNotFoundException {
