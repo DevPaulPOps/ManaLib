@@ -11,17 +11,13 @@ import server.db.model.AbonneModel;
 import server.db.model.DVDModel;
 import server.db.model.DocumentModel;
 import server.db.model.Model;
-import server.elements.Abonne;
 import server.elements.Documents.DVD;
-import server.elements.Documents.Document;
 import server.environment.Environment;
 import server.serv.MediathequeServer;
 import server.serv.MediathequeServerFactory;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class main {
@@ -43,6 +39,10 @@ public class main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+<<<<<<< Updated upstream
+=======
+        System.out.println(reservationService.showCatalogue2());
+>>>>>>> Stashed changes
     }
 
 //    public static void tmpInsertData() throws SQLException, ClassNotFoundException {
