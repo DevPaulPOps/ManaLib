@@ -6,9 +6,9 @@ import server.elements.interfaces.DataStorage;
 import server.elements.interfaces.Documents;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ManageDataStorage {
     public static HashMap<String, DataStorage> dataStorage = new HashMap<>();
@@ -26,24 +26,18 @@ public class ManageDataStorage {
     }
 
     public static List<DataStorage> getAllDataStorage() {
-        return (List<DataStorage>) ManageDataStorage.dataStorage.values();
+        return List.copyOf(ManageDataStorage.dataStorage.values());
     }
 
-    public static ArrayList<Document> getOnlyDocumentDataStorage() {
-        ArrayList<Document> documents = new ArrayList<>();
-        for (DataStorage dataStorage : ManageDataStorage.dataStorage.values()) {
-            if (dataStorage instanceof Documents) {
-                documents.add((Document) dataStorage);
-            }
-        }
-        return documents;
+    public static List<Document> getOnlyDocumentDataStorage() {
+        return ManageDataStorage.dataStorage.values().stream()
+                .filter(dataStorage -> dataStorage instanceof Documents)
+                .map(dataStorage -> (Document) dataStorage)
+                .collect(Collectors.toList());
     }
 
     public static void removeDataStorage(String id) {
         ManageDataStorage.dataStorage.remove(id);
     }
 
-    public static void updateDataStorage(DataStorage dataStorage) {
-        ManageDataStorage.dataStorage.put(dataStorage.getEntityId().toString(), dataStorage);
-    }
 }

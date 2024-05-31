@@ -1,20 +1,9 @@
 package client;
 
-import server.db.MediathequeDbService;
-import server.db.data.ManageDataStorage;
-import server.db.model.AbonneModel;
-import server.db.model.DocumentModel;
-import server.elements.Abonne;
-import server.elements.Documents.Document;
-import server.environment.Environment;
-
 import java.io.IOException;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, RuntimeException {
 
 //        if (args.length != 1) {
 //            System.err.println("Services disponible : " + SelectionPortServer.getServices());
@@ -31,15 +20,14 @@ public class main {
 
             while (true) {
                 try {
-                    String line = client.getBttpProtocole().getResponseServer();
-                    while (line != null) {
+                    String line;
+                    while ((line = client.getBttpProtocole().getResponseServer()) != null) {
                         System.out.println(line);
-                        line = client.getBttpProtocole().getResponseServer();
                     }
 
                     String response = client.getClavierInput().readLine();
 
-                    if (response.equalsIgnoreCase("exit")) {
+                    if ("exit".equalsIgnoreCase(response)) {
                         break;
                     }
 

@@ -11,11 +11,23 @@ import java.util.Map;
 
 public class Config {
 
-    private static Map<String, Integer> ports = new HashMap<>();
+    private static final Map<String, Integer> ports = new HashMap<>();
     private static String host;
 
     public Config() {
         loadConfig();
+    }
+
+    public static int getPort(String portName) {
+        if (ports.isEmpty()) {
+            Config f = new Config();
+        }
+
+        return ports.getOrDefault(portName, -1);
+    }
+
+    public static String getHost() {
+        return host;
     }
 
     private void loadConfig() {
@@ -30,17 +42,5 @@ public class Config {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-    }
-
-    public static int getPort(String portName) {
-        if (ports.isEmpty()) {
-            Config f = new Config();
-        }
-
-        return ports.getOrDefault(portName, -1);
-    }
-
-    public static String getHost() {
-        return host;
     }
 }

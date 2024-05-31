@@ -25,11 +25,11 @@ public class Emprunt {
         }
     }
 
-    public Abonnes getAbonne() {
-        return abonnes;
-    }
-
     public static void setAbonnes(Abonnes abonnesI) {
         abonnes = abonnesI;
+    }
+
+    public Abonnes getAbonne() {
+        return abonnes;
     }
 }

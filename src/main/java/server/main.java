@@ -2,35 +2,35 @@ package server;
 
 import server.Operations.Emprunt.empruntServer;
 import server.Operations.Reservation.reservationServer;
-import server.Operations.Reservation.reservationService;
 import server.Operations.Retour.retourServer;
 import server.db.MediathequeDbService;
 import server.db.data.DataFactory;
-import server.db.data.ManageDataStorage;
 import server.db.model.AbonneModel;
 import server.db.model.DVDModel;
 import server.db.model.DocumentModel;
 import server.db.model.Model;
-import server.elements.Documents.DVD;
 import server.environment.Environment;
 import server.serv.MediathequeServer;
 import server.serv.MediathequeServerFactory;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class main {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        List<Class<? extends MediathequeServer>> serverClasses = new ArrayList<>();
-        serverClasses.add(empruntServer.class);
-        serverClasses.add(reservationServer.class);
-        serverClasses.add(retourServer.class);
+        List<Class<? extends MediathequeServer>> serverClasses = Arrays.asList(
+                empruntServer.class,
+                reservationServer.class,
+                retourServer.class
+        );
 
-        List<Class<? extends Model>> dataClasses = new ArrayList<>();
-        dataClasses.add(AbonneModel.class);
-        dataClasses.add(DocumentModel.class);
-        dataClasses.add(DVDModel.class);
+        List<Class<? extends Model>> dataClasses = Arrays.asList(
+                AbonneModel.class,
+                DocumentModel.class,
+                DVDModel.class
+        );
         try {
             MediathequeDbService.setJdbcUrlClassDriver(Environment.URL, Environment.DRIVER);
 //            tmpInsertData();

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.SQLException;
 
 public class retourService extends MediathequeService {
 
@@ -24,7 +23,7 @@ public class retourService extends MediathequeService {
 
             String docTrouve = in.readLine();
             while (true) {
-                if (docTrouve.equals("oui")){
+                if (docTrouve.equals("oui")) {
 
                     out.println("Numero du document : ");
                     String numeroDocument = in.readLine();
@@ -41,8 +40,7 @@ public class retourService extends MediathequeService {
 
                     //Stocker le numero de document / voir si appartient a quelqun
                     break;
-                }
-                else {
+                } else {
                     out.println("Vous devez répondre par oui ou non.");
                     docTrouve = in.readLine();
                 }

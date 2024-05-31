@@ -4,7 +4,6 @@ import server.Exception.EmpruntException;
 import server.Exception.ReservationException;
 import server.Operations.Emprunt.Emprunt;
 import server.elements.interfaces.Abonnes;
-import server.timerTask.AnnulationReservationTask;
 
 import java.util.Timer;
 
@@ -26,11 +25,9 @@ public class Reservation {
 
         if (estReserve()) {
             throw new ReservationException();
-        }
-        else if (Emprunt.estEmprunte()) {
+        } else if (Emprunt.estEmprunte()) {
             throw new EmpruntException();
-        }
-        else {
+        } else {
             setAbonne(abonneI);
             startReservationDelay();
         }

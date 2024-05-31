@@ -43,7 +43,7 @@ public class SelectionPortServer {
     }
 
     public static String getServices() {
-        return  "   - reservation \n" +
+        return "   - reservation \n" +
                 "   - emprunt \n" +
                 "   - retour \n";
     }

@@ -5,7 +5,7 @@ import java.sql.*;
 public abstract class MediathequeDbService {
     private static String jdbcClassDriver;
     private static String jdbcUrl;
-    private static Connection connection = null;
+    private static final Connection connection = null;
 
     public static void setJdbcClassDriver(String jdbcClassDriver) throws ClassNotFoundException {
         MediathequeDbService.jdbcClassDriver = jdbcClassDriver;
@@ -17,10 +17,7 @@ public abstract class MediathequeDbService {
     }
 
     public static Connection getConnection() throws SQLException {
-        if (MediathequeDbService.connection == null) {
-            MediathequeDbService.connection = java.sql.DriverManager.getConnection(jdbcUrl);
-        }
-        return connection;
+        return java.sql.DriverManager.getConnection(jdbcUrl);
     }
 
     public static void setJdbcUrlClassDriver(String jdbcUrl, String jdbcClassDriver) throws ClassNotFoundException {
@@ -41,14 +38,15 @@ public abstract class MediathequeDbService {
     }
 
     public static int executeUpdateKey(String query) throws SQLException {
-        PreparedStatement pst = MediathequeDbService.prepareStatementWithKey(query);
-        pst.executeUpdate();
+        try (PreparedStatement pst = MediathequeDbService.prepareStatementWithKey(query)) {
+            pst.executeUpdate();
 
-        try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
-            if (generatedKeys.next()) {
-                return generatedKeys.getInt(1);
-            } else {
-                throw new SQLException("Creating document failed, no ID obtained.");
+            try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Creating document failed, no ID obtained.");
+                }
             }
         }
     }

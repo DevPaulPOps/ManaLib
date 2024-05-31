@@ -8,10 +8,10 @@ import java.util.Date;
 
 public class Abonne implements Abonnes {
 
-    //Crée automatiquement depuis la base de donnee
-    private Integer idAbonne;
     private final String nom;
     private final Date dateNaissance;
+    //Crée automatiquement depuis la base de donnee
+    private Integer idAbonne;
 
     //constructeur pour creer un abonne
     public Abonne(String nom, Date dateNaissance) {

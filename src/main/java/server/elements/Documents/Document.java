@@ -14,11 +14,11 @@ import java.sql.SQLException;
 
 public class Document implements Documents {
 
-    //L'id du document est creer automatiquement dans la base de donnee.
-    private Integer idDocument;
     private final String titre;
     private final String state;
     private final Integer abonneId;
+    //L'id du document est creer automatiquement dans la base de donnee.
+    private Integer idDocument;
 
     //Cosntructeur pour creer un document
     public Document(String titre, String state, Integer abonneId) {
@@ -29,7 +29,7 @@ public class Document implements Documents {
 
     //Constructeur pour mettre a jour un document existant avec l'id
     public Document(int idDocument, String titre, String state, Integer abonneId) {
-        this(titre,state,abonneId);
+        this(titre, state, abonneId);
         this.idDocument = idDocument;
     }
 
@@ -89,8 +89,8 @@ public class Document implements Documents {
 
     /**
      * @return
-    @Override
-    */
+     * @Override
+     */
     public Integer getEntityId() {
         return idDocument;
     }

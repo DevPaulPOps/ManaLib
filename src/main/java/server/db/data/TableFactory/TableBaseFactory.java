@@ -9,23 +9,17 @@ public abstract class TableBaseFactory implements TableFactory {
     protected final String removeOperation = "supprimé";
 
     public static void createAllTables() throws SQLException {
-        TableBaseFactory t = new TableAbonne();
-        TableBaseFactory t2 = new TableDocument();
-        TableBaseFactory t3 = new TableDvd();
-
-        t.createTable();
-        t2.createTable();
-        t3.createTable();
+        TableBaseFactory[] tables = {new TableAbonne(), new TableDocument(), new TableDvd()};
+        for (TableBaseFactory table : tables) {
+            table.createTable();
+        }
     }
 
     public static void dropAllTables() throws SQLException {
-        TableBaseFactory t = new TableDvd();
-        TableBaseFactory t2 = new TableDocument();
-        TableBaseFactory t3 = new TableAbonne();
-
-        t.removeTable();
-        t2.removeTable();
-        t3.removeTable();
+        TableBaseFactory[] tables = {new TableDvd(), new TableDocument(), new TableAbonne()};
+        for (TableBaseFactory table : tables) {
+            table.removeTable();
+        }
     }
 
     public void executeQueryCreate(String createTableSQL, String tableName, String operation) throws SQLException {

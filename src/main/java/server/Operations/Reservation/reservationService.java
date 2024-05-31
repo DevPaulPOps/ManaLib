@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -67,12 +66,13 @@ public class reservationService extends MediathequeService {
     }
 
     public String showCatalogue() throws SQLException {
-        ArrayList<Document> catalogue = ManageDataStorage.getOnlyDocumentDataStorage();
+        // Il veut une List de document
+        List<Document> catalogue = ManageDataStorage.getOnlyDocumentDataStorage();
 
         StringBuilder sb = new StringBuilder();
 
         for (var document : catalogue) {
-            sb.append(document.toString()).append(System.getProperty("line.separator")); // Ajoute le caractère de nouvelle ligne
+            sb.append(document.toString()).append(System.lineSeparator()); // Ajoute le caractère de nouvelle ligne
         }
 
         return sb.toString();
