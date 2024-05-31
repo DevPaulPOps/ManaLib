@@ -39,10 +39,8 @@ public class main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-<<<<<<< Updated upstream
-=======
-        System.out.println(reservationService.showCatalogue2());
->>>>>>> Stashed changes
+
+        //System.out.println(reservationService.showCatalogue2());
     }
 
 //    public static void tmpInsertData() throws SQLException, ClassNotFoundException {

@@ -39,7 +39,7 @@ public class main {
 
                     String response = client.getClavierInput().readLine();
 
-                    if (response.toLowerCase() == "exit") {
+                    if (response.equalsIgnoreCase("exit")) {
                         break;
                     }
 

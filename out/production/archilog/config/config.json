@@ -1,0 +1,7 @@
+{
+  "PORT": 2000,
+  "PORT_RESERVATION": 3000,
+  "PORT_EMPRUNT": 4000,
+  "PORT_RETOUR": 5000,
+  "HOST": "localhost"
+}
