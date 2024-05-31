@@ -16,31 +16,37 @@ import java.util.Date;
 public class main {
     public static void main(String[] args) throws IOException {
 
-        SelectionPortServer.messageBienvenue();
+//        if (args.length != 1) {
+//            System.err.println("Services disponible : " + SelectionPortServer.getServices());
+//            return;
+//        }
 
-        if (args.length != 1) {
-            System.err.println("Services disponible : " + SelectionPortServer.getServices());
-            return;
-        }
+        //Voir avec le prof pour savoir on passe en parametre et si pas de param on fait quoi
+
+        SelectionPortServer.messageBienvenueWithtoutServices();
 
         ClientServer client;
         try {
             client = new ClientServer(SelectionPortServer.getPort(args[0]));
-            System.out.println(client.getBttpProtocole().getResponseServer());
 
-            //A voir vu que ducoup on recuperer pas les reponses du serveur
             while (true) {
-                client.getBttpProtocole().initInOut();
-                client.getBttpProtocole().getResponseServer();
-                client.getBttpProtocole().getResponseServer();
+                try {
+                    String line = client.getBttpProtocole().getResponseServer();
+                    while (line != null) {
+                        System.out.println(line);
+                        line = client.getBttpProtocole().getResponseServer();
+                    }
 
-                String line = client.getClavierInput().readLine();
+                    String response = client.getClavierInput().readLine();
 
-                if (line.toLowerCase() == "exit") {
-                    break;
+                    if (response.toLowerCase() == "exit") {
+                        break;
+                    }
+
+                    client.getBttpProtocole().sendResponseToServer(response);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-
-                System.out.println(client.getBttpProtocole().communicate(line));
             }
             client.close();
         } catch (IOException e) {

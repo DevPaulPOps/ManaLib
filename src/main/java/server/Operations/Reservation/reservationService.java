@@ -41,11 +41,6 @@ public class reservationService extends MediathequeService {
             PrintWriter sout = new PrintWriter(getSocket().getOutputStream(), true);
             sout.println("Bienvenue sur le service de reservation, voici le catalogue : " + catalogue);
 
-//            for (String line : catalogue) {
-//                sout.println(line); // Envoie chaque ligne au client
-//            }
-//            sout.flush();
-
             sout.print("Votre numero de client : ");
             String stringAboId = sin.readLine();
             int numberAboId = Integer.parseInt(stringAboId);
