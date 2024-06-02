@@ -3,5 +3,7 @@
   "PORT_RESERVATION": 3000,
   "PORT_EMPRUNT": 4000,
   "PORT_RETOUR": 5000,
-  "HOST": "localhost"
+  "HOST": "localhost",
+  "URL_JDBC": "jdbc:mysql://localhost:3306/mediatheque?useSSL=false&user=root",
+  "DRIVER_JDBC": "com.mysql.jdbc.Driver"
 }
