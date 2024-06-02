@@ -15,44 +15,43 @@ import java.util.HashMap;
 import java.util.Timer;
 
 public class Reservation {
-    private static HashMap<Documents, HashMap<Abonnes, Timer>> lstReserve;
+    private final static HashMap<Documents, HashMap<Abonnes, Timer>> lstReserve = new HashMap<>();
 
-    public Reservation() {
-        lstReserve = new HashMap<>();
+    public static void reserver(Documents document, Abonnes abonneI) throws ReservationException, EmpruntException {
+        synchronized (lstReserve) {
+            if (estReservePar(document, abonneI)) {
+                return;
+            }
+
+            if (estReserve(document)) {
+                throw new ReservationException();
+            } else if (Emprunt.estEmprunte(document)) {
+                throw new EmpruntException();
+            }
+
+            startReservationDelay(document, abonneI);
+        }
+        // Mettre à jour le state du document en dehors de la section synchronisée pour éviter les verrouillages prolongés
     }
 
-    public static void reserver(Documents document, Abonnes abonneI) {
-
-        if (estReservePar(document, abonneI)) {
-            return;
-        }
-
-        if (estReserve(document)) {
-            throw new ReservationException();
-        } else if (Emprunt.estEmprunte(document)) {
-            throw new EmpruntException();
-        }
-
-        startReservationDelay(document, abonneI);
-        DocumentModel documentModel = new DocumentModel();
-
-    }
-
-    public static boolean estReserve(Documents document) {
+    public static synchronized boolean estReserve(Documents document) {
         return lstReserve.containsKey(document);
     }
 
-    public static boolean estReservePar(Documents documents, Abonnes abonnesI) {
-        return lstReserve.get(documents).containsKey(abonnesI);
+    public static synchronized boolean estReservePar(Documents document, Abonnes abonneI) {
+        return lstReserve.containsKey(document) && lstReserve.get(document).containsKey(abonneI);
     }
 
-    public static void cancelReservation(Documents document) {
+    public static synchronized void cancelReservation(Documents document) {
         lstReserve.remove(document);
     }
 
     public static void startReservationDelay(Documents document, Abonnes abonneI) {
         Timer timer = new Timer();
         timer.schedule(new AnnulationReservationTask(document), AnnulationReservationTask.getDelay());
-        lstReserve.computeIfAbsent(document, k -> new HashMap<>()).put(abonneI, timer);
+
+        synchronized (lstReserve) {
+            lstReserve.computeIfAbsent(document, k -> new HashMap<>()).put(abonneI, timer);
+        }
     }
 }
