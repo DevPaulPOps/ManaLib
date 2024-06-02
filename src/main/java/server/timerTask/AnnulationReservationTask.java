@@ -1,16 +1,17 @@
 package server.timerTask;
 
 import server.Operations.Reservation.Reservation;
+import server.elements.interfaces.Abonnes;
+import server.elements.interfaces.Documents;
 
 import java.util.TimerTask;
 
 public class AnnulationReservationTask extends TimerTask {
-    // 1h30 in milliseconds
-    private static final long DELAY = 90 * 60 * 1000;
-    private final Reservation reservation;
+    private static final long DELAY = 90 * 60 * 1000; // 1h30 in milliseconds
+    private final Documents document;
 
-    public AnnulationReservationTask(Reservation reservation) {
-        this.reservation = reservation;
+    public AnnulationReservationTask(Documents documents) {
+        this.document = documents;
     }
 
     public static long getDelay() {
@@ -19,6 +20,6 @@ public class AnnulationReservationTask extends TimerTask {
 
     @Override
     public void run() {
-        Reservation.cancelReservation();
+        Reservation.cancelReservation(document);
     }
 }

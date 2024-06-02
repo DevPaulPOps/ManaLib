@@ -15,10 +15,9 @@ import java.sql.SQLException;
 public class Document implements Documents {
 
     private final String titre;
-    private final String state;
-    private final Integer abonneId;
-    //L'id du document est creer automatiquement dans la base de donnee.
-    private Integer idDocument;
+    private String state;
+    private Integer abonneId;
+    private Integer idDocument; //L'id du document est creer automatiquement dans la base de donnee.
 
     //Cosntructeur pour creer un document
     public Document(String titre, String state, Integer abonneId) {
@@ -45,8 +44,15 @@ public class Document implements Documents {
         return titre;
     }
 
+    public void setAbonneId(Integer abonneId) {
+        this.abonneId = abonneId;
+    }
 
-    //Duplication entre celle si et getIdStroage
+    public void setState(String state) {
+        this.state = state;
+    }
+
+
     @Override
     public int numero() {
         return this.idDocument;
@@ -58,10 +64,10 @@ public class Document implements Documents {
      */
     @Override
     public void reservation(Abonnes ab) throws ReservationException {
-        if (Reservation.estReserve() || Emprunt.estEmprunte()) {
+        if (Reservation.estReserve(this) || Emprunt.estEmprunte(this)) {
             throw new ReservationException();
         }
-        Reservation.reserver(ab);
+        Reservation.reserver(this, ab);
     }
 
     /**
@@ -70,10 +76,10 @@ public class Document implements Documents {
      */
     @Override
     public void emprunt(Abonnes ab) throws EmpruntException {
-        if (!Reservation.estReservePar(ab) && !Emprunt.estEmprunte()) {
+        if (!Reservation.estReservePar(this, ab) && !Emprunt.estEmprunte(this)) {
             throw new EmpruntException();
         }
-        Reservation.reserver(ab);
+        Reservation.reserver(this, ab);
     }
 
     /**
@@ -81,10 +87,10 @@ public class Document implements Documents {
      */
     @Override
     public void retour() throws RetourException {
-        if (!Emprunt.estEmprunte()) {
+        if (!Emprunt.estEmprunte(this)) {
             throw new RetourException();
         }
-        Retour.retourner();
+        Retour.retourner(this);
     }
 
     /**

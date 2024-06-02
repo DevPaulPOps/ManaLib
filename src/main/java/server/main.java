@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class main {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) {
         List<Class<? extends MediathequeServer>> serverClasses = Arrays.asList(
                 empruntServer.class,
                 reservationServer.class,
@@ -33,14 +33,11 @@ public class main {
         );
         try {
             MediathequeDbService.setJdbcUrlClassDriver(Environment.URL, Environment.DRIVER);
-//            tmpInsertData();
             DataFactory.createDataInAppToDb(dataClasses);
             MediathequeServerFactory.createMediathequeServer(serverClasses);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        //System.out.println(reservationService.showCatalogue2());
     }
 
 //    public static void tmpInsertData() throws SQLException, ClassNotFoundException {

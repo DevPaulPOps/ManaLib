@@ -2,8 +2,10 @@ package server.db.model;
 
 import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
+import server.elements.Abonne;
 import server.elements.Documents.Document;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,6 +38,24 @@ public class DocumentModel<D extends Document> implements Model<D> {
         }
     }
 
+    @Override
+    public D getById(int documentId) throws SQLException {
+        String query = "SELECT * FROM document WHERE numero = " + documentId;
+        try (ResultSet data = MediathequeDbService.executeQuery(query)) {
+            while (data.next()) {
+                int numero = data.getInt("numero");
+                String titre = data.getString("titre");
+                String state = data.getString("state");
+                int abonneId = data.getInt("abonneId");
+
+                Document document = new Document(numero, titre, state, abonneId);
+
+                return (D) document;
+            }
+        }
+        return null;
+    }
+
     public int saveAndGetKey(D documents) throws SQLException {
         if (documents.getEntityId() == null) {
             String query = "INSERT INTO document (titre, state, abonneId) VALUES (?, ?, ?)";
@@ -58,7 +78,7 @@ public class DocumentModel<D extends Document> implements Model<D> {
     }
 
     @Override
-    public void getInit() throws SQLException {
+    public void getAll() throws SQLException {
         String query = "SELECT * FROM document";
         try (ResultSet allData = MediathequeDbService.executeQuery(query)) {
             while (allData.next()) {

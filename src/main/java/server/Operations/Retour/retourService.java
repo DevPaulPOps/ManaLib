@@ -1,5 +1,6 @@
 package server.Operations.Retour;
 
+import server.elements.Documents.Document;
 import server.serv.MediathequeService;
 
 import java.io.BufferedReader;
@@ -12,6 +13,7 @@ public class retourService extends MediathequeService {
 
     public retourService(Socket socket) {
         super(socket);
+        initCatalogue();
     }
 
     @Override
@@ -31,6 +33,7 @@ public class retourService extends MediathequeService {
 
                     //Faire la recherche pour voir si le document correspond et qu'il etait bien emprunte
 
+
                     break;
                 } else if (docTrouve.equals("non")) {
 
@@ -38,7 +41,7 @@ public class retourService extends MediathequeService {
                     String numeroDocument = in.readLine();
                     int numeroDoc = Integer.parseInt(numeroDocument);
 
-                    //Stocker le numero de document / voir si appartient a quelqun
+                    //Stocker le numero de document
                     break;
                 } else {
                     out.println("Vous devez répondre par oui ou non.");
@@ -58,5 +61,15 @@ public class retourService extends MediathequeService {
             }
         } catch (IOException ignored) {
         }
+    }
+
+    public void tryRetour(int numeroDoc) {
+        Document document = listCatalogue.get(numeroDoc);
+
+        if (document == null) {
+            return;
+        }
+
+        document.retour();
     }
 }

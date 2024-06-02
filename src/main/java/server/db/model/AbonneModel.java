@@ -37,7 +37,23 @@ public class AbonneModel<A extends Abonne> implements Model<A> {
     }
 
     @Override
-    public void getInit() throws SQLException {
+    public A getById(int abonneId) throws SQLException {
+        String query = "SELECT * FROM abonne WHERE numero = " + abonneId;
+        try (ResultSet data = MediathequeDbService.executeQuery(query)) {
+            while (data.next()) {
+                int id = data.getInt("numero");
+                String nom = data.getString("nom");
+                Date dateNaissance = data.getDate("dateNaissance");
+                Abonne abonne = new Abonne(id, nom, dateNaissance);
+
+                return (A) abonne;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void getAll() throws SQLException {
         String query = "SELECT * FROM abonne";
         try (ResultSet allData = MediathequeDbService.executeQuery(query)) {
             while (allData.next()) {

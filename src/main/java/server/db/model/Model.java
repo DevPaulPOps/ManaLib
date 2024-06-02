@@ -1,5 +1,6 @@
 package server.db.model;
 
+import server.elements.Abonne;
 import server.elements.interfaces.DataStorage;
 
 import java.sql.SQLException;
@@ -14,8 +15,9 @@ public interface Model<D extends DataStorage> {
 
     void update(D dataStorage) throws SQLException;
 
-    void getInit() throws SQLException;
+    D getById(int id) throws SQLException;
+
+    void getAll() throws SQLException;
 
     void delete(D dataStorage) throws SQLException;
-
 }

@@ -1,35 +1,39 @@
 package server.Operations.Emprunt;
 
+import server.Exception.EmpruntException;
 import server.Operations.Reservation.Reservation;
 import server.elements.interfaces.Abonnes;
+import server.elements.interfaces.Documents;
+
+import java.util.HashMap;
 
 public class Emprunt {
-    static Abonnes abonnes;
+    private static HashMap<Documents, Abonnes> lstEmprunts;
 
     public Emprunt() {
-        abonnes = null;
+        lstEmprunts = new HashMap<>();
     }
 
-    public Emprunt(Abonnes abonnesI) {
-        abonnes = abonnesI;
+    public Emprunt(Documents documents,Abonnes abonnesI) {
+        this();
+        lstEmprunts.put(documents, abonnesI);
     }
 
-    public static boolean estEmprunte() {
-        return abonnes != null;
+    public static boolean estEmprunte(Documents documents) {
+        return lstEmprunts.containsKey(documents);
     }
 
-    public static void emprunter(Abonnes abonnesI) {
-        if (abonnes == null || abonnes.getIdAbonne() == abonnesI.getIdAbonne()) {
-            Reservation.cancelReservation();
-            abonnes = abonnesI;
+    public static void cancelEmprunt(Documents documents) {
+        lstEmprunts.remove(documents);
+    }
+
+    public static void emprunter(Documents documents, Abonnes abonnesI) {
+        if (Reservation.estReservePar(documents, abonnesI)) {
+            lstEmprunts.put(documents, abonnesI);
+            Reservation.cancelReservation(documents);
         }
-    }
-
-    public static void setAbonnes(Abonnes abonnesI) {
-        abonnes = abonnesI;
-    }
-
-    public Abonnes getAbonne() {
-        return abonnes;
+        else {
+            throw new EmpruntException();
+        }
     }
 }

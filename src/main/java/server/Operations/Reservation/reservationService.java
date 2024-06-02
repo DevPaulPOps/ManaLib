@@ -1,6 +1,8 @@
 package server.Operations.Reservation;
 
 import server.db.data.ManageDataStorage;
+import server.db.model.AbonneModel;
+import server.elements.Abonne;
 import server.elements.Documents.Document;
 import server.serv.MediathequeService;
 
@@ -30,6 +32,7 @@ public class reservationService extends MediathequeService {
 
     public reservationService(Socket socket) throws SQLException {
         super(socket);
+        initCatalogue();
         catalogue = showCatalogue();
     }
 
@@ -52,10 +55,14 @@ public class reservationService extends MediathequeService {
             // Voir si le document existe ?
             // TODO
 
+            tryReserve(numberAboId,numberDocId);
+
             sout.print("exit => pour quitter le service.");
 
         } catch (IOException e) {
             System.err.println(e.getLocalizedMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         try {
             if (getSocket() != null) {
@@ -65,16 +72,26 @@ public class reservationService extends MediathequeService {
         }
     }
 
-    public String showCatalogue() throws SQLException {
-        // Il veut une List de document
-        List<Document> catalogue = ManageDataStorage.getOnlyDocumentDataStorage();
+    public String showCatalogue() {
+        this.listCatalogue = ManageDataStorage.getOnlyDocumentDataStorage();
 
         StringBuilder sb = new StringBuilder();
 
-        for (var document : catalogue) {
-            sb.append(document.toString()).append(System.lineSeparator()); // Ajoute le caractère de nouvelle ligne
+        for (var document : listCatalogue) {
+            sb.append(document.toString()).append(System.lineSeparator());
         }
 
         return sb.toString();
+    }
+
+    public void tryReserve(int numClient, int numDoc) throws SQLException {
+        Document document = listCatalogue.get(numDoc);
+
+        if (document == null) {
+            return;
+        }
+
+        Abonne abonne = new AbonneModel<>().getById(numClient);
+        document.reservation(abonne);
     }
 }

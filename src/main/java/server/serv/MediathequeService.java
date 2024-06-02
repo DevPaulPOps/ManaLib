@@ -1,13 +1,18 @@
 package server.serv;
 
+import server.db.data.ManageDataStorage;
+import server.elements.Documents.Document;
 import server.serv.bttp.BttpProtocole;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class MediathequeService implements Runnable {
     private final Socket socket;
     private final BttpProtocole bttp;
+    protected List<Document> listCatalogue;
 
     public MediathequeService(Socket socket) {
         this.socket = socket;
@@ -30,6 +35,10 @@ public abstract class MediathequeService implements Runnable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void initCatalogue() {
+        this.listCatalogue = ManageDataStorage.getOnlyDocumentDataStorage();
     }
 
     public void start() {

@@ -10,7 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DVDModel<D extends DVD> implements Model<D> {
-    DocumentModel<Document> documentModel = new DocumentModel();
+    private static final DVDModel<DVD> instance = new DVDModel<>();
+    DocumentModel<Document> documentModel = new DocumentModel<>();
 
     @Override
     public void save(D documents) throws SQLException {
@@ -42,7 +43,25 @@ public class DVDModel<D extends DVD> implements Model<D> {
     }
 
     @Override
-    public void getInit() throws SQLException {
+    public D getById(int dvdId) throws SQLException {
+        String query = "SELECT * FROM dvd WHERE numero = " + dvdId;
+        try (ResultSet data = MediathequeDbService.executeQuery(query)) {
+            while (data.next()) {
+                int numero = data.getInt("numero");
+                String titre = data.getString("titre");
+                String state = data.getString("state");
+                int abonneId = data.getInt("abonneId");
+                boolean contenuAdulte = data.getBoolean("contenuAdulte");
+                DVD dvd = new DVD(numero, titre, state, abonneId, contenuAdulte);
+
+                return (D) dvd;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void getAll() throws SQLException {
         String query = "SELECT d.numero, doc.titre, doc.state, doc.abonneId, d.contenuAdulte " +
                 "FROM dvd d " +
                 "JOIN document doc ON d.numero = doc.numero";
