@@ -23,7 +23,7 @@ public class Config {
 
     public static int getPort(String portName) {
         if (ports.isEmpty()) {
-            Config f = new Config();
+            Config.loadConfig();
         }
 
         return ports.getOrDefault(portName, -1);
@@ -41,7 +41,7 @@ public class Config {
         return jdbcDriver;
     }
 
-    private void loadConfig() {
+    public static void loadConfig() {
         JSONParser parser = new JSONParser();
         try {
             JSONObject config = (JSONObject) parser.parse(new FileReader("src/main/java/config/config.json"));

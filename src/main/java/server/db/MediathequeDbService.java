@@ -1,5 +1,7 @@
 package server.db;
 
+import config.Config;
+
 import java.sql.*;
 
 public abstract class MediathequeDbService {

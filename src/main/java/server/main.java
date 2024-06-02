@@ -1,5 +1,6 @@
 package server;
 
+import config.Config;
 import server.Operations.Emprunt.empruntServer;
 import server.Operations.Reservation.reservationServer;
 import server.Operations.Retour.retourServer;
@@ -20,6 +21,8 @@ import java.util.List;
 
 public class main {
     public static void main(String[] args) {
+        Config.loadConfig();
+        
         List<Class<? extends MediathequeServer>> serverClasses = Arrays.asList(
                 empruntServer.class,
                 reservationServer.class,

@@ -1,9 +1,12 @@
 package client;
 
+import config.Config;
+
 import java.io.IOException;
 
 public class main {
-    public static void main(String[] args) throws IOException, RuntimeException {
+    public static void main(String[] args) throws RuntimeException {
+        Config.loadConfig();
 
 //        if (args.length != 1) {
 //            System.err.println("Services disponible : " + SelectionPortServer.getServices());
