@@ -1,6 +1,8 @@
 package server.environment;
 
+import config.Config;
+
 public class Environment {
-    public static final String DRIVER = "com.mysql.jdbc.Driver";
-    public static final String URL = "jdbc:mysql://localhost:3306/mediatheque?useSSL=false&user=root";
+    public static final String DRIVER = Config.getJdbcDriver();
+    public static final String URL = Config.getUrlJdbc();
 }

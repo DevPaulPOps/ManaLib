@@ -13,6 +13,9 @@ public class Config {
 
     private static final Map<String, Integer> ports = new HashMap<>();
     private static String host;
+    private static String url_jdbc;
+
+    private static String jdbcDriver;
 
     public Config() {
         loadConfig();
@@ -30,6 +33,14 @@ public class Config {
         return host;
     }
 
+    public static String getUrlJdbc() {
+        return url_jdbc;
+    }
+
+    public static String getJdbcDriver() {
+        return jdbcDriver;
+    }
+
     private void loadConfig() {
         JSONParser parser = new JSONParser();
         try {
@@ -39,6 +50,8 @@ public class Config {
             ports.put("PORT_EMPRUNT", ((Long) config.get("PORT_EMPRUNT")).intValue());
             ports.put("PORT_RETOUR", ((Long) config.get("PORT_RETOUR")).intValue());
             host = (String) config.get("HOST");
+            url_jdbc = (String) config.get("URL_JDBC");
+            jdbcDriver = (String) config.get("JDBC_DRIVER");
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
