@@ -51,7 +51,7 @@ public class Config {
             ports.put("PORT_RETOUR", ((Long) config.get("PORT_RETOUR")).intValue());
             host = (String) config.get("HOST");
             url_jdbc = (String) config.get("URL_JDBC");
-            jdbcDriver = (String) config.get("JDBC_DRIVER");
+            jdbcDriver = (String) config.get("DRIVER_JDBC");
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
