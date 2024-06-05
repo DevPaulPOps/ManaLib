@@ -2,6 +2,7 @@ package client;
 
 import config.Config;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class main {
@@ -23,18 +24,15 @@ public class main {
 
             while (true) {
                 try {
-                    String line;
-                    while ((line = client.getBttpProtocole().getResponseServer()) != null) {
-                        System.out.println(line);
-                    }
-
+                    client.getBttpProtocole().initInOut();
+                    BufferedReader clavier = client.getBttpProtocole().getClavierInput();
+                    client.getBttpProtocole().communicate(clavier.readLine());
                     String response = client.getClavierInput().readLine();
-
                     if ("exit".equalsIgnoreCase(response)) {
                         break;
                     }
 
-                    client.getBttpProtocole().sendResponseToServer(response);
+                    System.out.println(client.getBttpProtocole().communicate(response));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
