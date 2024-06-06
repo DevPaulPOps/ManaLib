@@ -3,10 +3,6 @@ package server.Operations.Reservation;
 import server.Exception.EmpruntException;
 import server.Exception.ReservationException;
 import server.Operations.Emprunt.Emprunt;
-import server.db.MediathequeDbService;
-import server.db.model.DocumentModel;
-import server.elements.Abonne;
-import server.elements.Documents.Document;
 import server.elements.interfaces.Abonnes;
 import server.elements.interfaces.Documents;
 import server.timerTask.AnnulationReservationTask;
@@ -19,16 +15,12 @@ public class Reservation {
 
     public static void reserver(Documents document, Abonnes abonneI) throws ReservationException, EmpruntException {
         synchronized (lstReserve) {
-            if (estReservePar(document, abonneI)) {
-                return;
-            }
-
-            if (estReserve(document)) {
+            if (estReservePar(document, abonneI) || estReserve(document)) {
                 throw new ReservationException();
-            } else if (Emprunt.estEmprunte(document)) {
+            }
+             if (Emprunt.estEmprunte(document)) {
                 throw new EmpruntException();
             }
-
             startReservationDelay(document, abonneI);
         }
         // Mettre à jour le state du document en dehors de la section synchronisée pour éviter les verrouillages prolongés

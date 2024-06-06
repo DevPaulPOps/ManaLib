@@ -14,15 +14,13 @@ import server.environment.Environment;
 import server.serv.MediathequeServer;
 import server.serv.MediathequeServerFactory;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class main {
     public static void main(String[] args) {
         Config.loadConfig();
-        
+
         List<Class<? extends MediathequeServer>> serverClasses = Arrays.asList(
                 empruntServer.class,
                 reservationServer.class,

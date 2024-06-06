@@ -36,22 +36,21 @@ public class Document implements Documents {
         return state;
     }
 
-    public Integer getAbonneId() {
-        return abonneId;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public String getTitre() {
-        return titre;
+    public Integer getAbonneId() {
+        return abonneId;
     }
 
     public void setAbonneId(Integer abonneId) {
         this.abonneId = abonneId;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public String getTitre() {
+        return titre;
     }
-
 
     @Override
     public int numero() {

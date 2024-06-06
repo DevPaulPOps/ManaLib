@@ -25,8 +25,8 @@ public class ClientServer {
         this.bttpProtocole = new BttpProtocole(new Socket(host, port));
     }
 
-    public BufferedReader getClavierInput() {
-        return new BufferedReader(new InputStreamReader(System.in));
+    public String getClavierInput() throws IOException {
+        return new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
 
     public BttpProtocole getBttpProtocole() {

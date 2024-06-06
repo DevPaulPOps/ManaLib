@@ -1,6 +1,5 @@
 package server.db.model;
 
-import server.elements.Abonne;
 import server.elements.interfaces.DataStorage;
 
 import java.sql.SQLException;

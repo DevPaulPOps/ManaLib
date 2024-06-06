@@ -44,6 +44,8 @@ public abstract class MediathequeServer implements Runnable {
     }
 
     public void close() {
-        this.service.getBttpProtocole().close();
+        if (service != null) {
+            service.getBttpProtocole().close();
+        }
     }
 }

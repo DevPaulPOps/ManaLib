@@ -21,27 +21,23 @@ public class retourService extends MediathequeService {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
             PrintWriter out = new PrintWriter(getSocket().getOutputStream(), true);
-            out.println("Vous êtes sur le service de retour.\n" + "Le document appartient-il a quelqu'un ? (oui / non) : ");
+            out.println("Vous êtes sur le service de retour.\nLe document appartient-il a quelqu'un ? (oui / non) : ");
 
             String docTrouve = in.readLine();
             while (true) {
-                if (docTrouve.equals("oui")) {
-
-                    out.println("Numero du document : ");
+                if ("oui".equalsIgnoreCase(docTrouve)) {
+                    out.println("Numéro du document : ");
                     String numeroDocument = in.readLine();
                     int numeroDoc = Integer.parseInt(numeroDocument);
 
-                    //Faire la recherche pour voir si le document correspond et qu'il etait bien emprunte
-
-
+                    tryRetour(numeroDoc);
                     break;
-                } else if (docTrouve.equals("non")) {
-
-                    out.println("Numero du document : ");
+                } else if ("non".equalsIgnoreCase(docTrouve)) {
+                    out.println("Numéro du document : ");
                     String numeroDocument = in.readLine();
                     int numeroDoc = Integer.parseInt(numeroDocument);
 
-                    //Stocker le numero de document
+                    // Stocker le numéro de document si nécessaire
                     break;
                 } else {
                     out.println("Vous devez répondre par oui ou non.");
@@ -52,24 +48,23 @@ public class retourService extends MediathequeService {
             out.println("Le document a bien été remis avec succès.");
 
         } catch (IOException e) {
-            System.err.println(e.getLocalizedMessage());
-        }
-
-        try {
-            if (getSocket() != null) {
-                getSocket().close();
+            System.err.println("Erreur lors de la communication avec le client : " + e.getMessage());
+        } finally {
+            try {
+                if (getSocket() != null) {
+                    getSocket().close();
+                }
+            } catch (IOException e) {
+                System.err.println("Erreur lors de la fermeture du socket : " + e.getMessage());
             }
-        } catch (IOException ignored) {
         }
     }
 
     public void tryRetour(int numeroDoc) {
         Document document = listCatalogue.get(numeroDoc);
 
-        if (document == null) {
-            return;
+        if (document != null) {
+            document.retour();
         }
-
-        document.retour();
     }
 }

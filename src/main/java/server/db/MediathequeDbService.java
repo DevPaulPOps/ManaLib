@@ -1,13 +1,11 @@
 package server.db;
 
-import config.Config;
-
 import java.sql.*;
 
 public abstract class MediathequeDbService {
+    private static final Connection connection = null;
     private static String jdbcClassDriver;
     private static String jdbcUrl;
-    private static final Connection connection = null;
 
     public static void setJdbcClassDriver(String jdbcClassDriver) throws ClassNotFoundException {
         MediathequeDbService.jdbcClassDriver = jdbcClassDriver;

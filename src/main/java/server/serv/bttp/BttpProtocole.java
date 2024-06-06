@@ -25,16 +25,16 @@ public class BttpProtocole {
         }
     }
 
-    public String communicate(String response) throws IOException {
+    public synchronized String communicate(String response) throws IOException {
         out.println(response);
         return in.readLine();
     }
 
-    public String getResponseServer() throws IOException {
+    public synchronized String getResponseServer() throws IOException {
         return in.readLine();
     }
 
-    public void sendResponseToServer(String response) throws IOException {
+    public synchronized void sendResponseToServer(String response) throws IOException {
         out.println(response);
     }
 
@@ -44,7 +44,7 @@ public class BttpProtocole {
             in.close();
             socket.close();
         } catch (IOException e) {
-            System.out.println("Error: " + e);
+            System.err.println("Erreur lors de la fermeture : " + e.getMessage());
         }
     }
 }

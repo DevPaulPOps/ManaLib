@@ -6,7 +6,6 @@ import server.serv.bttp.BttpProtocole;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MediathequeService implements Runnable {

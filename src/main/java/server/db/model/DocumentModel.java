@@ -2,10 +2,8 @@ package server.db.model;
 
 import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
-import server.elements.Abonne;
 import server.elements.Documents.Document;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,5 +1,7 @@
 package server.Operations.Reservation;
 
+import server.Exception.EmpruntException;
+import server.Exception.ReservationException;
 import server.db.data.ManageDataStorage;
 import server.db.model.AbonneModel;
 import server.elements.Abonne;
@@ -12,21 +14,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.List;
 
-import static java.lang.Integer.parseInt;
-
-
-/*
-    le service de réservation lui
-    envoie le catalogue et lui demande son numéro d’abonné et le numéro de document qu’il souhaite
-    réserver.
-*/
-
-
-// TODO
-//Essayer de regler le probleme : quand on saute une ligne, on doit redemander partie client de faire un readline.
-//Ducoup l'affichage moche.
 public class reservationService extends MediathequeService {
     String catalogue;
 
@@ -41,57 +29,60 @@ public class reservationService extends MediathequeService {
         try {
             BufferedReader sin = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
             PrintWriter sout = new PrintWriter(getSocket().getOutputStream(), true);
-            sout.println("Bienvenue sur le service de reservation, voici le catalogue : " + catalogue);
+            sout.println("Bienvenue sur le service de réservation, voici le catalogue : " + catalogue);
 
-            sout.print("Votre numero de client : ");
+            sout.print("Votre numéro de client : ");
             String stringAboId = sin.readLine();
             int numberAboId = Integer.parseInt(stringAboId);
 
-            sout.print("Le numero du document : ");
+            sout.print("Le numéro du document : ");
             String stringDocId = sin.readLine();
-            int numberDocId = parseInt(stringDocId);
+            int numberDocId = Integer.parseInt(stringDocId);
 
-            // Voir si l'abonne existe ?
-            // Voir si le document existe ?
-            // TODO
+            // Vérification de l'existence de l'abonné et du document
+            Abonne abonne = new AbonneModel<>().getById(numberAboId);
+            Document document = listCatalogue.get(numberDocId);
 
-            tryReserve(numberAboId,numberDocId);
+            if (abonne != null && document != null) {
+                tryReserve(abonne, document);
+                sout.println("Le document a été réservé avec succès.");
+            } else {
+                sout.println("Abonné ou document introuvable.");
+            }
 
-            sout.print("exit => pour quitter le service.");
+            sout.println("exit => pour quitter le service.");
 
         } catch (IOException e) {
-            System.err.println(e.getLocalizedMessage());
+            System.err.println("Erreur lors de la communication avec le client : " + e.getMessage());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            if (getSocket() != null) {
-                getSocket().close();
+            throw new RuntimeException("Erreur SQL : " + e.getMessage(), e);
+        } finally {
+            try {
+                if (getSocket() != null) {
+                    getSocket().close();
+                }
+            } catch (IOException e) {
+                System.err.println("Erreur lors de la fermeture du socket : " + e.getMessage());
             }
-        } catch (IOException ignored) {
         }
     }
 
     public String showCatalogue() {
         this.listCatalogue = ManageDataStorage.getOnlyDocumentDataStorage();
-
         StringBuilder sb = new StringBuilder();
 
-        for (var document : listCatalogue) {
+        for (Document document : listCatalogue) {
             sb.append(document.toString()).append(System.lineSeparator());
         }
 
         return sb.toString();
     }
 
-    public void tryReserve(int numClient, int numDoc) throws SQLException {
-        Document document = listCatalogue.get(numDoc);
-
-        if (document == null) {
-            return;
+    public void tryReserve(Abonne abonne, Document document) {
+        try {
+            document.reservation(abonne);
+        } catch (ReservationException | EmpruntException e) {
+            System.err.println("Erreur lors de la réservation : " + e.getMessage());
         }
-
-        Abonne abonne = new AbonneModel<>().getById(numClient);
-        document.reservation(abonne);
     }
 }
