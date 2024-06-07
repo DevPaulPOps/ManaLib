@@ -2,6 +2,7 @@ package server.timerTask;
 
 import server.Operations.Reservation.Reservation;
 import server.elements.interfaces.Documents;
+import server.utils.Utils;
 
 import java.util.TimerTask;
 
@@ -20,5 +21,8 @@ public class AnnulationReservationTask extends TimerTask {
     @Override
     public void run() {
         Reservation.cancelReservation(document);
+
+        //Envoie de l'email par defaut
+        Utils.setDefaultMail(document, Reservation.getFirstAttente(document));
     }
 }

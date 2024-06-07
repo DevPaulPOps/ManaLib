@@ -3,6 +3,8 @@ package server.Operations.Reservation;
 import server.Operations.BaseOperation;
 import server.elements.Abonne;
 import server.elements.Documents.Document;
+import server.elements.interfaces.Abonnes;
+import server.elements.interfaces.Documents;
 import server.stateConstante.StateConstante;
 import java.io.IOException;
 import java.net.Socket;
@@ -21,8 +23,8 @@ public class reservationService extends BaseOperation {
             getBttpProtocole().sendResponse("\n" + showCatalogue());
             getBttpProtocole().sendResponse("FIN_DU_CATALOGUE");
 
-            Abonne abonne = getAbonne();
-            Document document = getDocument();
+            Abonnes abonne = getAbonne();
+            Documents document = getDocument();
 
             if (abonne == null || document == null) {
                 getBttpProtocole().sendResponse("Abonné ou document introuvable.");
@@ -48,7 +50,7 @@ public class reservationService extends BaseOperation {
     public String showCatalogue() {
         StringBuilder sb = new StringBuilder();
 
-        for (Document document : listCatalogue) {
+        for (Documents document : listCatalogue) {
             sb.append(document.toString()).append(System.lineSeparator());
         }
 
