@@ -1,6 +1,8 @@
 package server.Operations;
 
 import server.Exception.EmpruntException;
+import server.Exception.ReservationException;
+import server.Operations.Reservation.Reservation;
 import server.db.model.AbonneModel;
 import server.elements.Abonne;
 import server.elements.Documents.Document;
@@ -24,7 +26,7 @@ public abstract class BaseOperation extends MediathequeService {
         try {
             document.reservation(abonne);
             return "Le document a été " + getOperation() + " avec succès.";
-        } catch (EmpruntException e) {
+        } catch (EmpruntException | ReservationException e) {
             return "Erreur lors " + getErreur() + e.getMessage();
         }
     }

@@ -27,7 +27,7 @@ public class reservationService extends BaseOperation {
             if (abonne == null || document == null) {
                 getBttpProtocole().sendResponse("Abonné ou document introuvable.");
             } else {
-                getBttpProtocole().sendResponse(tryOperation(abonne, document));
+                getBttpProtocole().sendResponse((tryOperation(abonne, document) + " End."));
             }
 
         } catch (IOException e) {
