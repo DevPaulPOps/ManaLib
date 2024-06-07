@@ -21,10 +21,6 @@ public class ManageDataStorage {
         ManageDataStorage.dataStorage.put(dataStorage.getEntityId().toString(), dataStorage);
     }
 
-    public static DataStorage getDataStorageById(String id) {
-        return ManageDataStorage.dataStorage.get(id);
-    }
-
     public static List<DataStorage> getAllDataStorage() {
         return List.copyOf(ManageDataStorage.dataStorage.values());
     }
@@ -35,9 +31,4 @@ public class ManageDataStorage {
                 .map(dataStorage -> (Document) dataStorage)
                 .collect(Collectors.toList());
     }
-
-    public static void removeDataStorage(String id) {
-        ManageDataStorage.dataStorage.remove(id);
-    }
-
 }

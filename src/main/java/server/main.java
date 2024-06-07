@@ -40,16 +40,4 @@ public class main {
             e.printStackTrace();
         }
     }
-
-//    public static void tmpInsertData() throws SQLException, ClassNotFoundException {
-//        ManageDataStorage.initDataStorage();
-//
-//        Document doc = new Document("Mein Kampf","libre", 1);
-//        DocumentModel documentModel = new DocumentModel();
-//        documentModel.save(doc);
-//
-//        DVD dvd = new DVD("Jhonnyes", "busy", 1, true);
-//        DVDModel dvdModel = new DVDModel();
-//        dvdModel.save(dvd);
-//    }
 }

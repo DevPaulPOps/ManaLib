@@ -36,10 +36,6 @@ public class Document implements Documents {
         return state;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public Integer getAbonneId() {
         return abonneId;
     }
@@ -113,7 +109,6 @@ public class Document implements Documents {
     public String toString() {
         return "Document : " + idDocument +
                 ", titre ='" + titre + '\'' +
-                ", state ='" + state + '\'' +
-                ", abonneId = '" + abonneId + '\'';
+                ", state ='" + state + '\'';
     }
 }

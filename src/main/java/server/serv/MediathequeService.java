@@ -16,6 +16,7 @@ public abstract class MediathequeService implements Runnable {
     public MediathequeService(Socket socket) {
         this.socket = socket;
         this.bttp = new BttpProtocole(this.socket);
+        initCatalogue();
     }
 
     public BttpProtocole getBttpProtocole() {

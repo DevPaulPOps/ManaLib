@@ -34,11 +34,19 @@ public abstract class MediathequeServer implements Runnable {
     @Override
     public void run() {
         while (true) {
-            try (Socket socket = serverSocket.accept()) {
+            Socket socket = null;
+            try {
+                socket = serverSocket.accept();
                 this.service = TypeClassDuService.getConstructor(Socket.class).newInstance(socket);
                 service.start();
             } catch (Exception e) {
                 System.out.println("Error: " + e);
+                if (socket != null && !socket.isClosed()) {
+                    try {
+                        socket.close();
+                    } catch (IOException ignored) {
+                    }
+                }
             }
         }
     }

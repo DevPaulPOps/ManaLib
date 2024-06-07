@@ -1,7 +1,9 @@
 package server.db.model;
 
 import server.elements.interfaces.DataStorage;
+import server.elements.interfaces.Documents;
 
+import javax.swing.text.Document;
 import java.sql.SQLException;
 
 public interface Model<D extends DataStorage> {

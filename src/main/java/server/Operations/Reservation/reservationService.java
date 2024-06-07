@@ -1,56 +1,34 @@
 package server.Operations.Reservation;
 
-import server.Exception.EmpruntException;
-import server.Exception.ReservationException;
-import server.db.data.ManageDataStorage;
-import server.db.model.AbonneModel;
+import server.Operations.BaseOperation;
 import server.elements.Abonne;
 import server.elements.Documents.Document;
-import server.serv.MediathequeService;
-
-import java.io.BufferedReader;
+import server.stateConstante.StateConstante;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.SQLException;
 
-public class reservationService extends MediathequeService {
-    String catalogue;
+public class reservationService extends BaseOperation {
 
-    public reservationService(Socket socket) throws SQLException {
+    public reservationService(Socket socket) {
         super(socket);
-        initCatalogue();
-        catalogue = showCatalogue();
     }
 
     @Override
-    public void lancement() throws IOException {
+    public void lancement() {
         try {
-            BufferedReader sin = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
-            PrintWriter sout = new PrintWriter(getSocket().getOutputStream(), true);
-            sout.println("Bienvenue sur le service de réservation, voici le catalogue : " + catalogue);
+            getBttpProtocole().sendResponse("Bienvenue sur le service de réservation, voici le catalogue : ");
+            getBttpProtocole().sendResponse("\n" + showCatalogue());
+            getBttpProtocole().sendResponse("FIN_DU_CATALOGUE");
 
-            sout.print("Votre numéro de client : ");
-            String stringAboId = sin.readLine();
-            int numberAboId = Integer.parseInt(stringAboId);
+            Abonne abonne = getAbonne();
+            Document document = getDocument();
 
-            sout.print("Le numéro du document : ");
-            String stringDocId = sin.readLine();
-            int numberDocId = Integer.parseInt(stringDocId);
-
-            // Vérification de l'existence de l'abonné et du document
-            Abonne abonne = new AbonneModel<>().getById(numberAboId);
-            Document document = listCatalogue.get(numberDocId);
-
-            if (abonne != null && document != null) {
-                tryReserve(abonne, document);
-                sout.println("Le document a été réservé avec succès.");
+            if (abonne == null || document == null) {
+                getBttpProtocole().sendResponse("Abonné ou document introuvable.");
             } else {
-                sout.println("Abonné ou document introuvable.");
+                getBttpProtocole().sendResponse(tryOperation(abonne, document));
             }
-
-            sout.println("exit => pour quitter le service.");
 
         } catch (IOException e) {
             System.err.println("Erreur lors de la communication avec le client : " + e.getMessage());
@@ -68,7 +46,6 @@ public class reservationService extends MediathequeService {
     }
 
     public String showCatalogue() {
-        this.listCatalogue = ManageDataStorage.getOnlyDocumentDataStorage();
         StringBuilder sb = new StringBuilder();
 
         for (Document document : listCatalogue) {
@@ -78,11 +55,11 @@ public class reservationService extends MediathequeService {
         return sb.toString();
     }
 
-    public void tryReserve(Abonne abonne, Document document) {
-        try {
-            document.reservation(abonne);
-        } catch (ReservationException | EmpruntException e) {
-            System.err.println("Erreur lors de la réservation : " + e.getMessage());
-        }
+    public String getOperation() {
+        return StateConstante.RESERVE;
+    }
+
+    public String getErreur() {
+        return "de la reservation : ";
     }
 }

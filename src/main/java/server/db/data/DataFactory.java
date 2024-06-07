@@ -16,9 +16,7 @@ public class DataFactory {
                 modelInstance.getAll();
             } catch (InstantiationException | IllegalAccessException | SQLException e) {
                 e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                throw new RuntimeException(e);
-            } catch (NoSuchMethodException e) {
+            } catch (InvocationTargetException | NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
         }

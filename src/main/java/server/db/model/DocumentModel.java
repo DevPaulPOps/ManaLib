@@ -1,8 +1,14 @@
 package server.db.model;
 
+import server.Operations.Emprunt.Emprunt;
+import server.Operations.Reservation.Reservation;
+import server.Operations.Retour.Retour;
 import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
+import server.elements.Abonne;
 import server.elements.Documents.Document;
+import server.elements.interfaces.Documents;
+import server.stateConstante.StateConstante;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -86,8 +92,26 @@ public class DocumentModel<D extends Document> implements Model<D> {
                 int abonneId = allData.getInt("abonneId");
 
                 Document document = new Document(numero, titre, state, abonneId);
+
+                addToList(document, state, abonneId);
+
                 ManageDataStorage.addDataStorage(document);
             }
+        }
+    }
+
+    public void addToList(Documents document, String state, int abonneID) throws SQLException {
+        Abonne abonne = new AbonneModel<>().getById(abonneID);
+        switch (state) {
+            case StateConstante.RESERVE:
+                Reservation.reserver(document, abonne);
+                break;
+            case StateConstante.EMPRUNTE:
+                Reservation.reserver(document,abonne);
+                Emprunt.emprunter(document, abonne);
+                break;
+            default:
+                Retour.retournerTrouve(document);
         }
     }
 
@@ -99,4 +123,6 @@ public class DocumentModel<D extends Document> implements Model<D> {
             pst.executeUpdate();
         }
     }
+
+
 }

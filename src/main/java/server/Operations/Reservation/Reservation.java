@@ -23,7 +23,6 @@ public class Reservation {
             }
             startReservationDelay(document, abonneI);
         }
-        // Mettre à jour le state du document en dehors de la section synchronisée pour éviter les verrouillages prolongés
     }
 
     public static synchronized boolean estReserve(Documents document) {

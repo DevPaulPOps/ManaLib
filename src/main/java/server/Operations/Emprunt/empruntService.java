@@ -1,19 +1,14 @@
 package server.Operations.Emprunt;
 
-import server.Exception.EmpruntException;
-import server.db.model.AbonneModel;
+import server.Operations.BaseOperation;
 import server.elements.Abonne;
 import server.elements.Documents.Document;
-import server.serv.MediathequeService;
-
-import java.io.BufferedReader;
+import server.stateConstante.StateConstante;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.SQLException;
 
-public class empruntService extends MediathequeService {
+public class empruntService extends BaseOperation {
 
     public empruntService(Socket socket) {
         super(socket);
@@ -22,30 +17,16 @@ public class empruntService extends MediathequeService {
     @Override
     public void lancement() {
         try {
-            BufferedReader sin = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
-            PrintWriter sout = new PrintWriter(getSocket().getOutputStream(), true);
-            sout.println("Bienvenue sur le service d'emprunt.");
+            getBttpProtocole().sendResponse("Bienvenue sur le service d'emprunt.");
 
-            sout.print("Votre numéro de client : ");
-            String stringAboId = sin.readLine();
-            int numberAboId = Integer.parseInt(stringAboId);
+            Abonne abonne = getAbonne();
+            Document document = getDocument();
 
-            sout.print("Le numéro du document : ");
-            String stringDocId = sin.readLine();
-            int numberDocId = Integer.parseInt(stringDocId);
-
-            // Vérification de l'existence de l'abonné et du document
-            Abonne abonne = new AbonneModel<>().getById(numberAboId);
-            Document document = listCatalogue.get(numberDocId);
-
-            if (abonne != null && document != null) {
-                tryEmprunt(abonne, document);
-                sout.println("Le document a été emprunté avec succès.");
+            if (abonne == null || document == null) {
+                getBttpProtocole().sendResponse("Abonné ou document introuvable.");
             } else {
-                sout.println("Abonné ou document introuvable.");
+                getBttpProtocole().sendResponse(tryOperation(abonne, document));
             }
-
-            sout.println("exit => pour quitter le service.");
 
         } catch (IOException | SQLException e) {
             System.err.println("Erreur lors de la communication avec le client : " + e.getMessage());
@@ -60,11 +41,11 @@ public class empruntService extends MediathequeService {
         }
     }
 
-    public void tryEmprunt(Abonne abonne, Document document) {
-        try {
-            document.emprunt(abonne);
-        } catch (EmpruntException e) {
-            System.err.println("Erreur lors de l'emprunt : " + e.getMessage());
-        }
+    public String getOperation() {
+        return StateConstante.EMPRUNTE;
+    }
+
+    public String getErreur() {
+        return "de l'emprunt : ";
     }
 }

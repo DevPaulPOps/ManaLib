@@ -10,6 +10,7 @@ public class Abonne implements Abonnes {
 
     private final String nom;
     private final Date dateNaissance;
+
     //Crée automatiquement depuis la base de donnee
     private Integer idAbonne;
 
