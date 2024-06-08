@@ -34,7 +34,6 @@ public class Abonne implements Abonnes {
         return this.idAbonne;
     }
 
-
     @Override
     public Integer getEntityId() {
         return idAbonne;

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ManageDataStorage {
-    public static HashMap<String, DataStorage> dataStorage = new HashMap<>();
+    private static HashMap<String, DataStorage> dataStorage = new HashMap<>();
 
     public static void initDataStorage() throws SQLException {
         TableBaseFactory.createAllTables();
@@ -30,5 +30,15 @@ public class ManageDataStorage {
                 .filter(dataStorage -> dataStorage instanceof Documents)
                 .map(dataStorage -> (Document) dataStorage)
                 .collect(Collectors.toList());
+    }
+
+    public static void saveDataStorage() {
+        dataStorage.forEach(((s, dataStorage1) -> {
+            try {
+                dataStorage1.saveFromDB();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }));
     }
 }

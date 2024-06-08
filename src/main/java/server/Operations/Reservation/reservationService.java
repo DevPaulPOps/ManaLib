@@ -1,5 +1,6 @@
 package server.Operations.Reservation;
 
+import server.Exception.ReservationException;
 import server.Operations.BaseOperation;
 import server.elements.Abonne;
 import server.elements.Documents.Document;
@@ -27,9 +28,9 @@ public class reservationService extends BaseOperation {
             Documents document = getDocument();
 
             if (abonne == null || document == null) {
-                getBttpProtocole().sendResponse("Abonné ou document introuvable.");
+                getBttpProtocole().sendResponse("Abonné ou document introuvable. End");
             } else {
-                getBttpProtocole().sendResponse((tryOperation(abonne, document) + " End."));
+                getBttpProtocole().sendResponse((tryOperation(abonne, document)) + " End");
             }
 
         } catch (IOException e) {
@@ -63,5 +64,10 @@ public class reservationService extends BaseOperation {
 
     public String getErreur() {
         return "de la reservation : ";
+    }
+
+    @Override
+    public void setOperation(Abonnes abonne, Documents documents) throws ReservationException {
+        documents.reservation(abonne);
     }
 }

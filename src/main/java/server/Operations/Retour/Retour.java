@@ -8,10 +8,13 @@ import server.elements.interfaces.Documents;
 public class Retour {
 
     public static void retourner(Documents documents) {
-        if (Emprunt.estEmprunte(documents)) {
+        if (Emprunt.estEmprunte(documents))
             Emprunt.cancelEmprunt(documents);
-            ManageDataStorage.addDataStorage(documents);
-        }
+
+        if(Reservation.estReserve(documents))
+            Reservation.cancelReservation(documents);
+
+        ManageDataStorage.addDataStorage(documents);
     }
 
     public static void retournerTrouve(Documents documents) {

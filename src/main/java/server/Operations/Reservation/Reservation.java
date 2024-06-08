@@ -3,18 +3,17 @@ package server.Operations.Reservation;
 import server.Exception.EmpruntException;
 import server.Exception.ReservationException;
 import server.Operations.Emprunt.Emprunt;
+import server.db.data.ManageDataStorage;
 import server.elements.interfaces.Abonnes;
 import server.elements.interfaces.Documents;
 import server.timerTask.AnnulationReservationTask;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Timer;
+import java.util.*;
 
 public class Reservation {
-    private final static HashMap<Documents, HashMap<Abonnes, Timer>> lstReserve = new HashMap<>();
+    private final static HashMap<String, HashMap<String, Timer>> lstReserve = new HashMap<>();
     private final static HashMap<Documents, Queue<Abonnes>> listeAttente = new HashMap<>();
+    private final static ArrayList<Documents> lstDocuments = new ArrayList<>();
 
     public static void reserver(Documents document, Abonnes abonneI) throws ReservationException, EmpruntException {
         synchronized (lstReserve) {
@@ -42,23 +41,33 @@ public class Reservation {
         }
     }
 
-    public static synchronized Abonnes getFirstAttente(Documents document) {
-        if (!listeAttente.isEmpty()) {
-            return listeAttente.get(document).peek();
+    public static Abonnes getFirstAttente(Documents document) {
+        synchronized (listeAttente) {
+            if (!listeAttente.isEmpty()) {
+                return listeAttente.get(document).peek();
+            }
         }
         return null;
     }
 
-    public static synchronized boolean estReserve(Documents document) {
-        return lstReserve.containsKey(document);
+    public static boolean estReserve(Documents document) {
+        synchronized (lstReserve) {
+            return lstReserve.containsKey(document.getEntityId().toString());
+        }
     }
 
-    public static synchronized boolean estReservePar(Documents document, Abonnes abonneI) {
-        return lstReserve.containsKey(document) && lstReserve.get(document).containsKey(abonneI);
+    public static boolean estReservePar(Documents document, Abonnes abonneI) {
+        synchronized (lstReserve) {
+            String id = document.getEntityId().toString();
+            return lstReserve.containsKey(id) && lstReserve.get(id).containsKey(abonneI.getEntityId().toString());
+        }
     }
 
-    public static synchronized void cancelReservation(Documents document) {
-        lstReserve.remove(document);
+    public static  void cancelReservation(Documents document) {
+        synchronized (lstReserve) {
+            lstReserve.remove(document.getEntityId().toString());
+            lstDocuments.remove(document);
+        }
     }
 
     public static void startReservationDelay(Documents document, Abonnes abonneI) {
@@ -66,7 +75,14 @@ public class Reservation {
         timer.schedule(new AnnulationReservationTask(document), AnnulationReservationTask.getDelay());
 
         synchronized (lstReserve) {
-            lstReserve.computeIfAbsent(document, k -> new HashMap<>()).put(abonneI, timer);
+            lstReserve.computeIfAbsent(document.getEntityId().toString(), k -> new HashMap<>()).put(abonneI.getEntityId().toString(), timer);
+            lstDocuments.add(document);
+        }
+    }
+
+    public static void saveData() {
+        synchronized (lstDocuments) {
+            lstDocuments.forEach(ManageDataStorage::addDataStorage);
         }
     }
 }

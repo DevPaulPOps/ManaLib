@@ -1,8 +1,11 @@
 package server.Operations.Emprunt;
 
+import server.Exception.EmpruntException;
 import server.Operations.BaseOperation;
 import server.elements.Abonne;
 import server.elements.Documents.Document;
+import server.elements.interfaces.Abonnes;
+import server.elements.interfaces.Documents;
 import server.stateConstante.StateConstante;
 import java.io.IOException;
 import java.net.Socket;
@@ -23,9 +26,9 @@ public class empruntService extends BaseOperation {
             Document document = getDocument();
 
             if (abonne == null || document == null) {
-                getBttpProtocole().sendResponse("Abonné ou document introuvable.");
+                getBttpProtocole().sendResponse("Abonné ou document introuvable. End");
             } else {
-                getBttpProtocole().sendResponse(tryOperation(abonne, document));
+                getBttpProtocole().sendResponse(tryOperation(abonne, document) + " End");
             }
 
         } catch (IOException | SQLException e) {
@@ -47,5 +50,10 @@ public class empruntService extends BaseOperation {
 
     public String getErreur() {
         return "de l'emprunt : ";
+    }
+
+    @Override
+    public void setOperation(Abonnes abonne, Documents documents) throws EmpruntException {
+        documents.emprunt(abonne);
     }
 }

@@ -23,6 +23,6 @@ public class AnnulationReservationTask extends TimerTask {
         Reservation.cancelReservation(document);
 
         //Envoie de l'email par defaut
-        Utils.setDefaultMail(document, Reservation.getFirstAttente(document));
+        Utils.setDefaultMail(document);
     }
 }

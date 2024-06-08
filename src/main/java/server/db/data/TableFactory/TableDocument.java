@@ -10,7 +10,7 @@ public class TableDocument extends TableBaseFactory {
                 + "numero INT AUTO_INCREMENT PRIMARY KEY, "
                 + "titre VARCHAR(255) NOT NULL, "
                 + "state VARCHAR(255) NOT NULL, "
-                + "abonneId INT NOT NULL, "
+                + "abonneId INT"
                 + "FOREIGN KEY (abonneId) REFERENCES Abonne(numero) ON DELETE CASCADE)";
         this.executeQueryCreate(createTableSQL, "Document", this.createOperation);
     }

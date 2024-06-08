@@ -9,6 +9,7 @@ import server.Operations.Retour.Retour;
 import server.db.model.DocumentModel;
 import server.elements.interfaces.Abonnes;
 import server.elements.interfaces.Documents;
+import server.stateConstante.StateConstante;
 
 import java.sql.SQLException;
 
@@ -40,7 +41,7 @@ public class Document implements Documents {
         return abonneId;
     }
 
-    public void setAbonneId(Integer abonneId) {
+    private void setAbonneId(Integer abonneId) {
         this.abonneId = abonneId;
     }
 
@@ -62,6 +63,8 @@ public class Document implements Documents {
         if (Reservation.estReserve(this) || Emprunt.estEmprunte(this)) {
             throw new ReservationException();
         }
+        state = StateConstante.RESERVE;
+        setAbonneId(ab.getIdAbonne());
         Reservation.reserver(this, ab);
     }
 
@@ -71,10 +74,12 @@ public class Document implements Documents {
      */
     @Override
     public void emprunt(Abonnes ab) throws EmpruntException {
-        if (!Reservation.estReservePar(this, ab) && !Emprunt.estEmprunte(this)) {
+        if (!Reservation.estReservePar(this, ab) && Emprunt.estEmprunte(this)) {
             throw new EmpruntException();
         }
-        Reservation.reserver(this, ab);
+        state = StateConstante.EMPRUNTE;
+        setAbonneId(ab.getIdAbonne());
+        Emprunt.emprunter(this, ab);
     }
 
     /**
@@ -82,9 +87,11 @@ public class Document implements Documents {
      */
     @Override
     public void retour() throws RetourException {
-        if (!Emprunt.estEmprunte(this)) {
+        if (!Emprunt.estEmprunte(this) && !Reservation.estReserve(this)) {
             throw new RetourException();
         }
+        state = StateConstante.RETOURNE;
+        setAbonneId(null);
         Retour.retourner(this);
     }
 

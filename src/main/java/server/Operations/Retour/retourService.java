@@ -20,9 +20,10 @@ public class retourService extends MediathequeService {
             getBttpProtocole().sendResponse("Le document appartient-il à quelqu'un ? (oui / non) : ");
 
             boolean appartient = "oui".equalsIgnoreCase(getBttpProtocole().getResponse());
+
             getBttpProtocole().sendResponse("Numéro du document : ");
 
-            getBttpProtocole().sendResponse(tryRetour(Integer.parseInt(getBttpProtocole().getResponse().trim()), appartient));
+            getBttpProtocole().sendResponse(tryRetour(Integer.parseInt(getBttpProtocole().getResponse().trim()), appartient) + " End.");
 
         } catch (IOException e) {
             System.err.println("Erreur lors de la communication avec le client : " + e.getMessage());

@@ -25,7 +25,7 @@ public class DVD extends Document {
 
     @Override
     public void reservation(Abonnes ab) throws ReservationException, NotAdultException {
-        if (Utils.isAdult(ab.getDateDeNaissance())) {
+        if (!Utils.isAdult(ab.getDateDeNaissance())) {
             throw new NotAdultException();
         }
         super.reservation(ab);
@@ -47,7 +47,6 @@ public class DVD extends Document {
 
     @Override
     public String toString() {
-
         if (contenuAdulte) {
             return super.toString() + ", contenu adulte";
         }
