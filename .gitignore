@@ -37,6 +37,6 @@ build/
 .DS_Store
 
 .idea/
-!out/*.pdf
 out/*
+!out/*.pdf
 auxil/*
