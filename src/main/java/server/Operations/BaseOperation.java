@@ -3,7 +3,6 @@ package server.Operations;
 import server.Exception.EmpruntException;
 import server.Exception.ReservationException;
 import server.Operations.Reservation.Reservation;
-import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
 import server.db.model.AbonneModel;
 import server.elements.Abonne;
@@ -12,6 +11,7 @@ import server.elements.interfaces.Abonnes;
 import server.elements.interfaces.Documents;
 import server.serv.MediathequeService;
 import server.utils.Utils;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
@@ -80,6 +80,7 @@ public abstract class BaseOperation extends MediathequeService {
     }
 
     private Document findDocumentById(int id) {
+        // Utiliser une HashMap pour stocker les documents Pourrait etre plus opti
         for (Document document : listCatalogue) {
             if (document.getEntityId() == id) {
                 return document;
@@ -89,6 +90,8 @@ public abstract class BaseOperation extends MediathequeService {
     }
 
     public abstract String getOperation();
+
     public abstract String getErreur();
+
     public abstract void setOperation(Abonnes abonne, Documents documents);
 }

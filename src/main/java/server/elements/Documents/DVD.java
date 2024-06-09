@@ -49,8 +49,7 @@ public class DVD extends Document {
     public String toString() {
         if (contenuAdulte) {
             return super.toString() + ", contenu adulte";
-        }
-        else {
+        } else {
             return super.toString() + ", pas de contenu adulte.";
         }
     }

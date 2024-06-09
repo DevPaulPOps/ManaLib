@@ -20,7 +20,7 @@ public class Reservation {
             if (estReservePar(document, abonneI) || estReserve(document)) {
                 throw new ReservationException();
             }
-             if (Emprunt.estEmprunte(document)) {
+            if (Emprunt.estEmprunte(document)) {
                 throw new EmpruntException();
             }
             startReservationDelay(document, abonneI);
@@ -63,7 +63,7 @@ public class Reservation {
         }
     }
 
-    public static  void cancelReservation(Documents document) {
+    public static void cancelReservation(Documents document) {
         synchronized (lstReserve) {
             lstReserve.remove(document.getEntityId().toString());
             lstDocuments.remove(document);

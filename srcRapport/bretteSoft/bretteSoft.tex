@@ -1,37 +1,23 @@
-\chapter*{BretteSoft}
-\addcontentsline{toc}{chapter}{BretteSoft}
+\chapter{BretteSoft}
 
 Pour la partie BretteSoft, nous avons implémenté une seule fonctionnalité : \textbf{Sitting Bull}.
-Cette fonctionnalité permet de notifier un utilisateur par courriel lorsque ce dernier souhaite emprunter
-un document déjà réservé.
+Cette fonctionnalité permet de notifier un utilisateur par courriel lorsque ce dernier souhaite emprunter un document déjà réservé.
 
-\section{Implementation}
 
-\bigskip
+\section{Implémentation}
 
-Pour implémenter cette fonctionnalité, nous avons intégré dans un fichier existant nommé \textbf{Utils} les
-fonctions nécessaires pour envoyer un courriel à une personne choisie, en l'occurrence le grand Wakan Tanka,
-à l'adresse suivante : \textbf{jean-francois.brette@u-paris.fr}. Cela signifie que lorsqu'une personne souhaite réserver un document,
-il lui sera demandé si elle souhaite être notifiée. Si elle répond positivement, un courriel lui sera envoyé dès que
-le document sera disponible.
+Pour implémenter cette fonctionnalité, nous avons intégré dans un fichier existant nommé \texttt{Utils} les fonctions nécessaires pour envoyer un courriel à une personne choisie, en l'occurrence le grand Wakan Tanka, à l'adresse suivante : \textbf{jean-francois.brette@u-paris.fr}. Cela signifie que lorsqu'une personne souhaite réserver un document, il lui sera demandé si elle souhaite être notifiée. Si elle répond positivement, un courriel lui sera envoyé dès que le document sera disponible.
 
 \begin{itemize}
-    \item \textbf{Javax.mail} : Bibliotheque utilisé pour envoyer des mails.
+    \item \textbf{Javax.mail} : Bibliothèque utilisée pour envoyer des mails.
 \end{itemize}
 
-Concernant la sécurité, les paramètres du courriel, notamment l'adresse d'envoi, le port ainsi que le mot de passe,
-ont été stockés dans un fichier // d'environnement (a changer ???) //.
+Concernant la sécurité, les paramètres du courriel, notamment l'adresse d'envoi, le port ainsi que le mot de passe, ont été stockés dans un fichier d'environnement.
+
 
 \section{Processus}
 
-\bigskip
-
-Pour faire fonctionner cette bibliothèque, nous devons d'abord mettre en place certains éléments, notamment le mot
-de passe pour l'accès aux applications. En effet, pour pouvoir se connecter et ensuite envoyer un courriel à une personne,
-il est nécessaire de générer un mot de passe pour l'authentification. Auparavant, il suffisait de cocher une case dans la
-section "Less secure App" de Google, mais cette option a été supprimée depuis le 30 septembre 2024.
-
-\bigskip
+Pour faire fonctionner cette bibliothèque, nous devons d'abord mettre en place certains éléments, notamment le mot de passe pour l'accès aux applications. En effet, pour pouvoir se connecter et ensuite envoyer un courriel à une personne, il est nécessaire de générer un mot de passe pour l'authentification. Auparavant, il suffisait de cocher une case dans la section "Less secure App" de Google, mais cette option a été supprimée depuis le 30 septembre 2024.
 
 Sources :
 
@@ -40,9 +26,17 @@ Sources :
     \item \textbf{Less secure App} : \href{https://support.google.com/accounts/answer/6010255?sjid=6174101903992956370-EU}{Google Accounts Answer}
 \end{itemize}
 
-\bigskip
 
+\section{Alternatives d'implémentation}
 
+Il existe différentes manières d'implémenter la fonctionnalité BretteSoft.
+Par exemple, nous aurions pu :
 
-\bigskip
+\begin{itemize}
+    \item Créer notre propre serveur SMTP pour envoyer les messages.
+    \item Utiliser d'autres bibliothèques ou services proposant l'envoie de mail.
+\end{itemize}
+
+Cependant, pour des raisons de sécurité et de simplicité, nous avons préféré utiliser un service déjà existant comme Javax.mail.
+Et d'utiliser le serveur SMTP de Gmail pour envoyer les mails car c'est un service déjà utilisé en entreprise.
 

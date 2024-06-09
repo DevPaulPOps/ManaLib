@@ -1,5 +1,5 @@
 package client.interfaces;
 
 public interface IClient {
-    void launch();
+    void launch(String[] args);
 }

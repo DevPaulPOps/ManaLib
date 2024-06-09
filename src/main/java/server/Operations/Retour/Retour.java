@@ -11,7 +11,7 @@ public class Retour {
         if (Emprunt.estEmprunte(documents))
             Emprunt.cancelEmprunt(documents);
 
-        if(Reservation.estReserve(documents))
+        if (Reservation.estReserve(documents))
             Reservation.cancelReservation(documents);
 
         ManageDataStorage.addDataStorage(documents);

@@ -107,7 +107,7 @@ public class DocumentModel<D extends Document> implements Model<D> {
                 Reservation.reserver(document, abonne);
                 break;
             case StateConstante.EMPRUNTE:
-                Reservation.reserver(document,abonne);
+                Reservation.reserver(document, abonne);
                 Emprunt.emprunter(document, abonne);
                 break;
             default:

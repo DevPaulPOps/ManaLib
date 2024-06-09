@@ -1,6 +1,7 @@
 package server.elements.Documents;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import server.Exception.NotAdultException;
@@ -20,7 +21,7 @@ class DVDTest {
 
     @BeforeEach
     void setUp() {
-        dvd = new DVD(1,"TitreDVD", StateConstante.RETOURNE, null, true);
+        dvd = new DVD(1, "TitreDVD", StateConstante.RETOURNE, null, true);
 
         Calendar cal = Calendar.getInstance();
         cal.set(2000, Calendar.JANUARY, 1);

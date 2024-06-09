@@ -30,7 +30,9 @@ public class BttpProtocole {
         return in.readLine();
     }
 
-    public Socket getSocket() { return socket; }
+    public Socket getSocket() {
+        return socket;
+    }
 
     public synchronized String getResponse() throws IOException {
         return in.readLine();

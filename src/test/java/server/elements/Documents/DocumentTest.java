@@ -21,7 +21,7 @@ class DocumentTest {
 
     @BeforeEach
     void setUp() {
-        document = new Document(1,"TitreTest", StateConstante.RETOURNE, null);
+        document = new Document(1, "TitreTest", StateConstante.RETOURNE, null);
         abonne = new Abonne(1, "NomTest", new Date());
     }
 

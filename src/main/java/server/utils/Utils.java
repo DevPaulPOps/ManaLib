@@ -2,6 +2,7 @@ package server.utils;
 
 import server.elements.interfaces.Documents;
 import server.environment.Environment;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -20,18 +21,8 @@ public class Utils {
         return dateOfThePerson.before(adultAgeDate);
     }
 
-    public boolean isNumeric(String str) {
+    public static void sendEmail(Session session, String toEmail, String subject, String body) {
         try {
-            Double.parseDouble(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    public static void sendEmail(Session session, String toEmail, String subject, String body){
-        try
-        {
             MimeMessage msg = new MimeMessage(session);
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
             msg.addHeader("format", "flowed");
@@ -52,8 +43,7 @@ public class Utils {
             Transport.send(msg);
 
             System.out.println("EMail Sent Successfully!!");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -79,11 +69,20 @@ public class Utils {
         Session session = Session.getInstance(props, auth);
 
         try {
-            Utils.sendEmail(session, toEmail,"BrettSoft (mail test)", "Bonsoir \n, le document : " + documents.toString() + "\nest disponible.");
+            Utils.sendEmail(session, toEmail, "BrettSoft (mail test)", "Bonsoir \n, le document : " + documents.toString() + "\nest disponible.");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

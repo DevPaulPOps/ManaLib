@@ -1,43 +1,17 @@
-\chapter*{Lien Application - Base de donnée}
-\addcontentsline{toc}{chapter}{Lien Application - Base de donnée}
+\chapter{Lien Application - Base de données}
+
 
 \section{Modèle}
 
-\bigskip
+Concernant la liaison entre l’application et le serveur, nous avons utilisé \textbf{\textcolor{orange}{phpMyAdmin}} pour la gestion. Toute base de données MySQL peut quand même être utilisée étant donné que le SQL n’est pas standardisé pour tous les SGBD, ce qui s’assure que l’application soit fonctionnelle pour chaque utilisateur, à condition qu’ils utilisent le même SGBD que nous.
 
-    Concernant la liaison entre l’application et le serveur, nous avons utilisé \textbf{\textcolor{orange}{phpMyAdmin}} pour la gestion,
-    toute base de données MySQL peut quand même être utilisée étant donné que le SQL n’est pas standardisé pour tous
-    les SGBD (on s’assure donc que l’application soit fonctionnel pour chaque utilisateur il faut donc qu’ils utilisent le même
-    SGBD que nous).
+Nous avons mis en place des modèles pour représenter les tables de la base de données sous forme de classes. Cela nous permet de créer un \textbf{\textcolor{orange}{CRUD (Create, Read, Update, Delete)}} afin de réaliser différentes opérations sur la base de données. En outre, nous avons également développé une factory pour générer nos modèles de tables, garantissant ainsi que chaque membre de l’équipe dispose des mêmes modèles. De plus, pour chaque type de modèle, nous avons créé une interface pour rendre les classes flexibles et stables.
 
-\bigskip
+Lors de l’initialisation du projet, en exécutant la classe responsable de la création des tables, nous pouvons nous assurer que tous les membres du groupe disposent de la même architecture de base de données.
 
-    Nous avons mis en place des modèles pour représenter les tables de la base de données sous forme de classes.
-    Cela nous permet de créer un \textbf{\textcolor{orange}{CRUD (Create, Read, Update, Delete)}} afin de réaliser différentes opérations sur la base de données.
-    En outre, nous avons également développé une factory pour générer nos modèles de tables, garantissant ainsi que chaque
-    membre de l’équipe dispose des mêmes modèles. De plus, pour chaque type de modele, nous avons crée une interface
-    pour rendre les classes flexibles et stables.
-
-\bigskip
-
-    Lors de l’initialisation du projet, en exécutant la classe responsable de la création des tables,
-    nous pouvons nous assurer que tous les membres du groupe disposent de la même architecture de base de données.
 
 \section{Sauvegarde}
 
-    Pour gérer les différents états des documents, nous avons mis en place plusieurs types de structures pour stocker
-    les documents en fonction de leur état. Par exemple, pour les documents réservés, nous les avons stockés dans une
-    HashMap au sein de la classe effectuant l'opération (ex: Réservation), afin d'éviter de les regrouper tous dans une seule structure.
-    Cette approche permet de localiser les documents selon leur état.
-    Il est à noter que tous les documents retournés et donc libres sont stockés dans la structure principale lors de
-    l'initialisation des services.
+Pour gérer les différents états des documents, nous avons mis en place plusieurs types de structures pour stocker les documents en fonction de leur état. Par exemple, pour les documents réservés, nous les avons stockés dans une \texttt{HashMap} au sein de la classe effectuant l'opération (ex: Réservation), afin d'éviter de les regrouper tous dans une seule structure. Cette approche permet de localiser les documents selon leur état. Il est à noter que tous les documents retournés et donc libres sont stockés dans la structure principale lors de l'initialisation des services.
 
-    \bigskip
-
-    Lorsque nous fermons l’application correctement, nous nous assurons de stocker les données dans la base de données.
-    Cette approche \textbf{minimise les échanges} avec la base de données car il s’agit d’une application serverSocket et non
-    d’une application Web.
-    Par conséquent, nous préférons stocker les données dans des variables ou tout autre structure de donnée pour interroger
-    la base de données qu’au lancement et à la fermeture de l’application.
-
-    \clearpage
+Lorsque nous fermons l’application correctement, nous nous assurons de stocker les données dans la base de données. Cette approche \textbf{minimise les échanges} avec la base de données car il s’agit d’une application \texttt{serverSocket} et non d’une application Web. Par conséquent, nous préférons stocker les données dans des variables ou tout autre structure de donnée pour interroger la base de données qu’au lancement et à la fermeture de l’application.

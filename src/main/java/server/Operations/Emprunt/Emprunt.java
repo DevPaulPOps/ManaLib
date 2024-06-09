@@ -10,11 +10,11 @@ import java.util.HashMap;
 
 
 public class Emprunt {
-    private static final HashMap<String , HashMap<Documents, Abonnes>> lstEmprunts = new HashMap<>();
+    private static final HashMap<String, HashMap<Documents, Abonnes>> lstEmprunts = new HashMap<>();
 
     public static boolean estEmprunte(Documents documents) {
         synchronized (lstEmprunts) {
-            String  entityId = documents.getEntityId().toString();
+            String entityId = documents.getEntityId().toString();
             return lstEmprunts.containsKey(entityId);
         }
     }

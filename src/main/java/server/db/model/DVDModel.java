@@ -1,15 +1,9 @@
 package server.db.model;
 
-import server.Operations.Emprunt.Emprunt;
-import server.Operations.Reservation.Reservation;
-import server.Operations.Retour.Retour;
 import server.db.MediathequeDbService;
 import server.db.data.ManageDataStorage;
-import server.elements.Abonne;
 import server.elements.Documents.DVD;
 import server.elements.Documents.Document;
-import server.elements.interfaces.Documents;
-import server.stateConstante.StateConstante;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

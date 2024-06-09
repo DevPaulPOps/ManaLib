@@ -1,61 +1,26 @@
-\chapter*{Echanges Client / Serveur}
-\addcontentsline{toc}{chapter}{Echanges CLient / Serveur}
-
-    Le code est structuré en trois parties : Le client, la configuration et le serveur.
-
-    \bigskip
-
-    \section{Client}
-
-    \bigskip
-
-    Pour la section client, nous avons établi plusieurs classes qui faciliteront la division du code en fichiers distincts.
-    Ainsi, nous disposons d'un fichier dédié à la création de la socket et au protocole BTTP, tandis
-    qu'une autre classe permettra à l'utilisateur de choisir le service requis en fonction de ses préférences, associé au
-    port correspondant.
-
-    \bigskip
-
-    \section{Serveur}
-
-    \bigskip
-
-    Pour la gestion des entrées et des sorties de données, nous utilisons plusieurs classes :
-
-    \begin{itemize}
-        \item \textbf{BufferedReader} : Utilisé pour lire les messages du client et du serveur.
-        \item \textbf{PrintWriter} : Utilisé pour envoyer des messages dans le flux de sortie.
-    \end{itemize}
-
-    \bigskip
-
-    \section{Échanges Client / Serveur}
-    \addcontentsline{toc}{section}{Échanges Client / Serveur}
+\chapter{Échanges Client / Serveur}
 
 
-    Le client se connecte au serveur en utilisant le protocole \textbf{BTTP}. Une fois connecté, le client et le serveur peuvent
-    échanger des messages de manière synchrone. La connexion est initiée par le client en spécifiant l'adresse et le port du serveur.
-    Les messages sont échangés en utilisant BufferedReader et PrintWriter. Le serveur traite les commandes reçues du client et renvoie les réponses appropriées.
+\section{Client}
 
-    \bigskip
+Pour la section client, nous avons établi plusieurs classes qui faciliteront la division du code en fichiers distincts.
+Nous disposons donc d'un fichier dédié à la création de socket et au protocole BTTP, tandis qu'une autre classe permettra à l'utilisateur de choisir le service en fonction du port correspondant.
 
-    Grâce à cette approche, une seule classe client est nécessaire, car la communication via BTTP permet une
-    redirection efficace des ports vers le serveur souhaité pour chaque opération \textbf{(emprunt, réservation, retour)}.
-    Le serveur dirige les requêtes vers les services appropriés, garantissant une gestion des différentes opérations
-    possibles à l’heure actuelle et dans le futur.
 
-    \bigskip
+\section{Serveur}
 
-    Cette architecture permets une application
-    performante et facile à maintenir, tout en permettant une extension future des fonctionnalités.
+Pour la gestion des entrées et des sorties de données, nous utilisons plusieurs classes :
 
-    \bigskip
+\begin{itemize}
+    \item \textbf{BufferedReader} : Utilisé pour lire les messages du client et du serveur.
+    \item \textbf{PrintWriter} : Utilisé pour envoyer des messages dans le flux de sortie.
+\end{itemize}
 
-    \bigskip
 
-    Cette approche permet d'éviter la répétition de code en
-    réinitialisant constamment les sockets, améliorant ainsi la performance et la maintenabilité de l'application.
-    Nous avons fait une version basique du BTTP sans implémenter l’encodage/décodage, ce qui réduit le temps de
-    communication mais diminue la sécurité.
+\section{Échanges Client / Serveur}
 
-    \clearpage
+Le client se connecte au serveur en utilisant le protocole \textbf{BTTP}. Une fois connecté, le client et le serveur peuvent échanger des messages de manière synchrone. La connexion est initiée par le client en spécifiant l'adresse et le port du serveur. Les messages sont échangés en utilisant \texttt{BufferedReader} et \texttt{PrintWriter}. Le serveur traite les commandes reçues du client et renvoie les réponses appropriées.
+
+Grâce à cette approche, une seule classe client est nécessaire, car la communication via BTTP permet une redirection efficace des ports vers le serveur souhaité pour chaque opération \textbf{(emprunt, réservation, retour)}. Le serveur dirige les requêtes vers les services appropriés, garantissant une gestion des différentes opérations possibles à l’heure actuelle et dans le futur.
+
+Cette architecture permet une application performante et facile à maintenir, tout en permettant une extension future des fonctionnalités. Cette approche permet d'éviter la répétition de code en réinitialisant constamment les sockets, améliorant ainsi la performance et la maintenabilité de l'application. Nous avons fait une version basique du BTTP sans implémenter l’encodage/décodage, ce qui réduit le temps de communication mais diminue la sécurité.
