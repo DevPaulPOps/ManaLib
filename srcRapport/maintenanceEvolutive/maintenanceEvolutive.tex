@@ -1,0 +1,32 @@
+\chapter*{Maintenance évolutive}
+\addcontentsline{toc}{chapter}{Maintenance évolutive}
+
+\section{Ajout de nouveaux Documents}
+
+\bigskip
+
+L’ajout de nouveau Document nécessite d’implémenter l’interface correspondant aux Document ainsi que son
+Modèle respectif si l'on veut le stocker dans la base de données.
+La logique des opérations de Réservation, emprunt, retour ne changeront pas. C’est du \textbf{\textcolor{orange}{Pattern Bridge}} que nous nous sommes
+inspirés pour implémenter les Documents.
+
+\bigskip
+
+\section{Passage en application web}
+
+\bigskip
+
+Pour passer sur une application Web nous devons revoir notre serveur de la médiathèque. Les opérations ne changeront pas mais
+toute notre partie serveur devra être revu. Nous devons donc optimiser la maintenabilité de l’application afin de dissocier la médiathèque Server et son service du protocole de communication existant.
+
+\bigskip
+
+\section{Ajout nouveaux services}
+
+\bigskip
+
+La numérotation des ports ainsi que les urls sont géré par une class config qui lit un fichier config.json.
+Nous avons utilisé ceci car c’est une bonne pratique en terme de sécurité de ne pas écrire en clair dans le code les urls port.
+
+Donc, pour ajouter un nouveau service, il suffit d'attribuer les informations confidentielles à ce service dans la partie configuration, puis d'implémenter la classe du service. Il est important de ne pas oublierd'implémenter l'interface correspondante à la médiathèque, qui est propre à la relation entre le service et le serveur.
+

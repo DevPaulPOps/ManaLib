@@ -1,0 +1,15 @@
+\chapter*{Concurrence}
+\addcontentsline{toc}{chapter}{Concurrence}
+
+    Nous avons utilisé des blocs “synchronized” ainsi que des fonctions pour protéger les sections critiques de notre application comme pour le
+    paradigme du problème des philosophes afin d’assurer une exécution thread-safe. La concurrence se trouve entre les
+    différentes opérations (réservation, retour, emprunt) car elles ne peuvent être exécutées simultanément sur un même document.
+
+    \bigskip
+
+    C’est en soit intuitif mais il est important de l’implémenter correctement pour éviter les conditions de course.
+    Les sections synchronisées sont donc exécutées que lorsqu’elles sont disponibles ceci garantie le fait que l’application
+    soit thread-safety.
+
+    \bigskip
+
