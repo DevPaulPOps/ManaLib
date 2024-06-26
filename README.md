@@ -1,59 +1,58 @@
-# 📚 GestionMediatheque
+# 📚 Library Management
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![JDBC](https://img.shields.io/badge/JDBC-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Sockets](https://img.shields.io/badge/Sockets-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Threads](https://img.shields.io/badge/Threads-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 
-## 🎉 Bienvenue
+## 🎉 Welcome
 
-Bienvenue sur le projet de **GestionMediatheque**.
+Welcome to the **Library Management** project.
 
 ## 📖 Description
 
-GestionMediatheque est une application Java conçue pour gérer les réservations, les emprunts et les retours de documents dans une médiathèque. Ce projet permet de se familiariser avec les Sockets, les Threads ainsi que la gestion de bases de données.
+Library Management is a Java application designed to manage the reservations, borrowings, and returns of documents in a library. This project helps familiarize with Sockets, Threads, and database management.
 
-## 🚀 Fonctionnalités
+## 🚀 Features
 
-- Réservation de documents
-- Emprunt de documents
-- Retour de documents
-- Suivi des documents
+- Document reservation
+- Document borrowing
+- Document return
+- Document tracking
 
 ## 📦 Installation
 
-Pour installer le projet, suivez les étapes ci-dessous :
+To install the project, follow the steps below:
 
-1. **Clonez le dépôt sur votre machine :**
+1. **Clone the repository to your machine:**
 
     ```bash
     git clone git@github.com:paulpp78/gestionMediatheque.git
     ```
 
-2. **Accédez au répertoire du projet :**
+2. **Navigate to the project directory:**
 
     ```bash
     cd gestionMediatheque
     ```
 
-3. **Compilez le projet :**
+3. **Compile the project:**
 
     ```bash
     javac -d bin src/*.java
     ```
 
-4. **Exécutez le projet :**
+4. **Run the project:**
 
     ```bash
     java -cp bin Main
     ```
 
+## 🛠️ Technologies Used
 
-## 🛠️ Technologies Utilisées
-
-- **Java** : Pour la logique principale de l'application
-- **Sockets** : Pour la communication réseau
-- **Threads** : Pour la gestion du multitâche
-- **JDBC** : Pour la gestion de la base de données
+- **Java**: For the main application logic
+- **Sockets**: For network communication
+- **Threads**: For multitasking management
+- **JDBC**: For database management
 
 ---
