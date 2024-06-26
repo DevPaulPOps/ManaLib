@@ -21,6 +21,7 @@ target/
 .sts4-cache
 srcRapport
 out
+config.json
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
