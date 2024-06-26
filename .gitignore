@@ -19,7 +19,8 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+srcRapport
+out
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
